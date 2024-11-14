@@ -15,8 +15,18 @@ header {
     height: 100px; /* Hauteur fixe pour le header */
 }
 
+.formulaire_inscription {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    margin: 15px auto;
+    max-width: 300px; /* Limit the fieldset's width */
+    gap: 15px;
+}
+
 /* Style des boutons */
-.bouton_login, .bouton_signin {
+.bouton_login, .bouton_signin, .bouton_retour {
     background-color: lightskyblue;
     border: none;
     color: white;
@@ -29,11 +39,6 @@ header {
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px; /* Espace entre le titre et les boutons */
-}
-
-/* Style au survol des boutons */
-.bouton_login:hover, .bouton_signin:hover {
-    background-color: lightblue;
 }
 
 /* Conteneur des boutons alignés à droite (plus besoin ici, on centre directement les boutons) */
