@@ -22,5 +22,8 @@ function header_page($titre)
 if(isset($_POST['inscription'])){
     header('Location: inscription.php');
 }
+if(isset($_POST['connexion'])){
+    header('Location: connexion.php');
+}
 
 
