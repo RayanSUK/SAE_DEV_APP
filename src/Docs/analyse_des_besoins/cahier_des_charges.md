@@ -10,13 +10,12 @@ Nous sommes une équipe de 5 développeurs travaillant sur un projet informatiqu
 Le logiciel permet d’effectuer des calculs. Les acteurs sont au nombre de quatre :
 
 1. **Visiteur** : Accès limité à une vidéo explicative, sans possibilité d’utiliser les modules de calculs.
-2. **Client (Utilisateur)** : Accès aux différents modules proposés sur le site.
-3. **Utilisateur inscrit** : Accès à un tableau de bord contenant les différents modules de calculs. L’utilisateur non inscrit n’aura pas accès à cette partie.
-4. **Administrateur web** : Identifiants fixes « adminweb » pour :
+2. **Utilisateur inscrit** : Accès à un tableau de bord contenant les différents modules de calculs. L’utilisateur non inscrit n’aura pas accès à cette partie.
+3. **Administrateur web** : Identifiants fixes « adminweb » pour :
    - Voir la liste des utilisateurs,
    - Créer des comptes via un fichier CSV,
    - Supprimer des comptes, tout en générant un fichier de log pour chaque suppression.
-5. **Administrateur système** : Identifiants « sysadmin » pour accéder aux journaux d’activités de l’application, afin de surveiller l’activité et d’assurer la sécurité de la plateforme.
+4. **Administrateur système** : Identifiants « sysadmin » pour accéder aux journaux d’activités de l’application, afin de surveiller l’activité et d’assurer la sécurité de la plateforme.
 
 ## Pré-requis
 L'application sera installée sur un Raspberry Pi 4 avec une carte SD configurée pour :
