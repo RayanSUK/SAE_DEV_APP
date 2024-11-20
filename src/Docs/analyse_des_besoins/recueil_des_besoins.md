@@ -210,7 +210,7 @@ Voici les exigences technologiques spécifiques pour le système :
 
 ### Serveur Web :
 
-- **Apache** : Le système doit être capable d'héberger l'application web en PHP. Apache est recommandé pour sa compatibilité avec PHP, mais d'autres serveurs comme Nginx peuvent également être envisagés.
+- **Apache** : Le système doit être capable d'héberger l'application web en PHP. Apache est recommandé pour sa compatibilité avec PHP.
 
 ### Serveur de base de données :
 
