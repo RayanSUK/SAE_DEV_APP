@@ -26,7 +26,7 @@ header {
 }
 
 /* Style des boutons */
-.bouton_login, .bouton_signin, .bouton_retour {
+.bouton {
     background-color: lightskyblue;
     border: none;
     color: white;
@@ -42,8 +42,15 @@ header {
 }
 
 /* Conteneur des boutons alignés à droite (plus besoin ici, on centre directement les boutons) */
-.boutons_co_et_inscription {
+.boutons {
     display: flex;
     justify-content: center;  /* Aligner les boutons horizontalement au centre */
     margin-top: 10px; /* Espacement entre le titre et les boutons */
+}
+
+.boutons_tableau_de_bord {
+    display: flex;
+    flex-direction: column; /* Pour centrer les boutons verticalement */
+    align-items: center; /* Pour centrer les boutons horizontalement */
+    margin: auto;
 }

@@ -1,4 +1,6 @@
 <?php
+ob_start(); // Start output buffering
+
 require('header_inscription.php');
 header_page("Connexion");
 
@@ -21,10 +23,13 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
         if ($nom == $stored_nom && $mdp == $stored_mdp) {
             // If they match, credentials are correct, redirect to the dashboard
             header('Location: tableau_de_bord.php');
+            ob_end_flush(); // Flush the output buffer
             exit;  // Make sure to call exit() after the header to stop further code execution
         }
     }
     fclose($fp);
     echo "<p style='background-color: red'>Identifiants incorrects</p>";
 }
+
+ob_end_flush(); // Flush the output buffer at the end of the script
 ?>

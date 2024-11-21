@@ -12,18 +12,14 @@ function header_page($titre)
 <header>
 <h1 class='titre'>SigmaX</h1>
 <form class='boutons' method='post'>
-    <input class='bouton' name='connexion' type='submit' value='Connexion'>
-    <input class='bouton' name='inscription' type='submit' value='Inscription'>
+    <input class='bouton' type='submit' name='retour' value='Retour'>
 </form>
 </header>
 <body>";
 }
 
-if(isset($_POST['inscription'])){
-    header('Location: inscription.php');
-}
-if(isset($_POST['connexion'])){
-    header('Location: connexion.php');
+if(isset($_POST['retour'])){
+    header('Location: tableau_de_bord.php');
 }
 
 

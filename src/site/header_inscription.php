@@ -11,8 +11,8 @@ function header_page($titre)
 <body>
 <header>
 <h1 class='titre'>SigmaX</h1>
-<form class='boutons_co_et_inscription' method='post'>
-    <input class='bouton_retour' type='submit' name='retour' value='Retour'>
+<form class='boutons' method='post'>
+    <input class='bouton' type='submit' name='retour' value='Retour'>
 </form>
 </header>
 <body>";
