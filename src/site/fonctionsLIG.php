@@ -11,8 +11,14 @@ function loi_inverse_gaussienne($x, $esperance, $forme) {
     return $densite;
 }
 
-function methode_Des_Rectangles_Median($x, $esperance, $forme, $a, $b, $n) {
+function methode_Des_Rectangles_Median($points, $esperance, $forme, $a, $b, $n) {
+    $resultat = 0;
     for($i = 0; $i < $n-1; $i++){
+        if($points[$i+1]){
+            $resultat += loi_inverse_gaussienne(($points[$i] + $points[$i+1])/2, $esperance, $forme);
 
+        }
     }
+
+    return (($b-$a)/$n)*$resultat;
 }
