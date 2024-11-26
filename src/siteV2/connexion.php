@@ -33,6 +33,22 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];
 
+    // Vérification pour l'administrateur système
+    if ($nom === 'sysadmin' && $mdp === 'sysadmin') {
+        // Enregistrer l'état de l'utilisateur admin
+        $_SESSION['nom'] = $nom;
+        $_SESSION['etat'] = 'admin';
+        header('Location: inscritcsv.php'); // Redirection vers la page d'administration
+        exit;
+    }
+
+    if($nom === 'adminweb' && $mdp === 'adminweb'){
+        $_SESSION['nom']= $nom;
+        $_SESSION['etat'] = 'adminweb';
+        header('Location: adminweb.php');
+
+    }
+
     $fp = fopen('utilisateurs.csv', 'r');
     $identifiantsCorrects = false;
 
