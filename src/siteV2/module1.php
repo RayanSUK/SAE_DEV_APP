@@ -16,12 +16,10 @@ include('partiels/navbar.php');
 </section>
 
 <!-- Formulaire des boutons pour les modules -->
-<section class="modules text-center">
-    <form method="POST" class="boutons_tableau_de_bord">
-        <input type="submit" class="bouton" name="loiInverseGaussienne" value="Loi inverse Gaussienne">
-        <input type="submit" class="bouton" name="module2" value="Module 2">
-        <input type="submit" class="bouton" name="module3" value="Module 3">
-        <input type="submit" class="bouton" name="module4" value="Module 4">
+<section class=" text-center">
+    <form method="POST">
+        <button type="submit" name="loiInverseGaussienne" value="Loi inverse Gaussienne" class="form-button">Loi inverse Gaussienne</button>
+        <br><br><br>
     </form>
 </section>
 

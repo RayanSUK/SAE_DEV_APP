@@ -22,7 +22,7 @@ error_reporting(E_ALL);
 <div class="form-container-parent">
     <div class="form-container">
         <h1 class="text-center">Calcul de la Loi Inverse Gaussienne</h1>
-        <form method="POST">
+        <form method="POST" class="text-center">
             <input type="number" name="x" placeholder="x" class="form-input" required>
             <input type="number" name="forme" placeholder="λ" class="form-input" required>
             <input type="number" name="esperance" placeholder="μ" class="form-input" required>
@@ -41,7 +41,7 @@ error_reporting(E_ALL);
             </select>
 
             <!-- Bouton pour valider -->
-            <button type="submit" class="form-button">Valider</button>
+            <button type="submit" class="form-buttonS">Valider</button>
         </form>
 
     </div>
