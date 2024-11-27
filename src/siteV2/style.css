@@ -161,7 +161,7 @@
 
 .video iframe {
     margin-top: 3%;
-    margin-bottom: 10%;
+    margin-bottom: 2%;
     border-radius: 3%;
 }
 
@@ -170,6 +170,56 @@
     font-size: 50px;
     margin-bottom: 10%;
 }
+
+
+
+.presentation-site {
+    padding: 40px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: white;
+}
+
+.presentation-site .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.presentation-site h1, .presentation-site h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+.presentation-site ul, .presentation-site ol {
+    padding-left: 20px;
+}
+
+.presentation-site ul li, .presentation-site ol li {
+    margin-bottom: 10px;
+}
+
+.presentation-site p {
+    margin-bottom: 20px;
+}
+
+.presentation-site strong {
+    color: #007bff;
+}
+
+.presentation-site em {
+    color: #555;
+}
+
+
+
+
+
 
 
 /*  CSS POUR L'INSCRIPTION ET CONNEXION  */
