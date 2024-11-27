@@ -75,7 +75,7 @@
 
 .navbar ul li{
     display: inline;
-    padding: 5%;
+    padding: 4%;
 
 
 }
@@ -188,7 +188,7 @@
 
 .form-container {
     width: 700px;
-    height: 400px;
+    height: 500px;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -336,7 +336,8 @@ button.form-button {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
-    width: 100%;
+    width: 50%;
+    
 }
 
 button.form-button:hover {

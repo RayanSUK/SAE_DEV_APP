@@ -27,7 +27,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     if ($reponse == $_SESSION['captcha']) {
         // Enregistrer dans le fichier CSV sans hachage
         $fp = fopen('utilisateurs.csv', 'a');
-        fputcsv($fp, [$nom, $mdp, $reponse, $ip, $date]);
+        fputcsv($fp, [$nom, $mdp, $ip, $date]);
         fclose($fp);
 
         $_SESSION['nom'] = $nom;
