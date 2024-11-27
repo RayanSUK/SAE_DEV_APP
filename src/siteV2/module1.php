@@ -23,6 +23,42 @@ include('partiels/navbar.php');
     </form>
 </section>
 
+
+<section class="presentation-site">
+    <div class="container">
+        <h1>📊 Calculs Mathématiques : Loi Inverse Gaussienne</h1>
+        <p>
+            Découvrez notre module interactif pour explorer la <strong>loi inverse gaussienne</strong>, 
+            une distribution clé en mathématiques et statistiques. Cet outil vous permet d'analyser des données 
+            et de visualiser vos résultats sous forme de graphiques dynamiques.
+        </p>
+
+        <h2>🛠 Comment ça marche ?</h2>
+        <ol>
+            <li><strong>Entrez vos paramètres :</strong></li>
+            <ul>
+                <li><strong>x :</strong> La valeur à analyser.</li>
+                <li><strong>λ (forme) :</strong> Définit la forme de la distribution.</li>
+                <li><strong>μ (espérance) :</strong> Définit la moyenne de la distribution.</li>
+            </ul>
+            <li><strong>Choisissez une méthode de calcul :</strong></li>
+            <ul>
+                <li>Rectangles médians</li>
+                <li>Rectangles trapèzes</li>
+                <li>Méthode de Simpson</li>
+            </ul>
+            <li><strong>Obtenez vos résultats :</strong></li>
+            <ul>
+                <li>Visualisez vos données sous forme de <strong>graphiques interactifs</strong> pour mieux comprendre les variations.</li>
+            </ul>
+        </ol>
+    </div>
+</section>
+
+
+
+
+
 <?php 
 include('partiels/footer.php'); 
 
