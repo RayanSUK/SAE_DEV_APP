@@ -17,7 +17,7 @@
             <img src="images/sigmaXlogo.png" alt="logo" class="logo img-responsive">
         <ul>
             <li><a href="accueil.php">Accueil</a></li>
-            <li><a href="module1.php">Module 1</a></li>
+            <li><a href="module1.php">Module probabilité</a></li>
             <li><a href="module2.php">Module 2</a></li>
             <li><a href="module3.php">Module 3</a></li>
             <li><a href="accueil_non_inscrit.php">Se déconnecter</a></li>
