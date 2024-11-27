@@ -8,17 +8,24 @@ function loi_inverse_gaussienne($x, $esperance, $forme) {
     }
 }
 
-function methode_rectangles_medians($points, $esperance, $forme, $a, $b, $n){
-    $h = ($b-$a)/$n;
+function methode_rectangles_medians($points, $esperance, $forme, $t) {
+
     $resultat = 0;
-    for($i = 0; $i < $n-1; $i++){
-        if($points[$i+1]){
-            $resultat += loi_inverse_gaussienne(($points[$i]+$points[$i+1])/2, $esperance, $forme);
+    $n = count($points) - 1;
+
+    for ($i = 0; $i < $n; $i++) {
+        if ($points[$i + 1]) {
+            $resultat += loi_inverse_gaussienne(($points[$i] + $points[$i + 1]) / 2, $esperance, $forme);
         }
     }
 
-    return $h*$resultat;
+    return $t * $resultat;
 }
+
+function ecart_type($esperance, $forme) {
+    return sqrt(pow($esperance, 3) / $forme);
+}
+
 
 
 
