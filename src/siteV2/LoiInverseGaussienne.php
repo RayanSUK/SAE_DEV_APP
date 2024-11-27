@@ -22,13 +22,9 @@ error_reporting(E_ALL);
 <div class="form-container-parent">
     <div class="form-container">
         <h1 class="text-center">Calcul de la Loi Inverse Gaussienne</h1>
-<<<<<<< HEAD
         <form method="POST">
             <input type="number" name="n" placeholder="n" class="form-input" required>
-=======
         <form method="POST" class="text-center">
-            <input type="number" name="x" placeholder="x" class="form-input" required>
->>>>>>> 4e1740a1815efbbd3bdc78bc5da46bee1a0daa94
             <input type="number" name="forme" placeholder="λ" class="form-input" required>
             <input type="number" name="esperance" placeholder="μ" class="form-input" required>
             <input type="number" name="t" placeholder="t" class="form-input" required>
