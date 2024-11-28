@@ -35,7 +35,7 @@ error_reporting(E_ALL);
             <select name="methode" class="form-input" required>
                 <option value="" disabled selected>Choisissez une méthode</option>
                 <option value="rectangles_medians">Méthode des rectangles médians</option>
-                <option value="rectangles_trapezes">Méthode des rectangles trapèzes</option>
+                <option value="trapezes">Méthode des trapèzes</option>
                 <option value="simpson">Méthode de Simpson</option>
             </select>
 
@@ -63,30 +63,40 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
         $points[] = loi_inverse_gaussienne($value, $esperance, $forme);
     }
 
-    if ($methode === "rectangles_medians") {
+    if ($methode == "rectangles_medians") {
         $resultat = methode_rectangles_medians($points, $esperance, $forme, $t);
-        $ecart_type = ecart_type($esperance, $forme);
-
-        echo "<table>";
-        echo "<tr>";
-        echo "<td>Valeur de probabilité :</td>";
-        echo "<td>.$resultat.</td>";
-        echo "</tr>";
-        echo "<tr>";
-        echo "<td>Forme :</td>";
-        echo "<td>.$forme.</td>";
-        echo "</tr>";
-        echo "<tr>";
-        echo "<td>Espérance :</td>";
-        echo "<td>.$esperance.</td>";
-        echo "</tr>";
-        echo "<tr>";
-        echo "<td>Ecart-type :</td>";
-        echo "<td>.$ecart_type.</td>";
-        echo "</tr>";
-
-
     }
+
+    if ($methode == "trapezes") {
+        $resultat = methode_trapezes($points, $esperance, $forme, $t);
+    }
+
+    if($methode == "simpson"){
+        $resultat = methode_simpson($points, $esperance, $forme, $t);
+    }
+
+    $ecart_type = ecart_type($esperance, $forme);
+
+    echo "<table>";
+    echo "<tr>";
+    echo "<td>Valeur de probabilité :</td>";
+    echo "<td>.$resultat.</td>";
+    echo "</tr>";
+    echo "<tr>";
+    echo "<td>Forme :</td>";
+    echo "<td>.$forme.</td>";
+    echo "</tr>";
+    echo "<tr>";
+    echo "<td>Espérance :</td>";
+    echo "<td>.$esperance.</td>";
+    echo "</tr>";
+    echo "<tr>";
+    echo "<td>Ecart-type :</td>";
+    echo "<td>.$ecart_type.</td>";
+    echo "</tr>";
+
+
+
 
     $x_values_json = json_encode($x_values);
     $points_json = json_encode($points);
