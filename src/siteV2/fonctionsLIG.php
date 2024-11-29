@@ -8,17 +8,15 @@ function loi_inverse_gaussienne($x, $esperance, $forme) {
 }
 
 function methode_rectangles_medians($points, $esperance, $forme, $t) {
-
     $resultat = 0;
-    $n = count($points);
+    $n = count($points) - 1;
 
-    for ($i = 0; $i < $n-1; $i++) {
-        if ($points[$i + 1]) {
-            $resultat += loi_inverse_gaussienne(($points[$i] + $points[$i + 1]) / 2, $esperance, $forme);
-        }
+    for ($i = 0; $i < $n; $i++) {
+        $m = ($points[$i] + $points[$i+1]) / 2;
+        $resultat += loi_inverse_gaussienne($m, $esperance, $forme);
     }
 
-    return ($t*$resultat)/$n ;
+    return ($t/$n) * $resultat;
 }
 
 function methode_trapezes($points, $esperance, $forme, $t){
