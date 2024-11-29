@@ -51,6 +51,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
             if (mysqli_stmt_execute($stmt)) {
                 // Message affiché si l'inscription est réussie
                 echo "<p style='color:green;'>Inscription validée !</p>";
+                header("Location: accueil.php");
             } else {
                 // Message affiché en cas d'erreurs
                 $_SESSION['error'] = "Erreur lors de l'inscription.";
@@ -63,7 +64,6 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
         mysqli_stmt_close($stmt);
         mysqli_close($cnx);
         unset($_SESSION['captcha']); // Supprimer le CAPTCHA après utilisation
-        header("Location: accueil.php");
         exit;
     } else {
         echo "<p style='background-color: red; color: white;'>Captcha incorrect.</p>";
