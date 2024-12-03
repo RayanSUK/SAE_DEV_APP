@@ -154,16 +154,21 @@
 }
 
 .video {
-    display: block; /* Assurez-vous que le conteneur n'est pas en flex ou grid */
-    margin-top: 0; /* Évitez d'utiliser des marges conflictuelles */
-    margin-bottom: 0;
+    display: block; /* Permet au conteneur de s'étendre sur toute la largeur */
+    max-width: 1080px; /* Limite la largeur de l'image sur les grands écrans */
+    margin: 0 auto; /* Centre le conteneur horizontalement */
 }
 
-.video iframe {
-    margin-top: 3%;
-    margin-bottom: 2%;
-    border-radius: 3%;
+.video img {
+    width: 100%; /* Image responsive : occupe tout l'espace disponible */
+    height: auto; /* Conserve les proportions de l'image */
+    display: block; /* Évite les espaces en dessous de l'image */
+    border-radius: 3%; /* Ajoute des bords légèrement arrondis */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile pour un effet pro */
+    margin-bottom: 10%;
+    margin-top: 10%;
 }
+
 
 
 .explication h1{
