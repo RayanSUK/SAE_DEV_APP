@@ -11,7 +11,7 @@ include('partiels/navbar.php');
 <!-- Section de description -->
 <section class="description text-center">
     <div class="titre text-center">
-        <h1>Modules de Calculs</h1>
+        <h1>Veuillez cliquer ci-dessous pour utiliser le module de calcul</h1><br><br>
     </div>
 </section>
 
