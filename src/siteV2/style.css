@@ -243,13 +243,13 @@
 
 .form-container {
     width: 700px;
-    height: 500px;
+    height: 400px;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10%;
+    margin-bottom: 1%;
 }
 
 .form-container h1 {
@@ -397,4 +397,33 @@ button.form-button {
 
 button.form-button:hover {
     background-color: #0056b3;
+}
+
+
+
+
+.result-container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.result-table {
+    margin: 0 auto 20px auto; /* Centre le tableau et ajoute un espace avec la courbe */
+    border-collapse: collapse;
+    width: 100%; /* Optionnel : ajustable selon le design */
+    max-width: 600px;
+}
+
+.result-table td {
+    border: 1px solid #ccc; /* Ajoute une bordure au tableau */
+    padding: 10px;
+    text-align: left;
+}
+
+canvas {
+    margin: 0 auto;
+    display: block;
+    max-width: 100%; /* S'assure que le graphique reste responsive */
+    height: auto; /* Gère la hauteur automatiquement */
 }
