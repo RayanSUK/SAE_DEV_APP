@@ -20,9 +20,7 @@ if (isset($_SESSION['etat'])) {
     </div>
 
 
-    <div class="video">
-        <iframe width='1080' height='560' src='https://www.youtube.com/embed/G5RpJwCJDqc' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
-    </div>
+    
  </section>
 <!-- la section accueil se termine ici-->
 
