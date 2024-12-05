@@ -10,7 +10,6 @@ if (!isset($_SESSION['captcha'])) {
 
 $nb = $_SESSION['captcha'];
 
-
 // Traitement du formulaire d'inscription
 if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     $nom = $_POST['nom'];
@@ -19,15 +18,12 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     $ip = $_SERVER['REMOTE_ADDR'];
     $date = date("Y-m-d H:i:s");
 
-
-
     if ($reponse == $_SESSION['captcha']) {
         // Connexion à la base de données
-        $cnx = mysqli_connect('localhost', 'root', '', 'sigmax');
+        $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
         if (!$cnx) {
             die("Échec de la connexion à la base de données: " . mysqli_connect_error());
         }
-
 
         // Vérifie si le login est déjà utilisé
         $check_sql = "SELECT * FROM USERS WHERE login = ?";
@@ -36,26 +32,29 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
         mysqli_stmt_execute($check_stmt);
         $check_result = mysqli_stmt_get_result($check_stmt);
 
-
         if (mysqli_num_rows($check_result) > 0) {
             // Le login est déjà utilisé : renvoie un message d'erreur et l'utilisateur doit recommencer
-            header("Location:inscription.php");
+            header("Location: inscription.php");
             $_SESSION['error'] = "Login déjà utilisé.";
-
         } else {
-            // Insére dans la base de données
+            // Insère dans la base de données
             $sql = "INSERT INTO USERS (login, password) VALUES (?, ?)";
             $stmt = mysqli_prepare($cnx, $sql);
             mysqli_stmt_bind_param($stmt, "ss", $nom, $mdp);
 
             if (mysqli_stmt_execute($stmt)) {
-                // Message affiché si l'inscription est réussie
-                echo "<p style='color:green;'>Inscription validée !</p>";
+                // Connexion de l'utilisateur après inscription
+                $_SESSION['login'] = $nom;  // Ajoute le login à la session
+                $_SESSION['id'] = mysqli_insert_id($cnx);  // Récupère l'ID de l'utilisateur inscrit
+                $_SESSION['etat'] = 'inscription';  // Indique que l'inscription a réussi
+
+                // Redirection vers accueil.php
                 header("Location: accueil.php");
+                exit;
             } else {
                 // Message affiché en cas d'erreurs
                 $_SESSION['error'] = "Erreur lors de l'inscription.";
-                header("Location:inscription.php");
+                header("Location: inscription.php");
             }
         }
 
@@ -71,9 +70,6 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     session_unset();
 }
 ?>
-
-
-
 
 <!-- Formulaire d'inscription -->
 <section class="description text-center">
