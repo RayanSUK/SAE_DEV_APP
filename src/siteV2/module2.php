@@ -1,4 +1,11 @@
-<?php include('partiels/navbar.php') ?>
+<?php 
+session_start();
+if (!isset($_SESSION['login'])) {
+    header("Location: accueil_non_inscrit.php");
+    exit;
+}
+include('partiels/navbar.php') 
+?>
 
 
 
