@@ -10,7 +10,7 @@ session_start();
         <h1>Connexion</h1>
     </div>
     <div class="form-container-parent">
-        <div class="form-container-co"> <!-- Nouvelle classe spécifique à la connexion -->
+        <div class="form-container-co">
             <h1>Connexion</h1>
             <form method="POST" action="#">
                 <input type="text" name="nom" placeholder="Pseudo" required>
@@ -19,7 +19,6 @@ session_start();
             </form>
         </div>
     </div>
-
 </section>
 
 <?php include('partiels/footer.php'); ?>
@@ -28,49 +27,46 @@ session_start();
 </html>
 
 <?php
-
 if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];
 
-    // Vérification pour l'administrateur système
-    if ($nom === 'sysadmin' && $mdp === 'sysadmin') {
-        // Enregistrer l'état de l'utilisateur admin
-        $_SESSION['nom'] = $nom;
-        $_SESSION['etat'] = 'admin';
-        header('Location: inscritcsv.php'); // Redirection vers la page d'administration
-        exit;
+    // Connexion à la base de données
+    $cnx = mysqli_connect('localhost', 'root', '', 'sigmax');
+
+    if (!$cnx) {
+        die("Échec de connexion à la base de données : " . mysqli_connect_error());
     }
 
-    if($nom === 'adminweb' && $mdp === 'adminweb'){
-        $_SESSION['nom']= $nom;
-        $_SESSION['etat'] = 'adminweb';
-        header('Location: adminweb.php');
+    // Préparation et exécution de la requête pour récupérer les informations de l'utilisateur
+    $query = "SELECT * FROM users WHERE login = ?";
+    $stmt = mysqli_prepare($cnx, $query);
+    mysqli_stmt_bind_param($stmt, "s", $nom);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-    }
-
-    $fp = fopen('utilisateurs.csv', 'r');
-    $identifiantsCorrects = false;
-
-    while ($row = fgetcsv($fp, 1024, ",")) {
-        if (count($row) >= 2) { // Vérifiez que la ligne est valide
-            $stored_nom = $row[0];
-            $stored_mdp = $row[1];
-            if ($nom === $stored_nom && $mdp === $stored_mdp) {
-                $identifiantsCorrects = true;
-                break;
-            }
+    if ($row = mysqli_fetch_assoc($result)) {
+        // Comparaison du mot de passe saisi avec celui stocké dans la base
+        if (md5($mdp) === $row['password']) {
+            // Connexion réussie
+            $_SESSION['login'] = $row['login']; // Stocke le login dans la session
+            $_SESSION['id'] = $row['id'];       // Stocke l'ID utilisateur dans la session
+            $_SESSION['etat'] = 'connexion';    // Indique que c'est une connexion réussie
+            
+            // Redirection vers la page d'accueil
+            header("Location: accueil.php");
+            exit;
+        } else {
+            echo "<p style='color:red;'>Mot de passe incorrect.</p>";
         }
-    }
-    fclose($fp);
-
-    if ($identifiantsCorrects) {
-        $_SESSION['nom'] = $nom;
-        $_SESSION['etat'] = 'connexion';
-        header('Location: accueil.php');
-        exit;
     } else {
-        echo "<p style='background-color: red; color: white; text-align: center;'>Identifiants incorrects</p>";
+        echo "<p style='color:red;'>Utilisateur non trouvé.</p>";
     }
+
+    // Libération des ressources et fermeture de la connexion
+    mysqli_stmt_close($stmt);
+    mysqli_close($cnx);
 }
 ?>
+
+
