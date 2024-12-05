@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['login'])) {
+    header("Location: accueil_non_inscrit.php");
+    exit;
+}
 require("fonctionsLIG.php");
 
 // Gestion des erreurs pour le débogage
@@ -7,6 +11,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
