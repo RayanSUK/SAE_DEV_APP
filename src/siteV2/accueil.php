@@ -11,21 +11,30 @@ if (!isset($_SESSION['login'])) {
 <!-- la section accueil commence ici-->
 <section class="text-center">
     <div class="titre text-center">
-    <?php
-if (isset($_SESSION['etat'])) {
-    if ($_SESSION['etat'] === 'inscription') {
-        echo "<h1>Bienvenue parmi nous, " . htmlspecialchars($_SESSION['nom']) . " !</h1>";
-    } elseif ($_SESSION['etat'] === 'connexion') {
-        echo "<h1>Te revoilà parmi nous, " . htmlspecialchars($_SESSION['nom']) . " !</h1>";
-    }
-    unset($_SESSION['etat']); // Réinitialiser après affichage
-}
-?>
+        <?php
+        // Vérifier si la session contient 'login' et 'user_id'
+        if (isset($_SESSION['login'], $_SESSION['user_id'])) {
+            $login = htmlspecialchars($_SESSION['login']);  // Utiliser le login stocké dans la session
+
+            if ($_SESSION['etat'] === 'inscription') {
+                echo "<h1>Bienvenue parmi nous, $login !</h1>";
+            } elseif ($_SESSION['etat'] === 'connexion') {
+                echo "<h1>Te revoilà parmi nous, $login !</h1>";
+            }
+
+            // Réinitialiser la variable de session après affichage
+            unset($_SESSION['etat']);
+        } else {
+            echo "<h1>Veuillez vous connecter pour accéder à cette page.</h1>";
+        }
+        ?>
     </div>
+</section>
 
 
-    
- </section>
+<!-- la section accueil se termine ici-->
+
+
 <!-- la section accueil se termine ici-->
 
 
