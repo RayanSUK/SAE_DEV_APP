@@ -2,6 +2,10 @@
 session_start();
 ob_start(); // Démarrage du buffer de sortie
 
+if (!isset($_SESSION['login'])) {
+    header("Location: accueil_non_inscrit.php");
+    exit;
+}
 include('partiels/navbar_module1.php');
 
 
