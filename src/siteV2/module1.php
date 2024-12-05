@@ -2,7 +2,7 @@
 session_start();
 ob_start(); // Démarrage du buffer de sortie
 
-include('partiels/navbar.php'); 
+include('partiels/navbar_module1.php');
 
 
 // Fonction pour définir le titre de la page
@@ -21,6 +21,7 @@ include('partiels/navbar.php');
         <button type="submit" name="loiInverseGaussienne" value="Loi inverse Gaussienne" class="form-button">Loi inverse Gaussienne</button>
         <br><br><br>
     </form>
+    <p>\( f(x ; \lambda ; \mu ) = \sqrt{\frac{\lambda}{2\pi x^3}} e^{-\frac{\lambda(x-\mu)^2}{2\mu^2 x}} \)</p>
 </section>
 
 
@@ -43,9 +44,9 @@ include('partiels/navbar.php');
             </ul>
             <li><strong>Choisissez une méthode de calcul :</strong></li>
             <ul>
-                <li>Rectangles médians</li>
-                <li>Rectangles trapèzes</li>
-                <li>Méthode de Simpson</li>
+                <li>Rectangles médians \(\int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{n}\sum_{k=0}^{k=n-1}f(\frac{a_{k}+a_{k+1}}{2}; \mu ;\lambda)\)</li>
+                <li>Trapèzes \( \int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{2n}(f(t) + 2\sum_{k=1}^{k=n-1}f(a_{k})) \)</li>
+                <li>Simpson</li>
             </ul>
             <li><strong>Obtenez vos résultats :</strong></li>
             <ul>
