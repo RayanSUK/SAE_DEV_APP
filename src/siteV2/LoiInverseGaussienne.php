@@ -29,10 +29,10 @@ error_reporting(E_ALL);
     <div class="form-container">
         <h1 class="text-center">Calcul de la Loi Inverse Gaussienne</h1>
         <form method="POST">
-            <input type="number" name="n" placeholder="n" class="form-input" required>
-            <input type="number" name="forme" placeholder="λ" class="form-input" required>
-            <input type="number" name="esperance" placeholder="μ" class="form-input" required>
-            <input type="number" name="t" placeholder="t" class="form-input" required>
+            <input type="number" name="n" placeholder="n : un nombre de valeur" class="form-input" required>
+            <input type="number" name="forme" placeholder="λ : la forme" class="form-input" required>
+            <input type="number" name="esperance" placeholder="μ : l'espérance" class="form-input" required>
+            <input type="number" name="t" placeholder="t : un nombre dont P(X<t) " class="form-input" required>
 
             <!-- Menu déroulant pour choisir une méthode -->
             <select name="methode" class="form-input" required>
@@ -65,13 +65,13 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
     if ($methode == "rectangles_medians") {
         $resultat = methode_rectangles_medians($points, $esperance, $forme, $t);
-        echo "<p class='text-center'>Méthode utilisée : \(\int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{n}\sum_{k=0}^{k=n-1}g(\frac{a_{k}+a_{k+1}}{2}; \mu ;\lambda) \)</p>";
+        
     } elseif ($methode == "trapezes") {
         $resultat = methode_trapezes($points, $esperance, $forme, $t);
-        echo "<p class='text-center'>Méthode utilisée : \( \int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{2n}(g(t; \mu; \lambda) + 2\sum_{k=1}^{k=n-1}g(a_{k}; \mu; \lambda)) \)</p>";
+        
     } elseif ($methode == "simpson") {
         $resultat = methode_simpson($points, $esperance, $forme, $t);
-        echo "<p class='text-center'>Méthode utilisée : \( \int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{6n}(g(t;\mu;\lambda)+2\sum_{k=1}^{k=n-1}g(a+\frac{kt}{n}; \mu; \lambda)+4\sum_{k=0}^{k=n-1}g(a+\frac{t(2k+1)}{2n};\mu;\lambda)) \)</p>";
+
     }
 
     $ecart_type = ecart_type($esperance, $forme);
