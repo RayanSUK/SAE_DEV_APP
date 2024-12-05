@@ -29,13 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `history` (
   `id` int(11) NOT NULL,
-  `login` int(11) NOT NULL,
-  `methode` int(11) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `methode` varchar(255) NOT NULL,
   `n` int(11) NOT NULL,
-  `forme` int(11) NOT NULL,
-  `esperance` int(11) NOT NULL,
-  `t` int(11) NOT NULL,
-  `resultat` float NOT NULL,
+  `forme` double NOT NULL,
+  `esperance` double NOT NULL,
+  `t` double NOT NULL,
+  `resultat` double NOT NULL,
   `id_user` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
