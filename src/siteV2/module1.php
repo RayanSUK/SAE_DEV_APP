@@ -25,8 +25,7 @@ include('partiels/navbar_module1.php');
         <button type="submit" name="loiInverseGaussienne" value="Loi inverse Gaussienne" class="form-button">Loi inverse Gaussienne</button>
         <br><br><br>
     </form>
-    <p>\( g(x ; \lambda ; \mu ) = \sqrt{\frac{\lambda}{2\pi x^3}} e^{-\frac{\lambda(x-\mu)^2}{2\mu^2 x}} \)</p>
-</section>
+    <img src="images/loiGauss.png" alt="Formule de la loi inverse gaussienne"></section>
 
 
 <section class="presentation-site">
@@ -48,9 +47,9 @@ include('partiels/navbar_module1.php');
             </ul>
             <li><strong>Choisissez une méthode de calcul :</strong></li>
             <ul>
-                <li>Rectangles médians \(\int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{n}\sum_{k=0}^{k=n-1}g(\frac{a_{k}+a_{k+1}}{2}; \mu ;\lambda)\)</li>
-                <li>Trapèzes \( \int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{2n}(g(t; \mu; \lambda) + 2\sum_{k=1}^{k=n-1}g(a_{k}; \mu; \lambda)) \)</li>
-                <li>Simpson \( \int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{6n}(g(t;\mu;\lambda)+2\sum_{k=1}^{k=n-1}g(a+\frac{kt}{n}; \mu; \lambda)+4\sum_{k=0}^{k=n-1}g(a+\frac{t(2k+1)}{2n};\mu;\lambda)) \)</li>
+                <li>Rectangles médians</li>
+                <li>Rectangles trapèzes</li>
+                <li>Méthode de Simpson</li>
             </ul>
             <li><strong>Obtenez vos résultats :</strong></li>
             <ul>
