@@ -33,7 +33,6 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
 
     // Connexion à la base de données
     $cnx = mysqli_connect('localhost', 'root', '', 'sigmax');
-
     if (!$cnx) {
         die("Échec de connexion à la base de données : " . mysqli_connect_error());
     }
@@ -49,10 +48,10 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
         // Comparaison du mot de passe saisi avec celui stocké dans la base
         if (md5($mdp) === $row['password']) {
             // Connexion réussie
-            $_SESSION['login'] = $row['login']; // Stocke le login dans la session
-            $_SESSION['id'] = $row['id'];       // Stocke l'ID utilisateur dans la session
-            $_SESSION['etat'] = 'connexion';    // Indique que c'est une connexion réussie
-            
+            $_SESSION['login'] = $row['login'];  // Ajoute le login dans la session
+            $_SESSION['user_id'] = $row['id'];   // Ajoute l'ID utilisateur dans la session
+            $_SESSION['etat'] = 'connexion';     // Définit l'état de connexion
+
             // Redirection vers la page d'accueil
             header("Location: accueil.php");
             exit;
@@ -63,10 +62,11 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
         echo "<p style='color:red;'>Utilisateur non trouvé.</p>";
     }
 
-    // Libération des ressources et fermeture de la connexion
+    // Fermeture de la requête et de la connexion
     mysqli_stmt_close($stmt);
     mysqli_close($cnx);
 }
+
 ?>
 
 
