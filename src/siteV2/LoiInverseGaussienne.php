@@ -60,10 +60,13 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
     if ($methode == "rectangles_medians") {
         $resultat = methode_rectangles_medians($points, $esperance, $forme, $t);
+        echo "<p class='text-center'>Méthode utilisée : \(\int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{n}\sum_{k=0}^{k=n-1}g(\frac{a_{k}+a_{k+1}}{2}; \mu ;\lambda) \)</p>";
     } elseif ($methode == "trapezes") {
         $resultat = methode_trapezes($points, $esperance, $forme, $t);
+        echo "<p class='text-center'>Méthode utilisée : \( \int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{2n}(g(t; \mu; \lambda) + 2\sum_{k=1}^{k=n-1}g(a_{k}; \mu; \lambda)) \)</p>";
     } elseif ($methode == "simpson") {
         $resultat = methode_simpson($points, $esperance, $forme, $t);
+        echo "<p class='text-center'>Méthode utilisée : \( \int_{0}^{t}f(t;\mu;\lambda)dt \simeq \frac{t}{6n}(g(t;\mu;\lambda)+2\sum_{k=1}^{k=n-1}g(a+\frac{kt}{n}; \mu; \lambda)+4\sum_{k=0}^{k=n-1}g(a+\frac{t(2k+1)}{2n};\mu;\lambda)) \)</p>";
     }
 
     $ecart_type = ecart_type($esperance, $forme);
@@ -83,15 +86,15 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                 <td><?= $resultat ?></td>
             </tr>
             <tr>
-                <td>Forme :</td>
+                <td>Forme λ :</td>
                 <td><?= $forme ?></td>
             </tr>
             <tr>
-                <td>Espérance :</td>
+                <td>Espérance μ :</td>
                 <td><?= $esperance ?></td>
             </tr>
             <tr>
-                <td>Ecart-type :</td>
+                <td>Ecart-type σ :</td>
                 <td><?= $ecart_type ?></td>
             </tr>
         </table>
