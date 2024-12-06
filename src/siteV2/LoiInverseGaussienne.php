@@ -71,6 +71,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
     $ecart_type = ecart_type($esperance, $forme);
 
+    echo "<div class='text-center2'>";
     echo "<table>";
     echo "<tr><td>Valeur de probabilité :</td><td>" . $resultat . "</td></tr>";
     echo "<tr><td>Forme :</td><td>" . $forme . "</td></tr>";
@@ -87,6 +88,8 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     echo "<input type='hidden' name='resultat' value='" . $resultat . "'>";
     echo "<button type='submit' name='ajouter_history' class='form-buttonS'>Ajouter à l'historique</button>";
     echo "</form>";
+    echo "</div>";
+   
 
     $x_values_json = json_encode($x_values);
     $points_json = json_encode($points);
