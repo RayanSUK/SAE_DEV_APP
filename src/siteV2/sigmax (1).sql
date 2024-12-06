@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS sigmax;
+USE sigmax;
+
 -- phpMyAdmin SQL Dump
 -- version 5.1.3
 -- https://www.phpmyadmin.net/
@@ -57,7 +60,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `login`, `password`) VALUES
 (1, 'adminweb', 'af03798e4f9010c54d2eb6f386124f7e'),
-(2, 'sysadmin', '48a365b4ce1e322a55ae9017f3daf0c0');
+(2, 'adminsys', '9da1273385336b8d0ff2f460eb1e7fda');
 
 --
 -- Index pour les tables déchargées
@@ -85,6 +88,10 @@ ALTER TABLE `users`
 --
 ALTER TABLE `history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE history
+ADD COLUMN date DATETIME;
+
 
 --
 -- AUTO_INCREMENT pour la table `users`
