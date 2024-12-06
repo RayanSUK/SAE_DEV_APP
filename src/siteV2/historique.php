@@ -14,18 +14,18 @@ if (isset($_POST['ajouter_history'])) {
     $t = $_POST['t'];
     $methode = $_POST['methode'];
     $resultat = $_POST['resultat'];
-    $nom = $_SESSION['login'];  // Assurez-vous que l'utilisateur est connecté
+    $nom = $_SESSION['login']; // Assurez-vous que l'utilisateur est connecté
 
     // Connexion à la base de données
     $cnx = mysqli_connect("localhost", "root", "", "sigmax");
     if (!$cnx) {
-        die("Échec de la connexion à la base de données: " . mysqli_connect_error());
+        die("Échec de la connexion à la base de données : " . mysqli_connect_error());
     }
 
-    // Requête d'insertion avec jointure
+    // Requête d'insertion avec jointure pour inclure la date
     $requete = "
-        INSERT INTO history (login, methode, n, forme, esperance, t, resultat, id_user)
-        SELECT ?, ?, ?, ?, ?, ?, ?, u.id
+        INSERT INTO history (login, methode, n, forme, esperance, t, resultat, id_user, date)
+        SELECT ?, ?, ?, ?, ?, ?, ?, u.id, NOW()
         FROM users u
         WHERE u.login = ?;
     ";
@@ -36,6 +36,7 @@ if (isset($_POST['ajouter_history'])) {
         // Exécution de la requête
         if (mysqli_stmt_execute($stmt)) {
             echo "Données ajoutées à l'historique avec succès.";
+            header("location: history.php");
         } else {
             echo "Erreur lors de l'ajout des données : " . mysqli_stmt_error($stmt);
         }
@@ -48,3 +49,7 @@ if (isset($_POST['ajouter_history'])) {
     mysqli_close($cnx);
 }
 ?>
+
+
+
+
