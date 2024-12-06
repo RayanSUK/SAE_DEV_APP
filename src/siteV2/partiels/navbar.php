@@ -20,7 +20,9 @@
             <li><a href="module1.php">Module probabilité</a></li>
             <li><a href="module2.php">Module 2</a></li>
             <li><a href="module3.php">Module 3</a></li>
+            <li><a href="history.php">Historique des résultats</a></li>
             <li><a href="deconnexion.php">Se déconnecter</a></li>
+            
         </ul>
         <div class="clearfix"></div>
     </div>
