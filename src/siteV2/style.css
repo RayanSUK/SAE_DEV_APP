@@ -427,3 +427,20 @@ canvas {
     max-width: 100%; /* S'assure que le graphique reste responsive */
     height: auto; /* Gère la hauteur automatiquement */
 }
+
+
+.text-center2 table {
+    border-collapse: collapse; /* Style du tableau */
+    border: 1px solid #ddd;
+    margin: auto; /* Centre horizontalement si nécessaire */
+}
+.text-center2 td {
+    padding: 8px 16px; /* Ajoute de l'espace dans les cellules */
+    border: 1px solid #ddd;
+}
+.form-buttonS { /* Ajoute un espace au-dessus du bouton */
+    margin:auto;
+    display: block;
+    margin-bottom: 3%;
+    padding: 0.5%;
+}
