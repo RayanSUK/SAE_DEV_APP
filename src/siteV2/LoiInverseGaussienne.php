@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['login'])) {
-    header("Location: accueil_non_inscrit.php");
-    exit;
-}
 require("fonctionsLIG.php");
 
 // Gestion des erreurs pour le débogage
@@ -11,7 +7,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,7 +14,6 @@ error_reporting(E_ALL);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <title>Loi Inverse Gaussienne</title>
 </head>
 <body>
@@ -29,10 +23,10 @@ error_reporting(E_ALL);
     <div class="form-container">
         <h1 class="text-center">Calcul de la Loi Inverse Gaussienne</h1>
         <form method="POST">
-            <input type="number" name="n" placeholder="n : un nombre de valeur" class="form-input" required>
-            <input type="number" name="forme" placeholder="λ : la forme" class="form-input" required>
-            <input type="number" name="esperance" placeholder="μ : l'espérance" class="form-input" required>
-            <input type="number" name="t" placeholder="t : un nombre dont P(X<t) " class="form-input" required>
+            <input type="number" name="n" placeholder="n" class="form-input" required>
+            <input type="number" name="forme" placeholder="λ" class="form-input" required>
+            <input type="number" name="esperance" placeholder="μ" class="form-input" required>
+            <input type="number" name="t" placeholder="t" class="form-input" required>
 
             <!-- Menu déroulant pour choisir une méthode -->
             <select name="methode" class="form-input" required>
@@ -59,22 +53,40 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     $points = array();
     $x_values = range(0, $n);
 
-    foreach ($x_values as $value) {
+    foreach ($x_values as $i => $value) {
         $points[] = loi_inverse_gaussienne($value, $esperance, $forme);
     }
 
     if ($methode == "rectangles_medians") {
         $resultat = methode_rectangles_medians($points, $esperance, $forme, $t);
-        
-    } elseif ($methode == "trapezes") {
-        $resultat = methode_trapezes($points, $esperance, $forme, $t);
-        
-    } elseif ($methode == "simpson") {
-        $resultat = methode_simpson($points, $esperance, $forme, $t);
+    }
 
+    if ($methode == "trapezes") {
+        $resultat = methode_trapezes($points, $esperance, $forme, $t);
+    }
+
+    if ($methode == "simpson") {
+        $resultat = methode_simpson($points, $esperance, $forme, $t);
     }
 
     $ecart_type = ecart_type($esperance, $forme);
+
+    echo "<table>";
+    echo "<tr><td>Valeur de probabilité :</td><td>" . $resultat . "</td></tr>";
+    echo "<tr><td>Forme :</td><td>" . $forme . "</td></tr>";
+    echo "<tr><td>Espérance :</td><td>" . $esperance . "</td></tr>";
+    echo "<tr><td>Ecart-type :</td><td>" . $ecart_type . "</td></tr>";
+    echo "</table>";
+
+    echo "<form method='POST' action='historique.php'>";  // Redirection vers `historique.php`
+    echo "<input type='hidden' name='n' value='" . $n . "'>";
+    echo "<input type='hidden' name='forme' value='" . $forme . "'>";
+    echo "<input type='hidden' name='esperance' value='" . $esperance . "'>";
+    echo "<input type='hidden' name='t' value='" . $t . "'>";
+    echo "<input type='hidden' name='methode' value='" . $methode . "'>";
+    echo "<input type='hidden' name='resultat' value='" . $resultat . "'>";
+    echo "<button type='submit' name='ajouter_history' class='form-buttonS'>Ajouter à l'historique</button>";
+    echo "</form>";
 
     $x_values_json = json_encode($x_values);
     $points_json = json_encode($points);
@@ -82,66 +94,39 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
     <div class="result-container">
         <h2 class="text-center">Courbe de Wald</h2>
-        <canvas id="myChart" width="900" height="600"></canvas>
-
-        <h2 class="text-center">Résultats</h2>
-        <table class="result-table">
-            <tr>
-                <td>Valeur de probabilité :</td>
-                <td><?= $resultat ?></td>
-            </tr>
-            <tr>
-                <td>Forme λ :</td>
-                <td><?= $forme ?></td>
-            </tr>
-            <tr>
-                <td>Espérance μ :</td>
-                <td><?= $esperance ?></td>
-            </tr>
-            <tr>
-                <td>Ecart-type σ :</td>
-                <td><?= $ecart_type ?></td>
-            </tr>
-        </table>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: <?= $x_values_json ?>,
-                    datasets: [{
-                        label: 'Courbe de Wald',
-                        data: <?= $points_json ?>,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                        fill: false
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'x'
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Densité'
-                            }
+        <canvas id="myChart" width="400" height="200"></canvas>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    data: {
+                        labels: <?= $x_values_json ?>,
+                        datasets: [
+                            {
+                                label: 'Courbe de Wald',
+                                data: <?= $points_json ?>,
+                                type: 'line',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1,
+                                fill: false
+                            },
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            x: { title: { display: true, text: 'x' } },
+                            y: { title: { display: true, text: 'Densité' } }
                         }
                     }
-                }
+                });
             });
-        });
-    </script>
+        </script>
+    </div>
+
     <?php
 }
 ?>
+
 <?php include('partiels/footer.php'); ?>
 </body>
 </html>
