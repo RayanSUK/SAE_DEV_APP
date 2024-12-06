@@ -16,7 +16,7 @@
     <div class="container">
             <img src="images/sigmaXlogo.png" alt="logo" class="logo img-responsive">
         <ul>
-            <li><a href="accueil_non_inscrit.php">Accueil</a></li>
+            <li><a href="index.php">Accueil</a></li>
             <li><a href="connexion.php">Connexion</a></li>
             <li><a href="inscription.php">Inscription</a></li>
         </ul>
