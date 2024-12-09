@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="style.css"> <!-- Assurez-vous que le fichier style.css est dans le bon dossier -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap">
+</head>
+<body>
+
+<!-- Section Navbar -->
+<section class="navbar text-center">
+    <div class="container">
+        <img src="images/sigmaXlogo.png" alt="logo" class="logo img-responsive">
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="connexion.html">Connexion</a></li>
+            <li><a href="inscription.html">Inscription</a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+</section>
+
+<!-- Section Inscription -->
+<section class="description text-center">
+    <div class="titreInscrit">
+        <h1>Inscription</h1>
+    </div>
+    <div class="form-container-parent">
+        <div class="form-container-co">
+            <h1>Inscription</h1>
+            <form method="GET" action="main/accueil.html">
+                <!-- Label et champ pour le pseudo -->
+                <label for="nom">Pseudo :</label>
+                <input type="text" id="nom" name="nom" placeholder="Pseudo">
+
+                <!-- Label et champ pour le mot de passe -->
+                <label for="mdp">Mot de passe :</label>
+                <input type="password" id="mdp" name="mdp" placeholder="Mot de passe">
+
+                <p>Veuillez sélectionner un chiffre pour valider votre inscription :</p>
+                <table class="captcha-table">
+                    <tr>
+                        <td><button type="submit" name="reponse" value="0">0</button></td>
+                        <td><button type="submit" name="reponse" value="1">1</button></td>
+                        <td><button type="submit" name="reponse" value="2">2</button></td>
+                        <td><button type="submit" name="reponse" value="3">3</button></td>
+                        <td><button type="submit" name="reponse" value="4">4</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="submit" name="reponse" value="5">5</button></td>
+                        <td><button type="submit" name="reponse" value="6">6</button></td>
+                        <td><button type="submit" name="reponse" value="7">7</button></td>
+                        <td><button type="submit" name="reponse" value="8">8</button></td>
+                        <td><button type="submit" name="reponse" value="9">9</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Section Footer -->
+<section class="social">
+    <div class="container text-center">
+        <a href="accueil.html"><img src="images/sigmaXlogo.png" alt="SigmaBot" class="SigmaBot"></a>
+        <p>All rights reserved. Created by Abdelaziz, Kevin, Pierre-Alix, Rayan and Younes</p>
+    </div>
+</section>
+
+</body>
+</html>
