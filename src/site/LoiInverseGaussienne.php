@@ -97,7 +97,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
     <div class="result-container">
         <h2 class="text-center">Courbe de Wald</h2>
-        <canvas id="myChart" width="400" height="200"></canvas>
+        <canvas id="myChart" width="1000" height="600"></canvas>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var ctx = document.getElementById('myChart').getContext('2d');
@@ -109,9 +109,9 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                                 label: 'Courbe de Wald',
                                 data: <?= $points_json ?>,
                                 type: 'line',
-                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderColor: 'rgb(55, 66, 250)',
                                 borderWidth: 1,
-                                fill: false
+                                fill: true
                             },
                         ]
                     },
