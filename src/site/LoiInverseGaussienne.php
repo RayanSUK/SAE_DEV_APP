@@ -59,14 +59,17 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
     if ($methode == "rectangles_medians") {
         $resultat = methode_rectangles_medians($points, $esperance, $forme, $t);
+        echo "<div class='text-center'><img src='images/rectanglesMedians.png' alt=''></div>";
     }
 
     if ($methode == "trapezes") {
         $resultat = methode_trapezes($points, $esperance, $forme, $t);
+        echo "<div class='text-center'><img src='images/methodeTrapezes.png' alt=''></div>";
     }
 
     if ($methode == "simpson") {
         $resultat = methode_simpson($points, $esperance, $forme, $t);
+        echo "<div class='text-center'><img src='images/methodeTrapezes.png' alt=''></div>";
     }
 
     $ecart_type = ecart_type($esperance, $forme);

@@ -6,13 +6,7 @@
     }
 
 
-*{
-    margin: 0 0 ;
-    padding: 0 0 ;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    overflow-x: hidden;
-}
+
 
 
  
@@ -441,6 +435,7 @@ canvas {
 .form-buttonS { /* Ajoute un espace au-dessus du bouton */
     margin:auto;
     display: block;
+    color: #007bff;
     margin-bottom: 3%;
     padding: 0.5%;
 }

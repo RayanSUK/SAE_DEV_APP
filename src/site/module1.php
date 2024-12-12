@@ -25,7 +25,7 @@ include('partiels/navbar_module1.php');
         <button type="submit" name="loiInverseGaussienne" value="Loi inverse Gaussienne" class="form-button">Loi inverse Gaussienne</button>
         <br><br><br>
     </form>
-    <img src="images/loiGauss.png" alt="Formule de la loi inverse gaussienne"></section>
+    <img src="images/loiInverseGaussienne.png" alt="Formule de la loi inverse gaussienne"></section>
 
 
 <section class="presentation-site">
