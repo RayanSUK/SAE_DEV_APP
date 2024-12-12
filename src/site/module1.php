@@ -6,7 +6,7 @@ if (!isset($_SESSION['login'])) {
     header("Location: index.php");
     exit;
 }
-include('partiels/navbar_module1.php');
+include('partiels/navbar.php');
 
 
 // Fonction pour définir le titre de la page
