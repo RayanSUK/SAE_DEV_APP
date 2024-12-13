@@ -116,6 +116,8 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 
 if (isset($_POST['courbe']) && isset($_POST['id'])) {
@@ -125,7 +127,7 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-    header("Location: " . $_SERVER['PHP_SELF']);
+}
 
     if ($row = mysqli_fetch_assoc($result)) {
         $points = array();
