@@ -58,13 +58,16 @@ $result = mysqli_stmt_get_result($stmt);
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+        .invisible {
+            display: none;
+        }
     </style>
     <!-- Inclusion de Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-<div class="container">
+<div id="dataDiv" class="container">
     <h2>Historique des Résultats</h2>
     <?php if (mysqli_num_rows($result) > 0): ?>
         <table>
@@ -76,7 +79,7 @@ $result = mysqli_stmt_get_result($stmt);
                 <th>Espérance</th>
                 <th>t</th>
                 <th>Résultat</th>
-                <th>Date</th> <!-- Nouvelle colonne pour la date -->
+                <th>Date</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -89,7 +92,7 @@ $result = mysqli_stmt_get_result($stmt);
                     <td><?php echo htmlspecialchars($row['esperance']); ?></td>
                     <td><?php echo htmlspecialchars($row['t']); ?></td>
                     <td><?php echo htmlspecialchars($row['resultat']); ?></td>
-                    <td><?php echo htmlspecialchars($row['date']); ?></td> <!-- Affichage de la date -->
+                    <td><?php echo htmlspecialchars($row['date']); ?></td>
                     <td>
                         <form method="post" action="">
                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['id']); ?>">
@@ -117,27 +120,17 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    $_SESSION['suppression_effectuee'] = true;
-}?>
-
-<script type="text/javascript">
-    function refreshPage() {
-        // Rafraîchir la page une première fois
-        window.location.reload();
-
-        // Rafraîchir la page une deuxième fois après un court délai
-        setTimeout(function() {
-            window.location.reload();
-        }, 1000); // 1000 millisecondes = 1 seconde
-    }
-
-    window.onload = function() {
-        <?php if(isset($_SESSION['suppression_effectuee']) && $_SESSION['suppression_effectuee']): ?>
-        refreshPage();
-        <?php unset($_SESSION['suppression_effectuee']); ?>
-        <?php endif; ?>
-    };
-</script>
+    // Ajouter la classe .invisible à la div avec l'id 'dataDiv'
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dataDiv = document.getElementById('dataDiv');
+            if (dataDiv) {
+                dataDiv.classList.add('invisible');
+            }
+        });
+    </script>";
+}
+?>
 
 <?php
 if (isset($_POST['courbe']) && isset($_POST['id'])) {
@@ -147,7 +140,6 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-
 
     if ($row = mysqli_fetch_assoc($result)) {
         $points = array();
