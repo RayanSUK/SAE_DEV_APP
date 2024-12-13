@@ -120,17 +120,7 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    echo "<script>
-        document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('#supp').forEach(button => {
-        button.addEventListener('click', () => {
-            button.closest('tr').classList.add('invisible');
-        });
-    });
-});
-
-
-    </script>";
+    echo "<p style='color: #007bff'>Données supprimées avec succès, veuillez rafraîchir la page</p>";
 }
 ?>
 
