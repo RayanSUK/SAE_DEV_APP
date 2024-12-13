@@ -24,15 +24,6 @@ $stmt = mysqli_prepare($cnx, $query);
 mysqli_stmt_bind_param($stmt, "s", $_SESSION['login']);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
-
-if(isset($_POST['supp']) && isset($_POST['id'])){
-    $id = $_POST['id'];
-    $query = "DELETE FROM history WHERE id = ?";
-    $stmt = mysqli_prepare($cnx, $query);
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-}
 ?>
 
 <!DOCTYPE html>
@@ -118,6 +109,37 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
 <?php
 require("fonctionsLIG.php");
 
+if(isset($_POST['supp']) && isset($_POST['id'])){
+    $id = $_POST['id'];
+    $query = "DELETE FROM history WHERE id = ?";
+    $stmt = mysqli_prepare($cnx, $query);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    $_SESSION['suppression_effectuee'] = true;
+}?>
+
+<script type="text/javascript">
+    function refreshPage() {
+        // Rafraîchir la page une première fois
+        window.location.reload();
+
+        // Rafraîchir la page une deuxième fois après un court délai
+        setTimeout(function() {
+            window.location.reload();
+        }, 1000); // 1000 millisecondes = 1 seconde
+    }
+
+    window.onload = function() {
+        <?php if(isset($_SESSION['suppression_effectuee']) && $_SESSION['suppression_effectuee']): ?>
+        refreshPage();
+        <?php unset($_SESSION['suppression_effectuee']); ?>
+        <?php endif; ?>
+    };
+</script>
+
+<?php
 if (isset($_POST['courbe']) && isset($_POST['id'])) {
     $id = $_POST['id'];
     $query = "SELECT n, esperance, forme FROM history WHERE id = ?";
