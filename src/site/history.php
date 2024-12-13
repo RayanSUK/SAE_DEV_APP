@@ -120,19 +120,15 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    // Ajouter la classe .invisible à la div avec l'id 'dataDiv'
     echo "<script>
-        document.addEventListener('DOMContentLoaded', function() {
-    
-        const suppBouton = document.getElementById('supp');
-        const div = document.getElementById('supp');
-        
-
-      
-        suppBouton.addEventListener('click', function() {
-            div.classList.add('invisible');
+        document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#supp').forEach(button => {
+        button.addEventListener('click', () => {
+            button.closest('tr').classList.add('invisible');
         });
     });
+});
+
 
     </script>";
 }
