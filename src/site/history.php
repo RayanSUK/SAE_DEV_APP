@@ -108,6 +108,15 @@ $result = mysqli_stmt_get_result($stmt);
 
 <?php
 require("fonctionsLIG.php");
+
+if(isset($_POST['supp']) && isset($_POST['id'])){
+    $id = $_POST['id'];
+    $query = "DELETE n, esperance, forme FROM history WHERE id = ?";
+    $stmt = mysqli_prepare($cnx, $query);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+}
+
 if (isset($_POST['courbe']) && isset($_POST['id'])) {
     $id = $_POST['id'];
     $query = "SELECT n, esperance, forme FROM history WHERE id = ?";
