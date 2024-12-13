@@ -181,17 +181,6 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
     </div>
 <?php endif; ?>
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var successMessage = document.getElementById('success-message');
-        if (successMessage) {
-            setTimeout(function () {
-                successMessage.style.display = 'none';
-            }, 3000); // Le message disparaîtra après 3 secondes
-        }
-    });
-</script>
 </body>
 </html>
 
