@@ -120,7 +120,7 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    echo "<p style='color: #007bff'>Données supprimées avec succès, veuillez rafraîchir la page</p>";
+    echo "<p id='success-message' style='color: #007bff'>Données supprimées avec succès, veuillez rafraîchir la page</p>";
 }
 ?>
 
@@ -181,6 +181,17 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
     </div>
 <?php endif; ?>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var successMessage = document.getElementById('success-message');
+        if (successMessage) {
+            setTimeout(function () {
+                successMessage.style.display = 'none';
+            }, 3000); // Le message disparaîtra après 3 secondes
+        }
+    });
+</script>
 </body>
 </html>
 
