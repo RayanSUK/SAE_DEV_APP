@@ -16,7 +16,13 @@ function methode_rectangles_medians($points, $esperance, $forme, $t) {
         $resultat += loi_inverse_gaussienne($m, $esperance, $forme);
     }
 
-    return ($t/$n) * $resultat;
+    $resultatFinal = ($t/$n) * $resultat;
+
+    if($resultatFinal > 1){
+        return 1;
+    }
+
+    return $resultatFinal;
 }
 
 function methode_trapezes($points, $esperance, $forme, $t){
