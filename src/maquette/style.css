@@ -18,7 +18,6 @@
     overflow-x: hidden;
 }
 
-
  
 
 .container{
@@ -28,10 +27,37 @@
 
 }
 
+table {
+    border-collapse: collapse; /* Style du tableau */
+    border: 1px solid #ddd;
+    margin: auto; /* Centre horizontalement si nécessaire */
+}
+
+.form-buttonS { /* Ajoute un espace au-dessus du bouton */
+    margin:auto;
+    display: block;
+    color: #007bff;
+    margin-bottom: 3%;
+    padding: 0.5%;
+}
+
 .img-responsive{
     width: 100%;
 
 }
+
+td {
+    border: 1px solid #ccc; /* Ajoute une bordure au tableau */
+    padding: 10px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
 
 .clearfix{
     clear: both;

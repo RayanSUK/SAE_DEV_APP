@@ -67,7 +67,7 @@ $result = mysqli_stmt_get_result($stmt);
 </head>
 <body>
 
-<div id="dataDiv" class="container">
+<div class="container">
     <h2>Historique des Résultats</h2>
     <?php if (mysqli_num_rows($result) > 0): ?>
         <table>

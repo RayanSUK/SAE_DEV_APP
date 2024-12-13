@@ -37,15 +37,48 @@
     <div class="titre text-center">
         <h1>Voici un exemple de notre historique</h1><br><br><br>
     </div>
-
-    <div class="video">
-        <img width="1080" height="300" src="../images/historiqueCapture.png" alt="La photo de notre historique">
-    </div>
 </section>
-
-
-
 <!-- la section explication se termine ici-->
+
+<div class="container text-center">
+    <h2>Historique des Résultats</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Méthode</th>
+            <th>n</th>
+            <th>Forme</th>
+            <th>Espérance</th>
+            <th>t</th>
+            <th>Résultat</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>rectangles_medians</td>
+            <td>19</td>
+            <td>19</td>
+            <td>19</td>
+            <td>20</td>
+            <td>7.8864757855958E-72</td>
+            <td>2024-12-13 16:42:41</td>
+            <td>
+                <form method="post" action="">
+                    <input type="hidden" name="id" value="1"> <!-- Valeur statique pour l'ID -->
+                    <button type='submit' name='courbe' class='form-buttonS'>Consulter la courbe</button>
+                    <button type='submit' id="supp" name='supp' class='form-buttonS'>Supprimer de l'historique</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
 
 <!-- social Section commence ici -->
 <footer class="social">
