@@ -97,7 +97,7 @@ $result = mysqli_stmt_get_result($stmt);
                         <form method="post" action="">
                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['id']); ?>">
                             <button type='submit' name='courbe' class='form-buttonS'>Consulter la courbe</button>
-                            <button type='submit' name='supp' class='form-buttonS'>Supprimer de l'historique</button>
+                            <button type='submit' id="supp" name='supp' class='form-buttonS'>Supprimer de l'historique</button>
                         </form>
                     </td>
                 </tr>
@@ -123,11 +123,17 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
     // Ajouter la classe .invisible à la div avec l'id 'dataDiv'
     echo "<script>
         document.addEventListener('DOMContentLoaded', function() {
-            var dataDiv = document.getElementById('dataDiv');
-            if (dataDiv) {
-                dataDiv.classList.add('invisible');
-            }
+    
+        const suppBouton = document.getElementById('supp');
+        const div = document.getElementById('dataDiv')
+        
+
+      
+        suppBouton.addEventListener('click', function() {
+            div.classList.add('invisible');
         });
+    });
+
     </script>";
 }
 ?>
