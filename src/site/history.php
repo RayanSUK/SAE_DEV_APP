@@ -125,7 +125,7 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
         document.addEventListener('DOMContentLoaded', function() {
     
         const suppBouton = document.getElementById('supp');
-        const div = document.getElementById('dataDiv')
+        const div = document.getElementById('supp');
         
 
       
