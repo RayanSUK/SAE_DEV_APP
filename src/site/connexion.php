@@ -32,7 +32,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     $mdp = $_POST['mdp'];
 
     // Connexion à la base de données
-    $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
+    $cnx = mysqli_connect('localhost', 'root', '', 'sigmax');
     if (!$cnx) {
         die("Échec de connexion à la base de données : " . mysqli_connect_error());
     }
@@ -52,8 +52,14 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
             $_SESSION['user_id'] = $row['id'];   // Ajoute l'ID utilisateur dans la session
             $_SESSION['etat'] = 'connexion';     // Définit l'état de connexion
 
-            // Redirection vers la page d'accueil
-            header("Location: accueil.php");
+            // Vérification si l'utilisateur est l'adminweb
+            if ($row['login'] === 'adminweb') {
+                $_SESSION['role'] = 'adminweb';  // Ajoute le rôle adminweb
+                header("Location: adminweb.php");   // Redirection vers la page admin
+            } else {
+                $_SESSION['role'] = 'user';      // Ajoute le rôle utilisateur normal
+                header("Location: accueil.php"); // Redirection vers la page d'accueil
+            }
             exit;
         } else {
             echo "<p style='color:red;'>Mot de passe incorrect.</p>";
@@ -66,7 +72,4 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     mysqli_stmt_close($stmt);
     mysqli_close($cnx);
 }
-
 ?>
-
-
