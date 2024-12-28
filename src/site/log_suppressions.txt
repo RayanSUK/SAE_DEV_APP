@@ -1,0 +1,21 @@
+[2024-12-28 15:06:25] Utilisateur 'Test_final' supprimé de la base de données.
+[2024-12-28 15:09:18] Utilisateur 'dzqdq' supprimé de la base de données.
+[2024-12-28 15:09:50] Utilisateur 'dzqdq' supprimé de la base de données.
+[2024-12-28 15:10:29] Utilisateur 'login3' supprimé de la base de données.
+[2024-12-28 15:11:39] Utilisateur 'login2' supprimé de la base de données.
+[2024-12-28 15:13:10] Utilisateur 'login1' supprimé de la base de données.
+[2024-12-28 15:13:15] Historique de l'utilisateur 'TestU' supprimé du fichier CSV.
+[2024-12-28 15:14:41] Utilisateur 'RayanSUkkarie' supprimé de la base de données.
+[2024-12-28 15:19:06] Historique de l'utilisateur 'Test' supprimé du fichier CSV.
+[2024-12-28 15:25:06] Historique de l'utilisateur 'Test' supprimé du fichier CSV.
+[2024-12-28 15:35:57] Historique de l'utilisateur 'Test' supprimé de la base de données.
+[2024-12-28 15:37:52] Historique de l'utilisateur 'TESTFINAL' supprimé de la base de données.
+[2024-12-28 21:14:55] Utilisateur 'EncoreUntest' supprimé de la base de données.
+[2024-12-28 21:14:57] Utilisateur 'TESTFINAL' supprimé de la base de données.
+[2024-12-28 21:14:58] Utilisateur 'Test' supprimé de la base de données.
+[2024-12-28 21:15:00] Utilisateur 'TestU' supprimé de la base de données.
+[2024-12-28 21:49:52] Utilisateur 'RSK' supprimé de la base de données.
+[2024-12-28 21:53:27] Historique de l'utilisateur 'Robot' supprimé de la base de données.
+[2024-12-28 22:02:21] Utilisateur 'Robotooo' supprimé de la base de données.
+[2024-12-28 22:19:12] Historique de l'utilisateur 'IRIS' supprimé de la base de données.
+[2024-12-28 22:19:25] Utilisateur 'IRIS' supprimé de la base de données.
