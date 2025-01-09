@@ -3,7 +3,7 @@
 session_start();
 
 // Connexion à la base de données
-$cnx = mysqli_connect('localhost', 'root', '', 'sigmax');
+$cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
 
 // Vérification de la connexion
 if (!$cnx) {
