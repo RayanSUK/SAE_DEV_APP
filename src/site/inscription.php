@@ -77,7 +77,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
 <!-- Formulaire d'inscription -->
 <section class="description text-center">
     <div class="titreInscrit">
-        <h1>Inscriptions</h1>
+        <h1>Inscription</h1>
     </div>
     <div class="form-container-parent">
         <div class="form-container-co">
