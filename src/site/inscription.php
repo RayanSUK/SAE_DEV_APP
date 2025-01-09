@@ -43,7 +43,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
             exit;
         } else {
             // Insère dans la base de données
-            $sql = "INSERT INTO USERS (login, password) VALUES (?, ?)";
+            $sql = "INSERT INTO users (login, password) VALUES (?, ?)";
             $stmt = mysqli_prepare($cnx, $sql);
             mysqli_stmt_bind_param($stmt, "ss", $nom, $mdp);
 
