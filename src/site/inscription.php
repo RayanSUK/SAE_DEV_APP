@@ -34,8 +34,9 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
 
         if (mysqli_num_rows($check_result) > 0) {
             // Le login est déjà utilisé : renvoie un message d'erreur et l'utilisateur doit recommencer
-            header("Location: inscription.php");
             $_SESSION['error'] = "Login déjà utilisé.";
+            header("Location: inscription.php");
+            exit;
         } else {
             // Insère dans la base de données
             $sql = "INSERT INTO USERS (login, password) VALUES (?, ?)";
@@ -55,6 +56,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
                 // Message affiché en cas d'erreurs
                 $_SESSION['error'] = "Erreur lors de l'inscription.";
                 header("Location: inscription.php");
+                exit;
             }
         }
 
