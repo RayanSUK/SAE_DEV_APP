@@ -21,7 +21,6 @@ session_start();
     </div>
 </section>
 
-<?php include('partiels/footer.php'); ?>
 
 </body>
 </html>
@@ -73,3 +72,5 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     mysqli_close($cnx);
 }
 ?>
+
+<?php include('partiels/footer.php'); ?>
