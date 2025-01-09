@@ -61,9 +61,9 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
             }
             exit;
         } else {
-            echo "<p style='color:red;'>Mot de passe incorrect.</p>";
-            echo "<p style='color:red;' class="text-center">Mot de passe incorrect.</p>";
+            echo "<p style='color:red;' class='text-center'>Mot de passe incorrect.</p>";
         }
+
     } else {
         echo "<p style='color:red;'>Utilisateur non trouvé.</p>";
     }
