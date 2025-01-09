@@ -40,7 +40,9 @@ if (isset($_SESSION['message'])) {
 ?>
 
 <!-- --------------------------------------------------------------------Contenu de la page des utilisateurs inscrits ------------------------------------>
+<div class="text-center">
 <h1>Liste des utilisateurs inscrits</h1>
+</div>
 <table border="1">
     <tr>
         <th>ID</th>
