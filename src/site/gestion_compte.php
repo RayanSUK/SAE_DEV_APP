@@ -58,7 +58,7 @@ mysqli_close($cnx);
 <h1>Ajouter un nouvel utilisateur</h1>
 
 <!-- Formulaire pour ajouter un utilisateur -->
-<div class="form-container">
+
 <form action="gestion_compte.php" method="POST">
     <label for="login">Login:</label>
     <input type="text" id="login" name="login" required><br><br>
@@ -68,7 +68,7 @@ mysqli_close($cnx);
 
     <input type="submit" value="Ajouter utilisateur">
 </form>
-</div>
+
 
 <!-- Inclure le pied de page après le formulaire -->
 <?php include('partiels/footer.php'); ?>
@@ -113,14 +113,6 @@ mysqli_close($cnx);
         max-width: 400px;
     }
 
-    .form-container { 
-        background-color: white; 
-        border-radius: 8px; 
-        padding: 30px; 
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-        width: 100%; 
-        max-width: 400px; 
-    }
 
     /* Labels des champs */
     label {
