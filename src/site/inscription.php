@@ -1,5 +1,8 @@
 <?php
-ob_start();
+
+ini_set('display_errors', 1); 
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include('partiels/navbar_Inscription.php');
 session_start();
 
@@ -74,7 +77,6 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     session_unset();
     
 }
-    ob_end_flush();
 ?>
 
 <!-- Formulaire d'inscription -->
