@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include('partiels/navbar_Inscription.php');
 session_start();
 
@@ -70,8 +71,10 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     } else {
         echo "<p style='background-color: red; color: white;'>Captcha incorrect.</p>";
     }
+    session_unset();
     
 }
+    ob_end_flush();
 ?>
 
 <!-- Formulaire d'inscription -->
