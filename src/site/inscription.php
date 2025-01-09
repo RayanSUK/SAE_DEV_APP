@@ -65,6 +65,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
         mysqli_stmt_close($stmt);
         mysqli_close($cnx);
         unset($_SESSION['captcha']); // Supprimer le CAPTCHA après utilisation
+        exit;
         
     } else {
         echo "<p style='background-color: red; color: white;'>Captcha incorrect.</p>";
