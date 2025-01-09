@@ -70,7 +70,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     } else {
         echo "<p style='background-color: red; color: white;'>Captcha incorrect.</p>";
     }
-    session_unset();
+    
 }
 ?>
 
