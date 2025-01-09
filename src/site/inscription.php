@@ -30,7 +30,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
         }
 
         // Vérifie si le login est déjà utilisé
-        $check_sql = "SELECT * FROM USERS WHERE login = ?";
+        $check_sql = "SELECT * FROM users WHERE login = ?";
         $check_stmt = mysqli_prepare($cnx, $check_sql);
         mysqli_stmt_bind_param($check_stmt, "s", $nom);
         mysqli_stmt_execute($check_stmt);
