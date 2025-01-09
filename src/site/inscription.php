@@ -20,7 +20,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
 
     if ($reponse == $_SESSION['captcha']) {
         // Connexion à la base de données
-        $cnx = mysqli_connect('localhost', 'root', '', 'sigmax');
+        $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
         if (!$cnx) {
             die("Échec de la connexion à la base de données: " . mysqli_connect_error());
         }

@@ -32,7 +32,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     $mdp = $_POST['mdp'];
 
     // Connexion à la base de données
-    $cnx = mysqli_connect('localhost', 'root', '', 'sigmax');
+    $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
     if (!$cnx) {
         die("Échec de connexion à la base de données : " . mysqli_connect_error());
     }
