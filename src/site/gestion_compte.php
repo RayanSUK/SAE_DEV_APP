@@ -112,6 +112,15 @@ mysqli_close($cnx);
         max-width: 400px;
     }
 
+    .form-container { 
+        background-color: white; 
+        border-radius: 8px; 
+        padding: 30px; 
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+        width: 100%; 
+        max-width: 400px; 
+    }
+
     /* Labels des champs */
     label {
         font-size: 1rem;
