@@ -58,7 +58,7 @@ mysqli_close($cnx);
 <h1>Ajouter un nouvel utilisateur</h1>
 
 <!-- Formulaire pour ajouter un utilisateur -->
-<div class="form-container-co">
+<div class="form-container">
 <form action="gestion_compte.php" method="POST">
     <label for="login">Login:</label>
     <input type="text" id="login" name="login" required><br><br>
