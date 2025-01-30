@@ -88,7 +88,10 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
         <div class="form-container-co">
             <h1>Inscription</h1>
             <form method="POST">
+                <label for="nom">Pseudo :</label>
                 <input type="text" name="nom" placeholder="Pseudo" required>
+
+                <label for="mdp">Mot de passe :</label>
                 <input type="password" name="mdp" placeholder="Mot de passe" required>
                 <p>Veuillez sélectionner le chiffre <span style="font-weight: bold; color: red;"><?= $nb ?></span> pour valider votre inscription :</p>
                 <table>
