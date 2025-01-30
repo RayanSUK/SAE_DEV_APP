@@ -89,17 +89,17 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
             <h1>Inscription</h1>
             <form method="POST">
                 <label for="nom">Pseudo :</label>
-                <input type="text" name="nom" placeholder="Pseudo" required>
+                <input type="text" name="nom" id="nom" placeholder="Pseudo" required>
 
                 <label for="mdp">Mot de passe :</label>
-                <input type="password" name="mdp" placeholder="Mot de passe" required>
-                <p>Veuillez sélectionner le chiffre <span style="font-weight: bold; color: red;"><?= $nb ?></span> pour valider votre inscription :</p>
+                <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>
+                <p>Veuillez sélectionner le chiffre <span style="font-weight: bold; color: rgba(182,4,4,0.89);"><?= $nb ?></span> pour valider votre inscription :</p>
                 <table>
                     <tr>
                         <?php foreach (range(0, 9) as $value): ?>
                             <td>
                                 <button type="submit" name="reponse" value="<?= $value ?>" 
-                                        <?= $value == $nb ? 'style="background-color: red;"' : '' ?>>
+                                        <?= $value == $nb ? 'style="background-color: rgba(182,4,4,0.89);"' : '' ?>>
                                     <?= $value ?>
                                 </button>
                             </td>
@@ -109,7 +109,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
                 <br>
                 <?php
                 if (isset($_SESSION['error'])) {
-                    echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
+                    echo '<p style="color: rgba(182,4,4,0.89);">' . $_SESSION['error'] . '</p>';
                     unset($_SESSION['error']);
                 }
                 ?>
