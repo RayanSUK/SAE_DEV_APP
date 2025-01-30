@@ -290,6 +290,21 @@
     background-color: #0056b3;
 }
 
+.form-container-co label {
+    display: block; /* Affiche chaque label sur une ligne distincte */
+    text-align: left; /* Aligne les labels à gauche */
+    margin-bottom: 5px; /* Ajoute un espace sous le label */
+    font-weight: bold; /* Rend les labels plus visibles (optionnel) */
+}
+
+.form-container-co input {
+    display: block; /* Les champs s'affichent sur une nouvelle ligne */
+    width: 100%; /* Prend la largeur du conteneur parent */
+    padding: 10px; /* Ajoute de l'espace à l'intérieur des champs */
+    margin-bottom: 15px; /* Ajoute un espace entre chaque champ */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
 
 
 
@@ -337,6 +352,7 @@
 .form-container-co button:hover {
     background-color: #0056b3;
 }
+
 
 /* Centrer le formulaire dans son conteneur parent */
 .form-container-parent {
