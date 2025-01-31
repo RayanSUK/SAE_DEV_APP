@@ -17,7 +17,7 @@
             <img src="images/sigmaXlogo.png" alt="logo" class="logo img-responsive">
         <ul>
             <li><a href="inscritcsv.php">Utilisateurs inscrits</a></li>
-            <li><a href="index.php">Se déconnecter</a></li>
+            <li><a href="index.php">Deconnexion</a></li>
         </ul>
         <div class="clearfix"></div>
     </div>

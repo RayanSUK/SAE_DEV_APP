@@ -19,7 +19,7 @@
             <li><a href="adminweb.php">Accueil adminweb</a></li>
             <li><a href="inscritcsv2.php">Utilisateurs inscrits</a></li>
             <li><a href="gestion_compte.php">Gestion de comptes</a></li>
-            <li><a href="index.php">Se déconnecter</a></li>
+            <li><a href="index.php">Deconnexion</a></li>
         </ul>
         <div class="clearfix"></div>
     </div>
