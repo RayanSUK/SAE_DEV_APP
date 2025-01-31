@@ -1,6 +1,5 @@
 <?php
-
-ini_set('display_errors', 1); 
+ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include('partiels/navbar_Inscription.php');
@@ -70,52 +69,53 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
         mysqli_close($cnx);
         unset($_SESSION['captcha']); // Supprimer le CAPTCHA après utilisation
         exit;
-        
+
     } else {
         echo "<p style='background-color: red; color: white;'>Captcha incorrect.</p>";
     }
     session_unset();
-    
 }
 ?>
 
 <!-- Formulaire d'inscription -->
-<section class="description text-center">
-    <div class="titreInscrit">
-        <h1>Inscription</h1>
-    </div>
-    <div class="form-container-parent">
-        <div class="form-container-co">
-            <h1>Inscription</h1>
-            <form method="POST">
-                <label for="nom">Pseudo :</label>
-                <input type="text" name="nom" id="nom" placeholder="Pseudo" required>
-
-                <label for="mdp">Mot de passe :</label>
-                <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>
-                <p>Veuillez sélectionner le chiffre <span style="font-weight: bold; color: rgba(182,4,4,0.89);"><?= $nb ?></span> pour valider votre inscription :</p>
-                <table>
-                    <tr>
-                        <?php foreach (range(0, 9) as $value): ?>
-                            <td>
-                                <button type="submit" name="reponse" value="<?= $value ?>" 
-                                        <?= $value == $nb ? 'style="background-color: rgba(182,4,4,0.89);"' : '' ?>>
-                                    <?= $value ?>
-                                </button>
-                            </td>
-                        <?php endforeach; ?>
-                    </tr>
-                </table>
-                <br>
-                <?php
-                if (isset($_SESSION['error'])) {
-                    echo '<p style="color: rgba(182,4,4,0.89);">' . $_SESSION['error'] . '</p>';
-                    unset($_SESSION['error']);
-                }
-                ?>
-            </form>
+<main role="main">
+    <section class="description text-center" role="region" aria-labelledby="titre-inscription">
+        <div class="titreInscrit">
+            <h1 id="titre-inscription">Inscription</h1>
         </div>
-    </div>
-</section>
+        <div class="form-container-parent">
+            <div class="form-container-co">
+                <h2>Inscription</h2>
+                <form method="POST">
+                    <label for="nom">Pseudo :</label>
+                    <input type="text" name="nom" id="nom" placeholder="Pseudo" required>
+
+                    <label for="mdp">Mot de passe :</label>
+                    <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>
+
+                    <p>Veuillez sélectionner le chiffre <span style="font-weight: bold; color: rgba(182,4,4,0.89);"><?= $nb ?></span> pour valider votre inscription :</p>
+
+                    <!-- Boutons de validation sous forme de Flexbox -->
+                    <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                        <?php foreach (range(0, 9) as $value): ?>
+                            <button type="submit" name="reponse" value="<?= $value ?> "
+                                <?= $value == $nb ? 'style="background-color: rgba(182,4,4,0.89);"' : '' ?> >
+                                <?= $value ?>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <br>
+                    <?php
+                    if (isset($_SESSION['error'])) {
+                        echo '<p style="color: rgba(182,4,4,0.89);">' . $_SESSION['error'] . '</p>';
+                        unset($_SESSION['error']);
+                    }
+                    ?>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
 
 <?php include('partiels/footer.php'); ?>
