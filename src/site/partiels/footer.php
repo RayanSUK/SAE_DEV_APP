@@ -14,7 +14,7 @@
                 </li>
             </ul>
             -->
-            <a><img src="images/sigmaXlogo.png" alt="SigmaBot" class="SigmaBot"></a>
+            <a><img src="images/sigmaXlogo.png" alt="Le logo du site SigmaX" class="SigmaBot"></a>
             <p>All rights reserved. Created By Abdelaziz, Kevin, Pierre-Alix, Rayan and Younes</p>
         </div>
     </section>

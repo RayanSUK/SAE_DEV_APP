@@ -15,7 +15,7 @@
 <!-- navbar section starts here -->
 <section class="navbar text-center">
     <div class="container">
-        <img src="images/sigmaXlogo.png" alt="logo" class="logo img-responsive">
+        <img src="images/sigmaXlogo.png" alt="Le logo du site SigmaX" class="logo img-responsive">
         <ul>
             <li><a href="accueil.php">Accueil</a></li>
             <li><a href="module1.php">Module probabilité</a></li>
