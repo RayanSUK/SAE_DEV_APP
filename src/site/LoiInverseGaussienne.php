@@ -19,29 +19,42 @@ error_reporting(E_ALL);
 <body>
 <?php include('partiels/navbar.php'); ?>
 
+<main role="main">
 <div class="form-container-parent">
     <div class="form-container">
         <h1 class="text-center">Calcul de la Loi Inverse Gaussienne</h1>
         <form method="POST">
-            <input type="number" min="2" name="n" placeholder="n" class="form-input" required>
-            <input type="number" min="0" name="forme" placeholder="λ" class="form-input" required>
-            <input type="number" min="0" name="esperance" placeholder="μ" class="form-input" required>
-            <input type="number" min="0" name="t" placeholder="t" class="form-input" required>
+            <label for="n">Le nombre de valeur prises :</label>
+            <input type="number" min="2" name="n" id="n" placeholder="n" class="form-input" required>
+
+            <label for="forme">La forme :</label>
+            <input type="number" min="0" name="forme" id="forme" placeholder="λ" class="form-input" required>
+
+            <label for="esperance">L'esperance :</label>
+            <input type="number" min="0" name="esperance" id="esperance" placeholder="μ" class="form-input" required>
+
+            <label for="t">La valeur suivant la loi inverse gaussienne :</label>
+            <input type="number" min="0" name="t" placeholder="t" id="t" class="form-input" required>
+
+
 
             <!-- Menu déroulant pour choisir une méthode -->
-            <select name="methode" class="form-input" required>
-                <option value="" disabled selected>Choisissez une méthode</option>
-                <option value="rectangles_medians">Méthode des rectangles médians</option>
-                <option value="trapezes">Méthode des trapèzes</option>
-                <option value="simpson">Méthode de Simpson</option>
-            </select>
+            <form method="POST">
+                <label for="methode">Choisissez une méthode :</label>
+                <select name="methode" id="methode" class="form-input" required>
+                    <option value="" disabled selected>Choisissez une méthode</option>
+                    <option value="rectangles_medians">Méthode des rectangles médians</option>
+                    <option value="trapezes">Méthode des trapèzes</option>
+                    <option value="simpson">Méthode de Simpson</option>
+                </select>
+            </form>
 
             <!-- Bouton pour valider -->
             <button type="submit" class="form-buttonS">Valider</button>
         </form>
     </div>
 </div>
-
+</main>
 <?php
 if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], $_POST['t'])) {
     $n = $_POST['n'];
