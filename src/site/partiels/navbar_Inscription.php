@@ -11,10 +11,10 @@
 <body>
 
 
-<!-- navbar section starts here -->
+<!-- navbar section commence ici -->
  <section class="navbar text-center">
     <div class="container">
-            <img src="images/sigmaXlogo.png" alt="logo" class="logo img-responsive">
+            <img src="images/sigmaXlogo.png" alt="Le logo du site SigmaX" class="logo img-responsive">
         <ul>
             <li><a href="index.php">Accueil</a></li>
             <li><a href="connexion.php">Connexion</a></li>
@@ -23,4 +23,4 @@
         <div class="clearfix"></div>
     </div>
  </section>
-<!-- navbar section ends here -->
+<!-- navbar se termine ici -->
