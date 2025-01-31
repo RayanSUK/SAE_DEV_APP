@@ -4,6 +4,7 @@ session_start();
 
 <?php include('partiels/navbar_Inscription.php'); ?>
 
+<main role="main">
 <!-- Section de connexion -->
 <section class="description text-center">
     <div class="titreInscrit">
@@ -13,14 +14,18 @@ session_start();
         <div class="form-container-co">
             <h1>Connexion</h1>
             <form method="POST" action="#">
-                <input type="text" name="nom" placeholder="Pseudo" required>
-                <input type="password" name="mdp" placeholder="Mot de passe" required>
+                <label for="nom">Pseudo :</label>
+                <input type="text" name="nom" id="nom" placeholder="Pseudo" required>
+
+                <label for="mdp">Mot de passe :</label>
+                <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>
+
                 <button type="submit" name="acces">Se connecter</button>
             </form>
         </div>
     </div>
 </section>
-
+</main>
 
 </body>
 </html>
