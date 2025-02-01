@@ -10,13 +10,14 @@ function loi_inverse_gaussienne($x, $esperance, $forme) {
 function methode_rectangles_medians($points, $esperance, $forme, $t) {
     $resultat = 0;
     $n = count($points) - 1;
+    $largeur = $t / $n;
 
     for ($i = 0; $i < $n; $i++) {
         $m = ($points[$i] + $points[$i+1]) / 2;
         $resultat += loi_inverse_gaussienne($m, $esperance, $forme);
     }
 
-    $resultatFinal = ($t/$n) * $resultat;
+    $resultatFinal = $largeur * $resultat;
 
     if($resultatFinal > 1){
         return 1;
@@ -27,36 +28,38 @@ function methode_rectangles_medians($points, $esperance, $forme, $t) {
 
 function methode_trapezes($points, $esperance, $forme, $t){
     $resultat = 0;
-    $n = count($points);
+    $n = count($points) - 1;
+    $largeur = $t / $n;
 
-    for ($i = 1; $i < $n-1; $i++) {
+    for ($i = 1; $i < $n; $i++) {
         $resultat += loi_inverse_gaussienne($points[$i], $esperance, $forme);
     }
 
     $resultat *= 2;
-    $resultat += loi_inverse_gaussienne($t, $esperance, $forme);
+    $resultat += loi_inverse_gaussienne($points[0], $esperance, $forme) + loi_inverse_gaussienne($points[$n], $esperance, $forme);
 
-    return ($t*$resultat)/(2*$n) ;
+    return ($largeur * $resultat) / 2;
 }
 
 function methode_simpson($points, $esperance, $forme, $t){
     $resultat = 0;
-    $n = count($points);
+    $n = count($points) - 1;
+    $largeur = $t / $n;
+
     $somme1 = 0;
     $somme2 = 0;
-    for ($i = 1; $i < $n-1; $i++) {
-        $somme1 += loi_inverse_gaussienne(($i*$t)/$n, $esperance, $forme);
+
+    for ($i = 1; $i < $n; $i += 2) {
+        $somme1 += loi_inverse_gaussienne($points[$i], $esperance, $forme);
     }
-    $somme1 *= 2;
 
-    for ($j = 1; $j < $n-1; $j++) {
-        $somme2 += loi_inverse_gaussienne(((2*$j + 1)*$t)/2*$n, $esperance, $forme);
+    for ($j = 2; $j < $n-1; $j += 2) {
+        $somme2 += loi_inverse_gaussienne($points[$j], $esperance, $forme);
     }
-    $somme2 *= 4;
 
-    $resultat += loi_inverse_gaussienne($t, $esperance, $forme) + $somme1 + $somme2;
+    $resultat = loi_inverse_gaussienne($points[0], $esperance, $forme) + loi_inverse_gaussienne($points[$n], $esperance, $forme) + 4 * $somme1 + 2 * $somme2;
 
-    return ($t*$resultat)/(6*$n) ;
+    return ($largeur * $resultat) / 3;
 }
 
 function ecart_type($esperance, $forme) {
