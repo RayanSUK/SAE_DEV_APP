@@ -122,7 +122,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                         labels: <?= $x_values_json ?>,
                         datasets: [
                             {
-                                label: 'Courbe de Wald',
+                                label: 'Surface',
                                 data: <?= $points_json ?>,
                                 type: 'line',
                                 borderColor: 'rgb(55, 66, 250)',
