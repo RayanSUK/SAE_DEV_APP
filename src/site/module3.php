@@ -8,7 +8,7 @@ include('partiels/navbar.php')
 ?>
 
 
-
+<main role="main">
 <!-- description section starts here -->
 <section class="description text-center">
     <div class="titre text-center">
@@ -16,7 +16,7 @@ include('partiels/navbar.php')
     </div>
 
  </section>
-
+</main>
 
 
 

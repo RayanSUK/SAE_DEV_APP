@@ -12,6 +12,7 @@ include('partiels/navbar.php');
 // Fonction pour définir le titre de la page
 ?>
 
+<main role="main">
 <!-- Section de description -->
 <section class="description text-center">
     <div class="titre text-center">
@@ -58,7 +59,7 @@ include('partiels/navbar.php');
         </ol>
     </div>
 </section>
-
+</main>
 
 
 

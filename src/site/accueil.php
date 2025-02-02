@@ -8,6 +8,8 @@ if (!isset($_SESSION['login'])) {
 
 <?php include('partiels/navbar.php'); ?>
 
+
+<main role="main">
 <!-- la section accueil commence ici-->
 <section class="text-center">
     <div class="titre text-center">
@@ -30,12 +32,8 @@ if (!isset($_SESSION['login'])) {
         ?>
     </div>
 </section>
-
-
 <!-- la section accueil se termine ici-->
 
-
-<!-- la section accueil se termine ici-->
 
 
 <!-- la section explication commence ici-->
@@ -78,7 +76,7 @@ if (!isset($_SESSION['login'])) {
         </p>
     </div>
 </section>
-
+</main>
 
 <!-- la section explication se termine ici-->
 
