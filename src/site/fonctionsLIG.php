@@ -30,7 +30,7 @@ function methode_trapezes($points, $esperance, $forme, $t){
     $resultat = 0;
     $n = count($points) - 1;
 
-    for ($i = 1; $i < $n; $i++) {
+    for ($i = 0; $i < $n; $i++) {
         $resultat += loi_inverse_gaussienne($points[$i], $esperance, $forme);
     }
 
