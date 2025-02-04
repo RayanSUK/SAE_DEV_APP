@@ -130,7 +130,7 @@ mysqli_close($cnx);
 
     /* Boutons */
     input[type="submit"] {
-        background-color: #007bff;
+        background-color: #0a4482;
         color: white;
         border: none;
         padding: 8px 16px;
