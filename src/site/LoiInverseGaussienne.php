@@ -20,26 +20,23 @@ error_reporting(E_ALL);
 <?php include('partiels/navbar.php'); ?>
 
 <main role="main">
-<div class="form-container-parent">
-    <div class="form-container">
-        <h1 class="text-center">Calcul de la Loi Inverse Gaussienne</h1>
-        <form method="POST">
-            <label for="n">Le nombre de valeur prises :</label>
-            <input type="number" min="2" name="n" id="n" placeholder="n" class="form-input" required>
-
-            <label for="forme">La forme :</label>
-            <input type="number" min="0" name="forme" id="forme" placeholder="λ" class="form-input" required>
-
-            <label for="esperance">L'esperance :</label>
-            <input type="number" min="0" name="esperance" id="esperance" placeholder="μ" class="form-input" required>
-
-            <label for="t">La valeur suivant la loi inverse gaussienne :</label>
-            <input type="number" min="0" name="t" placeholder="t" id="t" class="form-input" required>
-
-
-
-            <!-- Menu déroulant pour choisir une méthode -->
+    <div class="form-container-parent">
+        <div class="form-container">
+            <h1 class="text-center">Calcul de la Loi Inverse Gaussienne</h1>
             <form method="POST">
+                <label for="n">Le nombre de valeur prises :</label>
+                <input type="number" min="2" name="n" id="n" placeholder="n" class="form-input" required>
+
+                <label for="forme">La forme :</label>
+                <input type="number" min="0" name="forme" id="forme" placeholder="λ" class="form-input" required>
+
+                <label for="esperance">L'esperance :</label>
+                <input type="number" min="0" name="esperance" id="esperance" placeholder="μ" class="form-input" required>
+
+                <label for="t">La valeur suivant la loi inverse gaussienne :</label>
+                <input type="number" min="0" name="t" placeholder="t" id="t" class="form-input" required>
+
+                <!-- Menu déroulant pour choisir une méthode -->
                 <label for="methode">Choisissez une méthode :</label>
                 <select name="methode" id="methode" class="form-input" required>
                     <option value="" disabled selected>Choisissez une méthode</option>
@@ -47,13 +44,12 @@ error_reporting(E_ALL);
                     <option value="trapezes">Méthode des trapèzes</option>
                     <option value="simpson">Méthode de Simpson</option>
                 </select>
-            </form>
 
-            <!-- Bouton pour valider -->
-            <button type="submit" class="form-buttonS">Valider</button>
-        </form>
+                <!-- Bouton pour valider -->
+                <button type="submit" class="form-buttonS">Valider</button>
+            </form>
+        </div>
     </div>
-</div>
 </main>
 <?php
 if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], $_POST['t'])) {
@@ -70,19 +66,18 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
         $points[] = loi_inverse_gaussienne($value, $esperance, $forme);
     }
 
+    $resultat = 0;
+    $image_path = '';
+
     if ($methode == "rectangles_medians") {
         $resultat = methode_rectangles_medians($points, $esperance, $forme, $t);
-        echo "<div class='text-center'><img src='images/rectanglesMedians.png' alt=''></div>";
-    }
-
-    if ($methode == "trapezes") {
+        $image_path = 'images/rectanglesMedians.png';
+    } elseif ($methode == "trapezes") {
         $resultat = methode_trapezes($points, $esperance, $forme, $t);
-        echo "<div class='text-center'><img src='images/methodeTrapezes.png' alt=''></div>";
-    }
-
-    if ($methode == "simpson") {
+        $image_path = 'images/methodeTrapezes.png';
+    } elseif ($methode == "simpson") {
         $resultat = methode_simpson($points, $esperance, $forme, $t);
-        echo "<div class='text-center'><img src='images/methodeSimpson.png' alt=''></div>";
+        $image_path = 'images/methodeSimpson.png';
     }
 
     $ecart_type = ecart_type($esperance, $forme);
@@ -105,7 +100,10 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     echo "<button type='submit' name='ajouter_history' class='form-buttonS'>Ajouter à l'historique</button>";
     echo "</form>";
     echo "</div>";
-   
+
+    if (!empty($image_path)) {
+        echo "<div class='text-center'><img src='" . $image_path . "' alt=''></div>";
+    }
 
     $x_values_json = json_encode($x_values);
     $points_json = json_encode($points);
