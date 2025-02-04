@@ -29,16 +29,15 @@ function methode_rectangles_medians($points, $esperance, $forme, $t) {
 function methode_trapezes($points, $esperance, $forme, $t){
     $resultat = 0;
     $n = count($points) - 1;
-    $largeur = $t / $n;
 
     for ($i = 1; $i < $n; $i++) {
         $resultat += loi_inverse_gaussienne($points[$i], $esperance, $forme);
     }
 
     $resultat *= 2;
-    $resultat += loi_inverse_gaussienne($points[0], $esperance, $forme) + loi_inverse_gaussienne($points[$n], $esperance, $forme);
+    $resultat += loi_inverse_gaussienne($points[$n], $esperance, $forme);
 
-    return ($largeur * $resultat) / 2;
+    return ($t * $resultat) / 2*$n;
 }
 
 function methode_simpson($points, $esperance, $forme, $t){
