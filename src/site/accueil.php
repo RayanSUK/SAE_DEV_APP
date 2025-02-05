@@ -11,27 +11,32 @@ if (!isset($_SESSION['login'])) {
 
 <main role="main">
 <!-- la section accueil commence ici-->
-<section class="text-center">
-    <div class="titre text-center">
-        <?php
-        // Vérifier si la session contient 'login' et 'user_id'
-        if (isset($_SESSION['login'], $_SESSION['user_id'])) {
-            $login = htmlspecialchars($_SESSION['login']);  // Utiliser le login stocké dans la session
+    <section class="text-center">
+        <div class="titre text-center">
+            <?php
+            // Vérifier si la session contient 'login' et 'user_id'
+            if (isset($_SESSION['login'], $_SESSION['id'])) {
+                $login = htmlspecialchars($_SESSION['login']);  // Utiliser le login stocké dans la session
 
-            if ($_SESSION['etat'] === 'inscription') {
-                echo "<h1>Bienvenue parmi nous, $login !</h1>";
-            } elseif ($_SESSION['etat'] === 'connexion') {
-                echo "<h1>Te revoilà parmi nous, $login !</h1>";
+                // Vérifie si 'etat' existe dans la session avant de l'utiliser
+                if (isset($_SESSION['etat'])) {
+                    if ($_SESSION['etat'] === 'inscription') {
+                        echo "<h1>Bienvenue parmi nous, $login !</h1>";
+                    } elseif ($_SESSION['etat'] === 'connexion') {
+                        echo "<h1>Te revoilà parmi nous, $login !</h1>";
+                    }
+
+                    // Réinitialiser la variable de session après affichage
+                    unset($_SESSION['etat']);
+                } else {
+                    echo "<h1>SigmaX</h1>";
+                }
+            } else {
+                echo "<h1>Veuillez vous connecter pour accéder à cette page.</h1>";
             }
-
-            // Réinitialiser la variable de session après affichage
-            unset($_SESSION['etat']);
-        } else {
-            echo "<h1>Veuillez vous connecter pour accéder à cette page.</h1>";
-        }
-        ?>
-    </div>
-</section>
+            ?>
+        </div>
+    </section>
 <!-- la section accueil se termine ici-->
 
 
