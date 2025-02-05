@@ -55,20 +55,26 @@ mysqli_close($cnx);
     <title>Gestion des utilisateurs</title>
 </head>
 <body>
-<h1>Ajouter un nouvel utilisateur</h1>
+<main role="main">
 
 <!-- Formulaire pour ajouter un utilisateur -->
 
-<form action="gestion_compte.php" method="POST">
-    <label for="login">Login:</label>
-    <input type="text" id="login" name="login" required><br><br>
+    <div class="form-container-parent">
+        <div class="form-container-admin">
+            <h1>Ajouter un utilisateur</h1>
+            <form action="gestion_compte.php" method="POST">
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login" required><br><br>
 
-    <label for="password">Mot de passe:</label>
-    <input type="password" id="password" name="password" required><br><br>
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required><br><br>
 
-    <input type="submit" value="Ajouter utilisateur">
-</form>
+                <input type="submit" value="Ajouter utilisateur">
+            </form>
+        </div>
+    </div>
 
+</main>
 
 <!-- Inclure le pied de page après le formulaire -->
 <?php include('partiels/footer.php'); ?>
@@ -92,6 +98,14 @@ mysqli_close($cnx);
         height: 100%;
     }
 
+    .form-container-admin {
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        width: 465px;
+    }
 
 
 
@@ -136,7 +150,7 @@ mysqli_close($cnx);
     input[type="submit"] {
         width: 100%;
         padding: 10px;
-        background-color: #007bff;
+        background-color: #0a4482;
         color: white;
         border: none;
         border-radius: 5px;
