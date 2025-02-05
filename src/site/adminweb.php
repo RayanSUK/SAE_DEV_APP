@@ -1,10 +1,10 @@
 <?php include('partiels/navbar_adminweb.php'); ?>
-
+<main role="main">
 <section class="description text-center">
     <div class="titre text-center">
         <h1>Accueil de l'admin web</h1>
         <p>Bienvenue dans votre espace Administrateur Web. En tant qu'administrateur web, vous avez accès à des fonctionnalités essentielles pour gérer les utilisateurs de la plateforme.</p>
-        <p>Voici ce que vous pouvez faire :</p>
+        <h2>Voici ce que vous pouvez faire :</h2>
         <ul>
             <li>Consulter la liste des utilisateurs inscrits.</li>
             <li>Créer des comptes utilisateurs .</li>
@@ -13,7 +13,7 @@
         <p>Veuillez noter que vos identifiants d'accès sont fixes (login : <strong>adminweb</strong>, mot de passe : <strong>adminweb</strong>) et ne doivent pas être modifiés.</p>
     </div>
 </section>
-
+</main>
 
 <?php include('partiels/footer.php') ?>
 
