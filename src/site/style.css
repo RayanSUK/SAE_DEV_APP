@@ -406,7 +406,7 @@ button.form-button {
     padding: 10px;
     font-size: 16px;
     color: #fff;
-    background-color: #007bff;
+    background-color: #0a4482;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -461,7 +461,7 @@ canvas {
 .form-buttonS { /* Ajoute un espace au-dessus du bouton */
     margin:auto;
     display: block;
-    color: #007bff;
+    color: #0a4482;
     margin-bottom: 3%;
     padding: 0.5%;
 }
