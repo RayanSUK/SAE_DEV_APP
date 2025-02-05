@@ -53,7 +53,7 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
         if (md5($mdp) === $row['password']) {
             // Connexion réussie
             $_SESSION['login'] = $row['login'];  // Ajoute le login dans la session
-            $_SESSION['user_id'] = $row['id'];   // Ajoute l'ID utilisateur dans la session
+            $_SESSION['id'] = $row['id'];   // Ajoute l'ID utilisateur dans la session
             $_SESSION['etat'] = 'connexion';     // Définit l'état de connexion
 
             // Vérification si l'utilisateur est l'adminweb
