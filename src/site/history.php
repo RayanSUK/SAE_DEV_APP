@@ -67,6 +67,7 @@ $result = mysqli_stmt_get_result($stmt);
 </head>
 <body>
 
+<main role="main">
 <div class="container">
     <h1>Historique des Résultats</h1>
     <?php if (mysqli_num_rows($result) > 0): ?>
@@ -108,7 +109,7 @@ $result = mysqli_stmt_get_result($stmt);
         <p>Aucun résultat trouvé.</p>
     <?php endif; ?>
 </div>
-
+</main>
 <?php
 require("fonctionsLIG.php");
 
