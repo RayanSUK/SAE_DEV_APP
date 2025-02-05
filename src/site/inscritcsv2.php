@@ -40,6 +40,7 @@ if (isset($_SESSION['message'])) {
 ?>
 
 <!-- --------------------------------------------------------------------Contenu de la page des utilisateurs inscrits ------------------------------------>
+<main role="main">
 <div class="text-center">
 <h1>Liste des utilisateurs inscrits</h1>
 </div>
@@ -69,7 +70,7 @@ if (isset($_SESSION['message'])) {
         </tr>
     <?php endforeach; ?>
 </table>
-
+</main>
 <?php include('partiels/footer.php'); ?>
 
 <?php
@@ -116,7 +117,7 @@ mysqli_close($cnx);
     }
 
     th {
-        background-color: #007bff;
+        background-color: #0a4482;
         color: white;
     }
 
