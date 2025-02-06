@@ -70,7 +70,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     $image_path = '';
 
     if ($methode == "rectangles_medians") {
-        $resultat = methode_rectangles_medians($points, $esperance, $forme, $t);
+        $resultat = methode_rectangles_medians($n, $esperance, $forme, $t);
         $image_path = 'images/rectanglesMedians.png';
     } elseif ($methode == "trapezes") {
         $resultat = methode_trapezes($points, $esperance, $forme, $t);
