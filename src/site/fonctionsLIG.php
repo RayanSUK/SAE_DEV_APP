@@ -10,7 +10,7 @@ function loi_inverse_gaussienne($x, $esperance, $forme) {
 function methode_rectangles_medians($points, $esperance, $forme, $t) {
     $resultat = 0;
     $n = count($points) - 1;
-    $largeur = $t / $n;
+    $largeur = $points[$t-1] / $n;
 
     for ($i = 0; $i < $n; $i++) {
         $m = ($points[$i] + $points[$i+1]) / 2;  // Point médian
