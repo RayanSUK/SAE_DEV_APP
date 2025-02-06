@@ -1,5 +1,8 @@
 <?php
 function loi_inverse_gaussienne($x, $esperance, $forme) {
+    if ($x == 0 || $forme == 0) {
+        return 0; // Or handle it in another way, like returning an error
+    }
     return sqrt($forme / (2 * M_PI * pow($x, 3))) * exp(-$forme * pow($x - $esperance, 2) / (2 * pow($esperance, 2) * $x));
 }
 
