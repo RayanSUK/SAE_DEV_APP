@@ -13,34 +13,29 @@ function methode_rectangles_medians($points, $esperance, $forme, $t) {
     $largeur = $t / $n;
 
     for ($i = 0; $i < $n; $i++) {
-        $m = ($points[$i] + $points[$i+1]) / 2;
+        $m = ($points[$i] + $points[$i+1]) / 2;  // Point médian
         $resultat += loi_inverse_gaussienne($m, $esperance, $forme);
     }
 
     $resultatFinal = $largeur * $resultat;
 
-    if($resultatFinal > 1){
-        return 1;
-    }
-
-    return $resultatFinal;
+    // Assurer que le résultat ne dépasse pas 1
+    return min($resultatFinal, 1);
 }
 
-function methode_trapezes($points, $esperance, $forme, $t){
+function methode_trapezes($points, $esperance, $forme, $t) {
     $resultat = 0;
     $n = count($points) - 1;
+    $largeur = $t / $n;
 
     for ($i = 0; $i < $n; $i++) {
-        $resultat += loi_inverse_gaussienne($points[$i], $esperance, $forme);
+        $resultat += loi_inverse_gaussienne($points[$i], $esperance, $forme) + loi_inverse_gaussienne($points[$i+1], $esperance, $forme);
     }
 
-    $resultat *= 2;
-    $resultat += loi_inverse_gaussienne($points[$n], $esperance, $forme);
-
-    return ($t * $resultat) / 2*$n;
+    return ($largeur * $resultat) / 2;
 }
 
-function methode_simpson($points, $esperance, $forme, $t){
+function methode_simpson($points, $esperance, $forme, $t) {
     $resultat = 0;
     $n = count($points) - 1;
     $largeur = $t / $n;
