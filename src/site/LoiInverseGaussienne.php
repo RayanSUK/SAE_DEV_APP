@@ -60,7 +60,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     $methode = $_POST['methode'];
 
     $points = array();
-    $x_values = range(0, $n);
+    $x_values = range(1, $n);
 
     foreach ($x_values as $i => $value) {
         $points[] = loi_inverse_gaussienne($value, $esperance, $forme);
