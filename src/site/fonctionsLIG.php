@@ -42,38 +42,25 @@ function methode_trapezes($n, $esperance, $forme, $t) {
 
 }
 
-function methode_simpson($n, $esperance, $forme, $t) {
+function simpson_method($n, $esperance, $forme, $t) {
     if ($n % 2 != 0) {
         throw new Exception("n doit être un nombre pair pour la méthode de Simpson.");
     }
 
-    $h = $t / $n; // Step size
-    $x = array();
-    $y = array();
+    $h = $t / $n;
+    $integral = loi_inverse_gaussienne(0, $esperance, $forme) + loi_inverse_gaussienne($t, $esperance, $forme);
 
-    // Calculate the x values and corresponding y values using the inverse Gaussian PDF
-    for ($i = 0; $i <= $n; $i++) {
-        $x[] = $i * $h; // Generate the x values
-        $y[] = loi_inverse_gaussienne($x[$i], $esperance, $forme); // Calculate the corresponding y values
-    }
-
-    // Apply Simpson's Rule
-    $integral = $h / 3 * ($y[0] + $y[$n]); // First and last terms
-
-    // Calculate sums for odd and even indexed terms
-    $sum_odd = 0;
-    $sum_even = 0;
     for ($i = 1; $i < $n; $i++) {
+        $x = $i * $h;
+        $y = loi_inverse_gaussienne($x, $esperance, $forme);
         if ($i % 2 == 0) {
-            $sum_even += $y[$i]; // Even index terms
+            $integral += 2 * $y;
         } else {
-            $sum_odd += $y[$i]; // Odd index terms
+            $integral += 4 * $y;
         }
     }
 
-    // Final result using Simpson's rule
-    $integral += 4 * $sum_odd + 2 * $sum_even;
-
+    $integral *= $h / 3;
     return $integral;
 }
 
