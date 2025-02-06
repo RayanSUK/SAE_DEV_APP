@@ -43,35 +43,40 @@ function methode_trapezes($n, $esperance, $forme, $t) {
 }
 
 function methode_simpson($n, $esperance, $forme, $t) {
+    if ($n % 2 != 0) {
+        throw new Exception("n doit être un nombre pair pour la méthode de Simpson.");
+    }
 
-    $h = $t / $n;
+    $h = $t / $n; // Step size
     $x = array();
     $y = array();
 
-    // Calculer les points x et les valeurs de la fonction
+    // Calculate the x values and corresponding y values using the inverse Gaussian PDF
     for ($i = 0; $i <= $n; $i++) {
-        $x[] = $i * $h;
-        $y[] = loi_inverse_gaussienne($x[$i], $esperance, $forme);
+        $x[] = $i * $h; // Generate the x values
+        $y[] = loi_inverse_gaussienne($x[$i], $esperance, $forme); // Calculate the corresponding y values
     }
 
-    // Appliquer la formule de Simpson
-    $integral = $h / 3 * ($y[0] + $y[$n]);
+    // Apply Simpson's Rule
+    $integral = $h / 3 * ($y[0] + $y[$n]); // First and last terms
+
+    // Calculate sums for odd and even indexed terms
     $sum_odd = 0;
     $sum_even = 0;
-
-    // Somme des termes impairs et pairs
     for ($i = 1; $i < $n; $i++) {
         if ($i % 2 == 0) {
-            $sum_even += $y[$i];
+            $sum_even += $y[$i]; // Even index terms
         } else {
-            $sum_odd += $y[$i];
+            $sum_odd += $y[$i]; // Odd index terms
         }
     }
 
+    // Final result using Simpson's rule
     $integral += 4 * $sum_odd + 2 * $sum_even;
 
     return $integral;
 }
+
 
 function ecart_type($esperance, $forme) {
     return sqrt(pow($esperance, 3) / $forme);
