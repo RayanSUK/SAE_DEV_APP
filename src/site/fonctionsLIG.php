@@ -42,7 +42,7 @@ function methode_trapezes($n, $esperance, $forme, $t) {
 
 }
 
-function simpson_method($n, $esperance, $forme, $t) {
+function methode_simpson($n, $esperance, $forme, $t) {
     if ($n % 2 != 0) {
         throw new Exception("n doit être un nombre pair pour la méthode de Simpson.");
     }
