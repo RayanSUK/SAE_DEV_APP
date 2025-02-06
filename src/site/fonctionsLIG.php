@@ -51,7 +51,7 @@ function methode_simpson($n, $esperance, $forme, $t) {
     // Calculer les points x et les valeurs de la fonction
     for ($i = 0; $i <= $n; $i++) {
         $x[] = $i * $h;
-        $y[] = inverse_gaussian_pdf($x[$i], $esperance, $forme);
+        $y[] = loi_inverse_gaussienne($x[$i], $esperance, $forme);
     }
 
     // Appliquer la formule de Simpson
