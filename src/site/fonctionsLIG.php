@@ -12,11 +12,12 @@ function methode_rectangles_medians($n, $esperance, $forme, $t) {
     $integral = 0.0;
 
     for ($i = 1; $i <= $n; $i++) {
-        $x_i = $t + ($i - 0.5) * $h;
+        $x_i = ($i - 0.5) * $h;
         $integral += loi_inverse_gaussienne($x_i, $esperance, $forme) * $h;
     }
 
     return $integral;
+
 }
 
 function methode_trapezes($n, $esperance, $forme, $t) {
