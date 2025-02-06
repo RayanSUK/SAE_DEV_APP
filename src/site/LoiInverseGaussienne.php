@@ -59,13 +59,6 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     $t = $_POST['t'];
     $methode = $_POST['methode'];
 
-    $points = array();
-    $x_values = range(1, $n);
-
-    foreach ($x_values as $i => $value) {
-        $points[] = loi_inverse_gaussienne($value, $esperance, $forme);
-    }
-
     $resultat = 0;
     $image_path = '';
 
@@ -73,11 +66,16 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
         $resultat = methode_rectangles_medians($n, $esperance, $forme, $t);
         $image_path = 'images/rectanglesMedians.png';
     } elseif ($methode == "trapezes") {
-        $resultat = methode_trapezes($points, $esperance, $forme, $t);
+        $resultat = methode_trapezes($n, $esperance, $forme, $t);
         $image_path = 'images/methodeTrapezes.png';
     } elseif ($methode == "simpson") {
-        $resultat = methode_simpson($points, $esperance, $forme, $t);
-        $image_path = 'images/methodeSimpson.png';
+        if($n % 2 == 0){
+            $resultat = methode_simpson($n, $esperance, $forme, $t);
+            $image_path = 'images/methodeSimpson.png';
+        } else {
+            echo "<p>n doit être pair</p>";
+        }
+
     }
 
     $ecart_type = ecart_type($esperance, $forme);

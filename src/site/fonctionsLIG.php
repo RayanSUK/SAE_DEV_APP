@@ -16,37 +16,58 @@ function methode_rectangles_medians($n, $esperance, $forme, $t) {
     return $integral;
 }
 
-function methode_trapezes($points, $esperance, $forme, $t) {
-    $resultat = 0;
-    $n = count($points) - 1;
-    $largeur = $t / $n;
+function methode_trapezes($n, $esperance, $forme, $t) {
+    $h = $t / $n;
+    $x = array();
+    $y = array();
 
-    for ($i = 0; $i < $n; $i++) {
-        $resultat += loi_inverse_gaussienne($points[$i], $esperance, $forme) + loi_inverse_gaussienne($points[$i+1], $esperance, $forme);
+    // Calculer les points x et les valeurs de la fonction
+    for ($i = 0; $i <= $n; $i++) {
+        $x[] = $i * $h;
+        $y[] = loi_inverse_gaussienne($x[$i], $esperance, $forme);
     }
 
-    return ($largeur * $resultat) / 2;
+    // Appliquer la formule des trapèzes
+    $integral = $h * (0.5 * $y[0] + 0.5 * $y[$n]);
+
+    // Somme des termes intermédiaires
+    for ($i = 1; $i < $n; $i++) {
+        $integral += $h * $y[$i];
+    }
+
+    return $integral;
+
 }
 
-function methode_simpson($points, $esperance, $forme, $t) {
-    $resultat = 0;
-    $n = count($points) - 1;
-    $largeur = $t / $n;
+function methode_simpson($n, $esperance, $forme, $t) {
 
-    $somme1 = 0;
-    $somme2 = 0;
+    $h = $t / $n;
+    $x = array();
+    $y = array();
 
-    for ($i = 1; $i < $n; $i += 2) {
-        $somme1 += loi_inverse_gaussienne($points[$i], $esperance, $forme);
+    // Calculer les points x et les valeurs de la fonction
+    for ($i = 0; $i <= $n; $i++) {
+        $x[] = $i * $h;
+        $y[] = inverse_gaussian_pdf($x[$i], $esperance, $forme);
     }
 
-    for ($j = 2; $j < $n-1; $j += 2) {
-        $somme2 += loi_inverse_gaussienne($points[$j], $esperance, $forme);
+    // Appliquer la formule de Simpson
+    $integral = $h / 3 * ($y[0] + $y[$n]);
+    $sum_odd = 0;
+    $sum_even = 0;
+
+    // Somme des termes impairs et pairs
+    for ($i = 1; $i < $n; $i++) {
+        if ($i % 2 == 0) {
+            $sum_even += $y[$i];
+        } else {
+            $sum_odd += $y[$i];
+        }
     }
 
-    $resultat = loi_inverse_gaussienne($points[0], $esperance, $forme) + loi_inverse_gaussienne($points[$n], $esperance, $forme) + 4 * $somme1 + 2 * $somme2;
+    $integral += 4 * $sum_odd + 2 * $sum_even;
 
-    return ($largeur * $resultat) / 3;
+    return $integral;
 }
 
 function ecart_type($esperance, $forme) {
