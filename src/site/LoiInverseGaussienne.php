@@ -14,6 +14,8 @@ error_reporting(E_ALL);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <title>Loi Inverse Gaussienne</title>
 </head>
 <body>
@@ -33,8 +35,8 @@ error_reporting(E_ALL);
                 <label for="esperance">L'esperance :</label>
                 <input type="number" min="0" name="esperance" id="esperance" placeholder="μ" class="form-input" required>
 
-                <label for="t">La valeur suivant la loi inverse gaussienne :</label>
-                <input type="number" min="0" name="t" placeholder="t" id="t" class="form-input" required>
+                <label for="x">La valeur suivant la loi inverse gaussienne :</label>
+                <input type="number" min="0" name="x" placeholder="x" id="x" class="form-input" required>
 
                 <!-- Menu déroulant pour choisir une méthode -->
                 <label for="methode">Choisissez une méthode :</label>
@@ -52,11 +54,11 @@ error_reporting(E_ALL);
     </div>
 </main>
 <?php
-if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], $_POST['t'])) {
+if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], $_POST['x'])) {
     $n = $_POST['n'];
     $forme = $_POST['forme'];
     $esperance = $_POST['esperance'];
-    $t = $_POST['t'];
+    $x = $_POST['x'];
     $methode = $_POST['methode'];
 
     $points = array();
@@ -70,14 +72,11 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     $image_path = '';
 
     if ($methode == "rectangles_medians") {
-        $resultat = methode_rectangles_medians($n, $esperance, $forme, $t);
-        $image_path = 'images/rectanglesMedians.png';
+        $resultat = methode_rectangles_medians($n, $esperance, $forme, $x);
     } elseif ($methode == "trapezes") {
-        $resultat = methode_trapezes($n, $esperance, $forme, $t);
-        $image_path = 'images/methodeTrapezes.png';
+        $resultat = methode_trapezes($n, $esperance, $forme, $x);
     } elseif ($methode == "simpson") {
-        $resultat = methode_simpson($n, $esperance, $forme, $t);
-        $image_path = 'images/methodeSimpson.png';
+        $resultat = methode_simpson($n, $esperance, $forme, $x);
     }
 
     $ecart_type = ecart_type($esperance, $forme);
@@ -94,16 +93,17 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     echo "<input type='hidden' name='n' value='" . $n . "'>";
     echo "<input type='hidden' name='forme' value='" . $forme . "'>";
     echo "<input type='hidden' name='esperance' value='" . $esperance . "'>";
-    echo "<input type='hidden' name='t' value='" . $t . "'>";
+    echo "<input type='hidden' name='t' value='" . $x . "'>";
     echo "<input type='hidden' name='methode' value='" . $methode . "'>";
     echo "<input type='hidden' name='resultat' value='" . $resultat . "'>";
     echo "<button type='submit' name='ajouter_history' class='form-buttonS'>Ajouter à l'historique</button>";
     echo "</form>";
     echo "</div>";
 
-    if (!empty($image_path)) {
-        echo "<div class='text-center'><img src='" . $image_path . "' alt=''></div>";
-    }
+
+    echo "<div class='text-center'>\[  P(X \leqslant $x) \]</div>";
+    echo "<div class='text-center'>\[ f($x) = \sqrt{\\frac{$forme}{2\pi $x^3}} e^{-\\frac{.$forme.($x-$esperance)^2}{2$esperance^2$x}} \]</div>";
+
 
     $x_values_json = json_encode($x_values);
     $points_json = json_encode($points);
@@ -116,20 +116,27 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
             document.addEventListener('DOMContentLoaded', function () {
                 var ctx = document.getElementById('myChart').getContext('2d');
                 var myChart = new Chart(ctx, {
+                    type: 'line',
                     data: {
                         labels: <?= $x_values_json ?>,
                         datasets: [
                             {
-                                label: 'Surface',
                                 data: <?= $points_json ?>,
-                                type: 'line',
                                 borderColor: 'rgb(55, 66, 250)',
-                                borderWidth: 1,
-                                fill: true
+                                borderWidth: 2,
+                                fill: false,
+                                tension: 0.4,
+                                pointRadius: 0,
+                                pointHoverRadius: 0,
                             },
                         ]
                     },
                     options: {
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
                         scales: {
                             x: { title: { display: true, text: 'x' } },
                             y: { title: { display: true, text: 'Densité' } }
@@ -138,6 +145,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                 });
             });
         </script>
+
     </div>
 
     <?php
