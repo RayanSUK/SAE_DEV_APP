@@ -7,19 +7,47 @@
 
 
 
+
 *{
     margin: 0 0 ;
     padding: 0 0 ;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    overflow-x: hidden;
+
 }
 
 .invisible {
     display: none;
 }
 
- 
+
+/* Classes pour les sections de mathématiques */
+.math-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    max-width: 90%;
+    margin: 15px auto;
+}
+
+
+
+/* Définition du style des équations */
+.math-equation {
+    font-family: 'Times New Roman', Times, serif; /* Police élégante pour les mathématiques */
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #333;
+    margin: 20px 0;
+}
+
+
+
+
 
 .container{
     width: 100%;
@@ -72,7 +100,7 @@
 .navbar ul{
     list-style-type: none;
     overflow: hidden;
-    
+
 
 }
 
@@ -95,7 +123,7 @@
     color: white;
     position: relative;
     transition: all 0.3 ease;
-    
+
 }
 
 .navbar ul li a:hover{
@@ -145,7 +173,7 @@
 }
 
 
-/*  CSS POUR LA PAGE D'ACCUEIL  */ 
+/*  CSS POUR LA PAGE D'ACCUEIL  */
 
 .titre {
     margin-top: 3%;
@@ -153,8 +181,8 @@
 
 .titre h1 {
     font-family: 'Dancing Script', cursive;
-    font-size: 50px; 
-    color: #333; 
+    font-size: 50px;
+    color: #333;
 }
 
 .video {
@@ -237,7 +265,7 @@
 .titreInscrit {
     margin-top: 5%;
     margin-bottom: 5%;
-    
+
 }
 
 .titreInscrit h1{
@@ -412,7 +440,7 @@ button.form-button {
     cursor: pointer;
     margin-top: 10px;
     width: 50%;
-    
+
 }
 
 button.form-button:hover {
