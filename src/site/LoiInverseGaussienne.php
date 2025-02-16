@@ -83,11 +83,16 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
     echo "<div class='text-center2'>";
     echo "<table>";
-    echo "<tr><td>Valeur de probabilité :</td><td>" . $resultat . "</td></tr>";
-    echo "<tr><td>Forme :</td><td>" . $forme . "</td></tr>";
-    echo "<tr><td>Espérance :</td><td>" . $esperance . "</td></tr>";
-    echo "<tr><td>Ecart-type :</td><td>" . $ecart_type . "</td></tr>";
+    echo "<caption>Résultats statistiques</caption>";
+    echo "<tbody>";
+    echo "<tr><th>Valeur de probabilité :</th><td>" . $resultat . "</td></tr>";
+    echo "<tr><th>Forme :</th><td>" . $forme . "</td></tr>";
+    echo "<tr><th>Espérance :</th><td>" . $esperance . "</td></tr>";
+    echo "<tr><th>Ecart-type :</th><td>" . $ecart_type . "</td></tr>";
+    echo "</tbody>";
     echo "</table>";
+    echo "</div>";
+
 
     echo "<form method='POST' action='historique.php'>";  // Redirection vers `historique.php`
     echo "<input type='hidden' name='n' value='" . $n . "'>";
