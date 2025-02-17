@@ -21,6 +21,46 @@ error_reporting(E_ALL);
 <body>
 <?php include('partiels/navbar.php'); ?>
 
+
+
+    <button id="openPopup" class="info-button text-center">ℹ️ Cliquez ICI pour voir l'explication du module !!</button>
+
+<div id="popup" class="popup">
+    <div class="popup-content text-center">
+        <span class="close">&times;</span>
+        <div class="container">
+            <h1>📊 Loi Inverse Gaussienne</h1>
+            <br>
+            <p>
+                Découvrez notre module interactif pour explorer la <strong>loi inverse gaussienne</strong>
+                Cet outil vous permet d'analyser des données et de visualiser vos résultats sous forme de graphiques dynamiques.
+            </p>
+
+            <h2>🛠 Comment ça marche ?</h2>
+            <ol>
+                <li><strong>Entrez vos paramètres :</strong></li>
+                <ul>
+                    <li><strong>x :</strong> La valeur à analyser.</li>
+                    <li><strong>λ (forme) :</strong> Définit la forme de la distribution.</li>
+                    <li><strong>μ (espérance) :</strong> Définit la moyenne de la distribution.</li>
+                </ul><br>
+                <li><strong>Choisissez une méthode de calcul :</strong></li>
+                <ul>
+                    <li> - Rectangles médians</li>
+                    <li> - Rectangles trapèzes</li>
+                    <li> - Méthode de Simpson</li>
+                </ul><br>
+                <li><strong>Obtenez vos résultats :</strong></li>
+                <ul>
+                    <li>Visualisez vos données sous forme de <strong>graphiques interactifs</strong></li>
+                </ul>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+
 <main role="main">
     <div class="form-container-parent">
         <div class="form-container">
@@ -53,6 +93,8 @@ error_reporting(E_ALL);
         </div>
     </div>
 </main>
+
+
 <?php
 if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], $_POST['x'])) {
     $n = $_POST['n'];
@@ -164,5 +206,31 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 ?>
 
 <?php include('partiels/footer.php'); ?>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var openPopupBtn = document.getElementById("openPopup");
+        var popup = document.getElementById("popup");
+        var closePopupBtn = document.querySelector(".close");
+
+        if (openPopupBtn && popup && closePopupBtn) {
+            openPopupBtn.addEventListener("click", function () {
+                popup.style.display = "block";
+            });
+
+            closePopupBtn.addEventListener("click", function () {
+                popup.style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target === popup) {
+                    popup.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
+
