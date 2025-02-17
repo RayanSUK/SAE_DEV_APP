@@ -22,6 +22,14 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     $ip = $_SERVER['REMOTE_ADDR'];
     $date = date("Y-m-d H:i:s");
 
+    if (strlen($_POST['mdp']) < 8) {
+        $_SESSION['error'] = "Le mot de passe doit contenir au moins 8 caractères.";
+        header("Location: inscription.php");
+        exit;
+    }
+
+    $mdp = md5($_POST['mdp']);
+
     if ($reponse == $_SESSION['captcha']) {
         // Connexion à la base de données
         $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
