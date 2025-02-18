@@ -162,15 +162,23 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                         labels: <?= $x_values_json ?>,
                         datasets: [
                             {
-                                label: 'Courbe de Wald',
                                 data: <?= $points_json ?>,
                                 borderColor: 'rgb(55, 66, 250)',
-                                borderWidth: 1,
-                                fill: true
+                                backgroundColor: 'rgba(55, 66, 250, 0.2)', // Couleur de remplissage sous la courbe
+                                borderWidth: 2,
+                                fill: true, // Remplir l'aire sous la courbe
+                                tension: 0.4,
+                                pointRadius: 0,
+                                pointHoverRadius: 0,
                             },
                         ]
                     },
                     options: {
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
                         scales: {
                             x: { title: { display: true, text: 'x' } },
                             y: { title: { display: true, text: 'Densité' } }
@@ -178,6 +186,7 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                     }
                 });
             });
+
         </script>
     </div>
 <?php endif; ?>
