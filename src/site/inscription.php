@@ -1,5 +1,5 @@
 <!-- Ajout du titre d'onglet -->
-<title>Inscription</title>
+<title>Inscription </title>
 
 <?php
 session_start();
