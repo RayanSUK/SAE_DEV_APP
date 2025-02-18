@@ -1,3 +1,6 @@
+<!-- Ajout du titre d'onglet -->
+<title>Connexion</title>
+
 <?php
 session_start();
 ?>

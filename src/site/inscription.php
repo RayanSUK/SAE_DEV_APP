@@ -1,3 +1,6 @@
+<!-- Ajout du titre d'onglet -->
+<title>Inscription </title>
+
 <?php
 session_start();
 ini_set('display_errors', 1);

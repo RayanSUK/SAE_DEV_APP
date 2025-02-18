@@ -1,3 +1,6 @@
+<!-- Ajout du titre d'onglet -->
+<title>Accueil</title>
+
 <?php include('partiels/navbar_Inscription.php') ?>
 
 <!-- la section accueil commence ici-->
