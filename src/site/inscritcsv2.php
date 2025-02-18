@@ -10,7 +10,7 @@ if (!$cnx) {
 // Fonction pour récupérer les utilisateurs inscrits
 function getUtilisateurs() {
     global $cnx; // Utilisation de la connexion globale
-    $query = "SELECT * FROM users WHERE id NOT IN (SELECT id FROM users WHERE id='adminweb' OR id='adminsys')";
+    $query = "SELECT * FROM users WHERE login NOT IN ('adminweb', 'adminsys');";
 ; // La requête SQL
     $result = mysqli_query($cnx, $query); // Exécution de la requête
 
