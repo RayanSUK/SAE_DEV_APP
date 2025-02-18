@@ -162,6 +162,7 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                         labels: <?= $x_values_json ?>,
                         datasets: [
                             {
+                                label: 'Aire', // Nom de la légende
                                 data: <?= $points_json ?>,
                                 borderColor: 'rgb(55, 66, 250)',
                                 backgroundColor: 'rgba(55, 66, 250, 0.2)', // Couleur de remplissage sous la courbe
@@ -176,7 +177,8 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                     options: {
                         plugins: {
                             legend: {
-                                display: false
+                                display: true, // Afficher la légende
+                                position: 'top' // Positionner la légende en haut (par défaut)
                             }
                         },
                         scales: {
@@ -186,6 +188,7 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                     }
                 });
             });
+
 
         </script>
     </div>
