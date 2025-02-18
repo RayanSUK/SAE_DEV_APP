@@ -117,8 +117,10 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
         $resultat = methode_rectangles_medians($n, $esperance, $forme, $x);
     } elseif ($methode == "trapezes") {
         $resultat = methode_trapezes($n, $esperance, $forme, $x);
-    } elseif ($methode == "simpson") {
+    } elseif ($methode == "simpson" && $n%2==0) {
         $resultat = methode_simpson($n, $esperance, $forme, $x);
+    } else {
+        echo "<p>Impossible d'effectuer les calculs</p>";
     }
 
     $ecart_type = ecart_type($esperance, $forme);
