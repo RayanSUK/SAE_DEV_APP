@@ -68,48 +68,49 @@ $result = mysqli_stmt_get_result($stmt);
 <body>
 
 <main role="main">
-<div class="container">
-    <h1>Historique des Résultats</h1>
-    <?php if (mysqli_num_rows($result) > 0): ?>
-        <table>
-            <thead>
-            <tr>
-                <th>Méthode</th>
-                <th>n</th>
-                <th>Forme</th>
-                <th>Espérance</th>
-                <th>t</th>
-                <th>Résultat</th>
-                <th>Date</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+    <div class="container">
+        <h1>Historique des Résultats</h1>
+        <?php if (mysqli_num_rows($result) > 0): ?>
+            <table>
+                <thead>
                 <tr>
-                    <td><?php echo htmlspecialchars($row['methode']); ?></td>
-                    <td><?php echo htmlspecialchars($row['n']); ?></td>
-                    <td><?php echo htmlspecialchars($row['forme']); ?></td>
-                    <td><?php echo htmlspecialchars($row['esperance']); ?></td>
-                    <td><?php echo htmlspecialchars($row['t']); ?></td>
-                    <td><?php echo htmlspecialchars($row['resultat']); ?></td>
-                    <td><?php echo htmlspecialchars($row['date']); ?></td>
-                    <td>
-                        <form method="post" action="">
-                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['id']); ?>">
-                            <button type='submit' name='courbe' class='form-buttonS'>Consulter la courbe</button>
-                            <button type='submit' id="supp" name='supp' class='form-buttonS'>Supprimer de l'historique</button>
-                        </form>
-                    </td>
+                    <th>Méthode</th>
+                    <th>n</th>
+                    <th>Forme</th>
+                    <th>Espérance</th>
+                    <th>t</th>
+                    <th>Résultat</th>
+                    <th>Date</th>
+                    <th>Action</th>
                 </tr>
-            <?php endwhile; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p>Aucun résultat trouvé.</p>
-    <?php endif; ?>
-</div>
+                </thead>
+                <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <tr id="row-<?php echo htmlspecialchars($row['id']); ?>">
+                        <td><?php echo htmlspecialchars($row['methode']); ?></td>
+                        <td><?php echo htmlspecialchars($row['n']); ?></td>
+                        <td><?php echo htmlspecialchars($row['forme']); ?></td>
+                        <td><?php echo htmlspecialchars($row['esperance']); ?></td>
+                        <td><?php echo htmlspecialchars($row['t']); ?></td>
+                        <td><?php echo htmlspecialchars($row['resultat']); ?></td>
+                        <td><?php echo htmlspecialchars($row['date']); ?></td>
+                        <td>
+                            <form method="post" action="">
+                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                                <button type='submit' name='courbe' class='form-buttonS'>Consulter la courbe</button>
+                                <button type='submit' name='supp' class='form-buttonS delete-button' data-id="<?php echo htmlspecialchars($row['id']); ?>">Supprimer de l'historique</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>Aucun résultat trouvé.</p>
+        <?php endif; ?>
+    </div>
 </main>
+
 <?php
 require("fonctionsLIG.php");
 
@@ -188,11 +189,28 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                     }
                 });
             });
-
-
         </script>
     </div>
 <?php endif; ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Empêche la soumission traditionnelle du formulaire
+                const id = this.getAttribute('data-id');
+                const row = document.getElementById('row-' + id);
+                const form = this.closest('form');
+
+                // Soumettre le formulaire de manière traditionnelle
+                form.submit();
+
+                // Supprimer la ligne du tableau après la soumission
+                row.remove();
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
