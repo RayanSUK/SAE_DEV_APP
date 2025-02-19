@@ -120,7 +120,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     } elseif ($methode == "simpson" && $n%2==0) {
         $resultat = methode_simpson($n, $esperance, $forme, $x);
     } else {
-        echo "<p>Impossible d'effectuer les calculs</p>";
+        echo "<p style='background-color: red; color: white;'>Impossible d'effectuer le calcul (n doit être pair).</p>";
     }
 
     $ecart_type = ecart_type($esperance, $forme);
