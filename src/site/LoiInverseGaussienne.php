@@ -177,13 +177,13 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                     data: {
                         labels: <?= $x_values_json ?>,
                         datasets: [
+                            {fill: <?= $x_json ?>}
                             {
                                 label: 'Aire', // Nom de la légende
                                 data: <?= $points_json ?>,
                                 borderColor: 'rgb(55, 66, 250)',
                                 backgroundColor: 'rgba(55, 66, 250, 0.2)', // Couleur de remplissage sous la courbe
                                 borderWidth: 2,
-                                fill: true,
                                 tension: 0.4,
                                 pointRadius: 0,
                                 pointHoverRadius: 0,
