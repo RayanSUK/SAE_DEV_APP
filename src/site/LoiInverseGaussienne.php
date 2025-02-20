@@ -183,7 +183,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                                 borderColor: 'rgb(55, 66, 250)',
                                 backgroundColor: 'rgba(55, 66, 250, 0.2)', // Couleur de remplissage sous la courbe
                                 borderWidth: 2,
-                                fill: {value: <?= $x ?>},
+                                fill: true,
                                 tension: 0.4,
                                 pointRadius: 0,
                                 pointHoverRadius: 0,
