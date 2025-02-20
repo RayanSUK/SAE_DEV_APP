@@ -161,6 +161,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
 
 
+    $x_json = json_encode($x);
     $x_values_json = json_encode($x_values);
     $points_json = json_encode($points);
     ?>
@@ -182,7 +183,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                                 borderColor: 'rgb(55, 66, 250)',
                                 backgroundColor: 'rgba(55, 66, 250, 0.2)', // Couleur de remplissage sous la courbe
                                 borderWidth: 2,
-                                fill: true, // Remplir l'aire sous la courbe
+                                fill: <?= $x_json ?>,
                                 tension: 0.4,
                                 pointRadius: 0,
                                 pointHoverRadius: 0,
