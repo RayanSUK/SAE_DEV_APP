@@ -172,38 +172,67 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var ctx = document.getElementById('myChart').getContext('2d');
+
+                // Ensure that PHP variables are correctly embedded in JavaScript
+                var xValues = <?= json_encode($x_values_json) ?>;
+                var points = <?= json_encode($points_json) ?>;
+                var xJson = <?= json_encode($x_json) ?>;
+
+                // Use xValues directly without rounding
+                var pointsY = points; // Assuming pointsY is the same as points
+
                 var myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: <?= $x_values_json ?>,
+                        labels: xValues,
                         datasets: [
                             {
-                                label: 'Aire', // Nom de la légende
-                                data: <?= $points_json ?>,
+                                label: 'Aire',
+                                data: points,
                                 borderColor: 'rgb(55, 66, 250)',
-                                backgroundColor: 'rgba(55, 66, 250, 0.2)', // Couleur de remplissage sous la courbe
+                                backgroundColor: 'rgba(55, 66, 250, 0.2)',
                                 borderWidth: 2,
-                                fill: true,
+                                fill: false,
                                 tension: 0.4,
                                 pointRadius: 0,
                                 pointHoverRadius: 0,
                             },
+                            {
+                                label: 'Surface sous la courbe (P(X ≤ t))',
+                                data: xValues.map((x, index) => {
+                                    return x <= xJson ? pointsY[index] : null;
+                                }),
+                                backgroundColor: 'rgba(135, 206, 235, 0.5)',
+                                borderWidth: 0,
+                                fill: true,
+                            }
                         ]
                     },
                     options: {
                         plugins: {
                             legend: {
-                                display: true, // Afficher la légende
-                                position: 'top' // Positionner la légende en haut (par défaut)
+                                display: true,
+                                position: 'top'
                             }
                         },
                         scales: {
-                            x: { title: { display: true, text: 'x' } },
-                            y: { title: { display: true, text: 'Densité' } }
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'x'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Densité'
+                                }
+                            }
                         }
                     }
                 });
             });
+
 
         </script>
 
