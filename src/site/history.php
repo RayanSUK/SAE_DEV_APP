@@ -119,12 +119,10 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
     $query = "DELETE FROM history WHERE id = ?";
     $stmt = mysqli_prepare($cnx, $query);
     mysqli_stmt_bind_param($stmt, "i", $id);
-    if (mysqli_stmt_execute($stmt)) {
-        echo "<p id='success-message' style='color: #007bff'>Données supprimées avec succès, veuillez rafraîchir la page</p>";
-    } else {
-        echo "<p id='error-message' style='color: red'>Erreur lors de la suppression des données.</p>";
-    }
+    mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
+
+    echo "<p id='success-message' style='color: #007bff'>Données supprimées avec succès, veuillez rafraîchir la page</p>";
 }
 ?>
 
@@ -192,7 +190,7 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                                 data: xValues.map((x, index) => {
                                     return x <= t ? pointsY[index] : null;
                                 }),
-                                backgroundColor: 'rgba(135, 206, 235, 0.5)',
+                                backgroundColor: 'rgba(55, 66, 250, 0.2)',
                                 borderWidth: 0,
                                 fill: true,
                             }
@@ -226,24 +224,7 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
     </div>
 <?php endif; ?>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.delete-button').forEach(button => {
-            button.addEventListener('click', function (event) {
-                event.preventDefault(); // Empêche la soumission traditionnelle du formulaire
-                const id = this.getAttribute('data-id');
-                const row = document.getElementById('row-' + id);
-                const form = this.closest('form');
 
-                // Soumettre le formulaire de manière traditionnelle
-                form.submit();
-
-                // Supprimer la ligne du tableau après la soumission
-                row.remove();
-            });
-        });
-    });
-</script>
 
 </body>
 </html>
