@@ -187,7 +187,6 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                         labels: xValues,
                         datasets: [
                             {
-                                label: 'Aire',
                                 data: points,
                                 borderColor: 'rgb(55, 66, 250)',
                                 backgroundColor: 'rgba(55, 66, 250, 0.2)',
@@ -198,7 +197,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                                 pointHoverRadius: 0,
                             },
                             {
-                                label: 'Surface sous la courbe (P(X ≤ t))',
+                                label: 'Aire sous la courbe P(X ≤ t)',
                                 data: xValues.map((x, index) => {
                                     return x <= t ? pointsY[index] : null;
                                 }),

@@ -122,7 +122,7 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    echo "<p id='success-message' style='color: #007bff'>Données supprimées avec succès, veuillez rafraîchir la page</p>";
+    echo "<p id='success-message' style='color: rgb(55, 66, 250)'>Données supprimées avec succès, veuillez rafraîchir la page</p>";
 }
 ?>
 
@@ -175,7 +175,6 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                         labels: xValues,
                         datasets: [
                             {
-                                label: 'Aire',
                                 data: points,
                                 borderColor: 'rgb(55, 66, 250)',
                                 backgroundColor: 'rgba(55, 66, 250, 0.2)',
@@ -186,7 +185,7 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                                 pointHoverRadius: 0,
                             },
                             {
-                                label: 'Surface sous la courbe (P(X ≤ t))',
+                                label: 'Aire sous la courbe P(X ≤ t)',
                                 data: xValues.map((x, index) => {
                                     return x <= t ? pointsY[index] : null;
                                 }),
