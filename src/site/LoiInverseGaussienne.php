@@ -174,9 +174,9 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                 var ctx = document.getElementById('myChart').getContext('2d');
 
                 // Ensure that PHP variables are correctly embedded in JavaScript
-                var xValues = <?= json_encode($x_values_json) ?>;
-                var points = <?= json_encode($points_json) ?>;
-                var xJson = <?= json_encode($x_json) ?>;
+                var xValues = <?= $x_values_json ?>;
+                var points = <?= $points_json ?>;
+                var xJson = <?= $x_json ?>;
 
                 // Use xValues directly without rounding
                 var pointsY = points; // Assuming pointsY is the same as points
