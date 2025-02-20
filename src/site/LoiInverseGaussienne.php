@@ -40,15 +40,16 @@ error_reporting(E_ALL);
             <ol>
                 <li><strong>Entrez vos paramètres :</strong></li>
                 <ul>
-                    <li><strong>x :</strong> La valeur à analyser.</li>
-                    <li><strong>λ (forme) :</strong> Définit la forme de la distribution.</li>
-                    <li><strong>μ (espérance) :</strong> Définit la moyenne de la distribution.</li>
+                    <li><strong>n :</strong> Le nombre de valeurs</li>
+                    <li><strong>x :</strong> La valeur à analyser</li>
+                    <li><strong>λ (forme) :</strong> Définit la forme de la distribution</li>
+                    <li><strong>μ (espérance) :</strong> Définit la moyenne de la distribution</li>
                 </ul><br>
                 <li><strong>Choisissez une méthode de calcul :</strong></li>
                 <ul>
                     <li> - Rectangles médians</li>
                     <li> - Rectangles trapèzes</li>
-                    <li> - Méthode de Simpson</li>
+                    <li> - Méthode de Simpson (Remarque : n doit être pair)</li>
                 </ul><br>
                 <li><strong>Obtenez vos résultats :</strong></li>
                 <ul>
