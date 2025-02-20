@@ -152,8 +152,8 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
 
     echo "<div class='math-section'>";
-    echo "<p class='text-center'>P(X ≤ x) est la probabilité que X soit inférieur ou égal à x.</p>";
-    echo "<p class='text-center'>f(x) est la fonction de densité associée à cette distribution.</p>";
+    echo "<p class='text-center'>P(X ≤ t) est la probabilité que X soit inférieure ou égal à t.</p>";
+    echo "<p class='text-center'>f($t) est la fonction de densité associée à cette distribution.</p>";
     echo "<div class='math-equation text-center'>\\[ P(X \\leqslant $t) \\]</div>";
     echo "<div class='math-equation text-center'>\\[ f($t) = \\sqrt{\\frac{$forme}{2\\pi $t^3}} e^{-\\frac{".$forme."($t-$esperance)^2}{2×$esperance^2×$t}} \\]</div>";
     echo "</div>";
