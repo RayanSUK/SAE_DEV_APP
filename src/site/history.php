@@ -129,19 +129,22 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
 <?php
 if (isset($_POST['courbe']) && isset($_POST['id'])) {
     $id = $_POST['id'];
-    $query = "SELECT n, esperance, forme FROM history WHERE id = ?";
+    $t = 0;
+    $query = "SELECT n, esperance, forme, t FROM history WHERE id = ?";
     $stmt = mysqli_prepare($cnx, $query);
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
+        $t = $row['t'];
         $points = array();
         $x_values = range(0, $row['n']);
         foreach ($x_values as $i => $value) {
             $points[] = loi_inverse_gaussienne($value, $row['esperance'], $row['forme']);
         }
 
+        $t_json = json_encode($t);
         $x_values_json = json_encode($x_values);
         $points_json = json_encode($points);
     } else {
@@ -157,34 +160,62 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var ctx = document.getElementById('myChart').getContext('2d');
+
+                // Ensure that PHP variables are correctly embedded in JavaScript
+                var xValues = <?= $x_values_json ?>;
+                var points = <?= $points_json ?>;
+                var t = <?= $t_json ?>;
+
+                // Use xValues directly without rounding
+                var pointsY = points; // Assuming pointsY is the same as points
+
                 var myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: <?= $x_values_json ?>,
+                        labels: xValues,
                         datasets: [
                             {
-                                label: 'Aire', // Nom de la légende
-                                data: <?= $points_json ?>,
+                                label: 'Aire',
+                                data: points,
                                 borderColor: 'rgb(55, 66, 250)',
-                                backgroundColor: 'rgba(55, 66, 250, 0.2)', // Couleur de remplissage sous la courbe
+                                backgroundColor: 'rgba(55, 66, 250, 0.2)',
                                 borderWidth: 2,
-                                fill: true, // Remplir l'aire sous la courbe
+                                fill: false,
                                 tension: 0.4,
                                 pointRadius: 0,
                                 pointHoverRadius: 0,
                             },
+                            {
+                                label: 'Surface sous la courbe (P(X ≤ t))',
+                                data: xValues.map((x, index) => {
+                                    return x <= t ? pointsY[index] : null;
+                                }),
+                                backgroundColor: 'rgba(135, 206, 235, 0.5)',
+                                borderWidth: 0,
+                                fill: true,
+                            }
                         ]
                     },
                     options: {
                         plugins: {
                             legend: {
-                                display: true, // Afficher la légende
-                                position: 'top' // Positionner la légende en haut (par défaut)
+                                display: true,
+                                position: 'top'
                             }
                         },
                         scales: {
-                            x: { title: { display: true, text: 'x' } },
-                            y: { title: { display: true, text: 'Densité' } }
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'x'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Densité'
+                                }
+                            }
                         }
                     }
                 });

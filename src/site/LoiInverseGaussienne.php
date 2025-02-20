@@ -161,7 +161,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
 
 
 
-    $t = json_encode($t);
+    $t_json = json_encode($t);
     $x_values_json = json_encode($x_values);
     $points_json = json_encode($points);
     ?>
@@ -176,7 +176,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                 // Ensure that PHP variables are correctly embedded in JavaScript
                 var xValues = <?= $x_values_json ?>;
                 var points = <?= $points_json ?>;
-                var t = <?= $t ?>;
+                var t = <?= $t_json ?>;
 
                 // Use xValues directly without rounding
                 var pointsY = points; // Assuming pointsY is the same as points
