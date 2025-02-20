@@ -202,7 +202,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                                 data: xValues.map((x, index) => {
                                     return x <= t ? pointsY[index] : null;
                                 }),
-                                backgroundColor: 'rgba(135, 206, 235, 0.5)',
+                                backgroundColor: 'rgba(55, 66, 250, 0.2)',
                                 borderWidth: 0,
                                 fill: true,
                             }
