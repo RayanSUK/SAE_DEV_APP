@@ -175,7 +175,7 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                         labels: xValues,
                         datasets: [
                             {
-                                label: false,
+                                label: 'Courbe de Wald',
                                 data: points,
                                 borderColor: 'rgb(55, 66, 250)',
                                 backgroundColor: 'rgba(55, 66, 250, 0.2)',

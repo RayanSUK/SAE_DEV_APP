@@ -187,7 +187,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                         labels: xValues,
                         datasets: [
                             {
-                                label: false,
+                                label: 'Courbe de Wald',
                                 data: points,
                                 borderColor: 'rgb(55, 66, 250)',
                                 backgroundColor: 'rgba(55, 66, 250, 0.2)',
