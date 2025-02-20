@@ -41,7 +41,7 @@ error_reporting(E_ALL);
                 <li><strong>Entrez vos paramètres :</strong></li>
                 <ul>
                     <li><strong>n :</strong> Le nombre de valeurs</li>
-                    <li><strong>x :</strong> La valeur à analyser</li>
+                    <li><strong>t :</strong> La valeur à analyser</li>
                     <li><strong>λ (forme) :</strong> Définit la forme de la distribution</li>
                     <li><strong>μ (espérance) :</strong> Définit la moyenne de la distribution</li>
                 </ul><br>
@@ -76,8 +76,8 @@ error_reporting(E_ALL);
                 <label for="esperance">L'esperance :</label>
                 <input type="number" min="0" name="esperance" id="esperance" placeholder="μ" class="form-input" required>
 
-                <label for="x">La valeur suivant la loi inverse gaussienne :</label>
-                <input type="number" min="0" name="x" placeholder="x" id="x" class="form-input" required>
+                <label for="t">La valeur suivant la loi inverse gaussienne :</label>
+                <input type="number" min="0" name="t" placeholder="t" id="t" class="form-input" required>
 
                 <!-- Menu déroulant pour choisir une méthode -->
                 <label for="methode">Choisissez une méthode :</label>
@@ -97,11 +97,11 @@ error_reporting(E_ALL);
 
 
 <?php
-if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], $_POST['x'])) {
+if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], $_POST['t'])) {
     $n = $_POST['n'];
     $forme = $_POST['forme'];
     $esperance = $_POST['esperance'];
-    $x = $_POST['x'];
+    $t = $_POST['t'];
     $methode = $_POST['methode'];
 
     $points = array();
@@ -115,11 +115,11 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     $image_path = '';
 
     if ($methode == "rectangles_medians") {
-        $resultat = methode_rectangles_medians($n, $esperance, $forme, $x);
+        $resultat = methode_rectangles_medians($n, $esperance, $forme, $t);
     } elseif ($methode == "trapezes") {
-        $resultat = methode_trapezes($n, $esperance, $forme, $x);
+        $resultat = methode_trapezes($n, $esperance, $forme, $t);
     } elseif ($methode == "simpson" && $n%2==0) {
-        $resultat = methode_simpson($n, $esperance, $forme, $x);
+        $resultat = methode_simpson($n, $esperance, $forme, $t);
     } else {
         echo "<p class='text-center' style='color: red;'>n doit être pair</p>";
     }
@@ -143,7 +143,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     echo "<input type='hidden' name='n' value='" . $n . "'>";
     echo "<input type='hidden' name='forme' value='" . $forme . "'>";
     echo "<input type='hidden' name='esperance' value='" . $esperance . "'>";
-    echo "<input type='hidden' name='t' value='" . $x . "'>";
+    echo "<input type='hidden' name='t' value='" . $t . "'>";
     echo "<input type='hidden' name='methode' value='" . $methode . "'>";
     echo "<input type='hidden' name='resultat' value='" . $resultat . "'>";
     echo "<button type='submit' name='ajouter_history' class='form-buttonS'>Ajouter à l'historique</button>";
@@ -154,14 +154,14 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     echo "<div class='math-section'>";
     echo "<p class='text-center'>P(X ≤ x) est la probabilité que X soit inférieur ou égal à x.</p>";
     echo "<p class='text-center'>f(x) est la fonction de densité associée à cette distribution.</p>";
-    echo "<div class='math-equation text-center'>\\[ P(X \\leqslant $x) \\]</div>";
-    echo "<div class='math-equation text-center'>\\[ f($x) = \\sqrt{\\frac{$forme}{2\\pi $x^3}} e^{-\\frac{".$forme."($x-$esperance)^2}{2×$esperance^2×$x}} \\]</div>";
+    echo "<div class='math-equation text-center'>\\[ P(X \\leqslant $t) \\]</div>";
+    echo "<div class='math-equation text-center'>\\[ f($t) = \\sqrt{\\frac{$forme}{2\\pi $t^3}} e^{-\\frac{".$forme."($t-$esperance)^2}{2×$esperance^2×$t}} \\]</div>";
     echo "</div>";
 
 
 
 
-    $x_json = json_encode($x);
+    $t = json_encode($t);
     $x_values_json = json_encode($x_values);
     $points_json = json_encode($points);
     ?>
@@ -176,7 +176,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                 // Ensure that PHP variables are correctly embedded in JavaScript
                 var xValues = <?= $x_values_json ?>;
                 var points = <?= $points_json ?>;
-                var xJson = <?= $x_json ?>;
+                var t = <?= $t ?>;
 
                 // Use xValues directly without rounding
                 var pointsY = points; // Assuming pointsY is the same as points
@@ -200,7 +200,7 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
                             {
                                 label: 'Surface sous la courbe (P(X ≤ t))',
                                 data: xValues.map((x, index) => {
-                                    return x <= xJson ? pointsY[index] : null;
+                                    return x <= t ? pointsY[index] : null;
                                 }),
                                 backgroundColor: 'rgba(135, 206, 235, 0.5)',
                                 borderWidth: 0,
