@@ -1,8 +1,6 @@
-<!-- Ajout du titre d'onglet -->
-<title>Connexion</title>
-
 <?php
 session_start();
+require_once('fonctions.php'); // Inclusion de la fonction RC4
 ?>
 
 <?php include('partiels/navbar_Inscription.php'); ?>
@@ -37,6 +35,8 @@ session_start();
 if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];
+    $key = "saesigmax";
+    $mdp_chiffre = bin2hex(rc4($key, $mdp)); // Chiffrement du mot de passe
 
     // Connexion à la base de données
     $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
@@ -53,25 +53,24 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
 
     if ($row = mysqli_fetch_assoc($result)) {
         // Comparaison du mot de passe saisi avec celui stocké dans la base
-        if (md5($mdp) === $row['password']) {
+        if ($mdp_chiffre === $row['password']) {
             // Connexion réussie
-            $_SESSION['login'] = $row['login'];  // Ajoute le login dans la session
-            $_SESSION['id'] = $row['id'];   // Ajoute l'ID utilisateur dans la session
-            $_SESSION['etat'] = 'connexion';     // Définit l'état de connexion
+            $_SESSION['login'] = $row['login'];
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['etat'] = 'connexion';
 
             // Vérification si l'utilisateur est l'adminweb
             if ($row['login'] === 'adminweb') {
-                $_SESSION['role'] = 'adminweb';  // Ajoute le rôle adminweb
-                header("Location: adminweb.php");   // Redirection vers la page admin
+                $_SESSION['role'] = 'adminweb';
+                header("Location: adminweb.php");
             } else {
-                $_SESSION['role'] = 'user';      // Ajoute le rôle utilisateur normal
-                header("Location: accueil.php"); // Redirection vers la page d'accueil
+                $_SESSION['role'] = 'user';
+                header("Location: accueil.php");
             }
             exit;
         } else {
             echo "<p style='color:red; text-align: center;'>Mot de passe incorrect.</p>";
         }
-
     } else {
         echo "<p style='color:red; text-align: center;'>Utilisateur non trouvé.</p>";
     }
