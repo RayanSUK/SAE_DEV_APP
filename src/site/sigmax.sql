@@ -1,14 +1,11 @@
-CREATE DATABASE IF NOT EXISTS sigmax;
-USE sigmax;
-
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : jeu. 05 déc. 2024 à 16:45
--- Version du serveur : 10.4.24-MariaDB
--- Version de PHP : 7.4.29
+-- Hôte : localhost:3306
+-- Généré le : dim. 09 mars 2025 à 14:38
+-- Version du serveur : 5.7.24
+-- Version de PHP : 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,6 +24,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `cle`
+--
+
+CREATE TABLE `cle` (
+  `cle_rc4` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `cle`
+--
+
+INSERT INTO `cle` (`cle_rc4`) VALUES
+('saesigmax');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `history`
 --
 
@@ -39,7 +53,8 @@ CREATE TABLE `history` (
   `esperance` double NOT NULL,
   `t` double NOT NULL,
   `resultat` double NOT NULL,
-  `id_user` int(4) NOT NULL
+  `id_user` int(4) NOT NULL,
+  `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -59,8 +74,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `password`) VALUES
-(1, 'adminweb', 'af03798e4f9010c54d2eb6f386124f7e'),
-(2, 'adminsys', '9da1273385336b8d0ff2f460eb1e7fda');
+(1, 'adminweb', 'fbb9ef173c00a574'),
+(2, 'adminsys', 'fbb9ef173c04b965');
 
 --
 -- Index pour les tables déchargées
@@ -87,17 +102,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE history
-ADD COLUMN date DATETIME;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Contraintes pour les tables déchargées
