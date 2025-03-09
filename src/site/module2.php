@@ -45,23 +45,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+
 <main role="main">
-    <section class="description text-center">
-        <div class="titre text-center">
-            <h1>Module 2 - Chiffrement/Déchiffrement RC4</h1>
+
+    <button id="openPopup" class="info-button text-center">ℹ️ Cliquez ICI pour voir l'explication du module !!</button>
+
+    <div id="popup" class="popup">
+        <div class="popup-content text-center">
+            <span class="close">&times;</span>
+            <div class="container">
+                <h1>🔐 Module de Cryptographie : Chiffrement RC4</h1>
+                <p>
+                    Découvrez notre module interactif dédié au <strong>chiffrement RC4</strong>, un algorithme de chiffrement utilisé
+                    en cryptographie. Cet outil vous permet d'expérimenter le chiffrement et le déchiffrement de messages en utilisant une clé secrète.
+                </p>
+
+                <h2>🛠 Comment ça marche ?</h2>
+                <ol>
+                    <li><strong>Entrez vos paramètres :</strong></li>
+                    <ul>
+                        <li><strong>Clé :</strong> Une suite de caractères pour chiffrer et déchiffrer le texte.</li>
+                        <li><strong>Texte :</strong> Le message que vous souhaitez chiffrer ou déchiffrer.</li>
+                    </ul><br>
+                    <li><strong>Lancez l'opération :</strong></li>
+                    <ul>
+                        <li>Choisissez entre <strong>chiffrement</strong> et <strong>déchiffrement</strong>.</li>
+                    </ul><br>
+                    <li><strong>Obtenez vos résultats :</strong></li>
+                    <ul>
+                        <li>Visualisez immédiatement le texte transformé et comprenez l'impact de votre clé sur l'encodage.</li>
+                    </ul>
+                </ol>
+            </div>
         </div>
-        <form method="post">
-            <label for="key">Clé :</label>
-            <input type="text" name="key" required>
-            <label for="text">Texte :</label>
-            <input type="text" name="text" required>
-            <button type="submit" name="action" value="encrypt">Chiffrer</button>
-            <button type="submit" name="action" value="decrypt">Déchiffrer</button>
-        </form>
+    </div>
+
+    <br>
+
+
+
+    <section class="description text-center">
+
+        <div class="form-container-parent">
+            <div class="form-container-co">
+                <h1>Module 2 - Chiffrement/Déchiffrement RC4</h1>
+                <form method="POST" action="#">
+                    <label for="key">Clé :</label>
+                    <input type="text" name="key" id="key" placeholder="Entrez la clé" required>
+
+                    <label for="text">Texte :</label>
+                    <input type="text" name="text" id="text" placeholder="Entrez le texte" required>
+
+                    <button type="submit" name="action" value="encrypt">Chiffrer</button>
+                    <button type="submit" name="action" value="decrypt">Déchiffrer</button>
+                </form>
+            </div>
+        </div>
         <?php if (isset($result)): ?>
             <p>Résultat : <strong><?php echo htmlspecialchars($result); ?></strong></p>
-        <?php endif; ?>
+        <?php endif; ?><br><br><br><br>
     </section>
 </main>
 
 <?php include('partiels/footer.php'); ?>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var openPopupBtn = document.getElementById("openPopup");
+        var popup = document.getElementById("popup");
+        var closePopupBtn = document.querySelector(".close");
+
+        if (openPopupBtn && popup && closePopupBtn) {
+            openPopupBtn.addEventListener("click", function () {
+                popup.style.display = "block";
+            });
+
+            closePopupBtn.addEventListener("click", function () {
+                popup.style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target === popup) {
+                    popup.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
