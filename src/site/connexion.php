@@ -32,17 +32,23 @@ require_once('fonctions.php'); // Inclusion de la fonction RC4
 </html>
 
 <?php
+// Connexion à la base de données
+$cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
+if (!$cnx) {
+    die("Échec de connexion à la base de données : " . mysqli_connect_error());
+}
+
 if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];
-    $key = "saesigmax";
-    $mdp_chiffre = bin2hex(rc4($key, $mdp)); // Chiffrement du mot de passe
 
-    // Connexion à la base de données
-    $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
-    if (!$cnx) {
-        die("Échec de connexion à la base de données : " . mysqli_connect_error());
-    }
+    // Récupération de la clé RC4 depuis la base de données
+    $key_query = "SELECT cle_rc4 FROM cle LIMIT 1";
+    $key_result = mysqli_query($cnx, $key_query);
+    $key_row = mysqli_fetch_assoc($key_result);
+    $key = $key_row['cle_rc4'];
+
+    $mdp_chiffre = bin2hex(rc4($key, $mdp)); // Chiffrement du mot de passe
 
     // Préparation et exécution de la requête pour récupérer les informations de l'utilisateur
     $query = "SELECT * FROM users WHERE login = ?";
