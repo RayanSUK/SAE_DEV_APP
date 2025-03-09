@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include('partiels/navbar_Inscription.php');
-require_once('fonctions.php');
+require_once('fonctions.php'); // Inclusion de la fonction RC4
 
 if (!isset($_SESSION['captcha'])) {
     $tab = range(0, 9);
@@ -13,6 +13,18 @@ if (!isset($_SESSION['captcha'])) {
 }
 
 $nb = $_SESSION['captcha'];
+
+// Connexion à la base de données
+$cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
+if (!$cnx) {
+    die("Échec de la connexion à la base de données: " . mysqli_connect_error());
+}
+
+// Récupération de la clé RC4 depuis la base de données
+$key_query = "SELECT cle_rc4 FROM cle LIMIT 1";
+$key_result = mysqli_query($cnx, $key_query);
+$key_row = mysqli_fetch_assoc($key_result);
+$key = $key_row['cle_rc4'];
 
 // Traitement du formulaire d'inscription
 if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
@@ -29,16 +41,9 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     }
 
     // Chiffrement du mot de passe avec RC4
-    $key = "saesigmax";
     $mdp_chiffre = bin2hex(rc4($key, $mdp));
 
     if ($reponse == $_SESSION['captcha']) {
-        // Connexion à la base de données
-        $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
-        if (!$cnx) {
-            die("Échec de la connexion à la base de données: " . mysqli_connect_error());
-        }
-
         // Vérifie si le login est déjà utilisé
         $check_sql = "SELECT * FROM users WHERE login = ?";
         $check_stmt = mysqli_prepare($cnx, $check_sql);
