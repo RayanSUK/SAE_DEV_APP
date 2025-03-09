@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['login'])) {
+    header("Location: index.php");
+    exit;
+}
 require("fonctionsLIG.php");
 
 // Gestion des erreurs pour le débogage
