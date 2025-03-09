@@ -18,7 +18,7 @@
         <ul>
             <li><a href="accueil.php">Accueil</a></li>
             <li><a href="LoiInverseGaussienne.php">Module probabilité</a></li>
-            <li><a href="module2.php">Module 2</a></li>
+            <li><a href="module2.php">Module Crypto</a></li>
             <li><a href="module3.php">Module 3</a></li>
             <li><a href="history.php">Historique des résultats</a></li>
             <li><a href="deconnexion.php">Deconnexion</a></li>
