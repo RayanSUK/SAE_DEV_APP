@@ -25,13 +25,13 @@ include('partiels/navbar.php')
             <h1 class="text-center">Calcul d'un polynôme de second degré</h1>
             <form method="POST">
                 <label for="n">a : </label>
-                <input type="number" name="n" id="n" placeholder="a" class="form-input" required>
+                <input type="number" name="n" id="n" placeholder="a" class="form-input" >
 
                 <label for="forme">b : </label>
-                <input type="number" name="b" id="b" placeholder="b" class="form-input" required>
+                <input type="number" name="b" id="b" placeholder="b" class="form-input" >
 
                 <label for="forme">c : </label>
-                <input type="number" name="c" id="c" placeholder="c" class="form-input" required>
+                <input type="number" name="c" id="c" placeholder="c" class="form-input" >
                 <button type="submit" class="form-buttonS">Valider</button>
             </form>
         </div>
