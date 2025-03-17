@@ -1,22 +1,20 @@
-<?php 
+<?php
 session_start();
 if (!isset($_SESSION['login'])) {
     header("Location: index.php");
     exit;
 }
 require('fonctionsPolynome.php');
-include('partiels/navbar.php') 
+include('partiels/navbar.php');
 ?>
 
-
 <main role="main">
-<!-- description section starts here -->
-<section class="description text-center">
-    <div class="titre text-center">
-        <h1>Module 3</h1>
-    </div>
-
- </section>
+    <!-- description section starts here -->
+    <section class="description text-center">
+        <div class="titre text-center">
+            <h1>Module 3</h1>
+        </div>
+    </section>
 </main>
 
 <main role="main">
@@ -24,28 +22,29 @@ include('partiels/navbar.php')
         <div class="form-container">
             <h1 class="text-center">Calcul d'un polynôme de second degré</h1>
             <form method="POST">
-                <label for="n">a : </label>
-                <input type="number" name="n" id="n" placeholder="a" class="form-input" >
+                <label for="a">a : </label>
+                <input type="number" name="a" id="a" placeholder="a" class="form-input" required>
 
-                <label for="forme">b : </label>
-                <input type="number" name="b" id="b" placeholder="b" class="form-input" >
+                <label for="b">b : </label>
+                <input type="number" name="b" id="b" placeholder="b" class="form-input" required>
 
-                <label for="forme">c : </label>
-                <input type="number" name="c" id="c" placeholder="c" class="form-input" >
+                <label for="c">c : </label>
+                <input type="number" name="c" id="c" placeholder="c" class="form-input" required>
                 <button type="submit" class="form-buttonS">Valider</button>
             </form>
         </div>
     </div>
 </main>
+
 <?php
-if(isset($_POST['a'], $_POST['b'], $_POST['c'])){
+if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
     $a = $_POST['a'];
     $b = $_POST['b'];
     $c = $_POST['c'];
     $delta = discriminant($a, $b, $c);
 
-    if($delta == 0){
-        $solution = racineUnique($a,$b);
+    if ($delta == 0) {
+        $solution = racineUnique($a, $b);
 
         echo "<div class='text-center2'>";
         echo "<table>";
@@ -59,9 +58,9 @@ if(isset($_POST['a'], $_POST['b'], $_POST['c'])){
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
-    } else if($delta > 0){
-        $solution1 = racineReelle1($a,$b,$c);
-        $solution2 = racineReelle2($a,$b,$c);
+    } else if ($delta > 0) {
+        $solution1 = racineReelle1($a, $b, $c);
+        $solution2 = racineReelle2($a, $b, $c);
 
         echo "<div class='text-center2'>";
         echo "<table>";
@@ -76,9 +75,9 @@ if(isset($_POST['a'], $_POST['b'], $_POST['c'])){
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
-    } else if($delta < 0){
-        $solution1 = racineComplexe1($a,$b,$c);
-        $solution2 = racineComplexe2($a,$b,$c);
+    } else if ($delta < 0) {
+        $solution1 = racineComplexe1($a, $b, $c);
+        $solution2 = racineComplexe2($a, $b, $c);
 
         echo "<div class='text-center2'>";
         echo "<table>";
@@ -99,11 +98,7 @@ if(isset($_POST['a'], $_POST['b'], $_POST['c'])){
 }
 ?>
 
+<?php include('partiels/footer.php'); ?>
 
- <?php include('partiels/footer.php') ?>
-
-
-
-    
-</body>  
+</body>
 </html>
