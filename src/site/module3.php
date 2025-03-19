@@ -112,8 +112,9 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \frac{-$b-i\sqrt{-$delta}}{2×$a} = $solution1[0] \\] ou \\[ x_{2} = \frac{-$b+i\sqrt{-$delta}}{2×$a} = $solution2[0] \\]</div>";
-        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \frac{-$b-i\sqrt{-$delta}}{2×$a} = $solution1[1] \\] ou \\[ x_{2} = \frac{-$b+i\sqrt{-$delta}}{2×$a} = $solution2[1] \\]</div>";
+        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = $solution1[0] \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = $solution2[0] \\]</div>";
+        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = $solution1[1] \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = $solution2[1] \\]</div>";
+
 
 
     }
