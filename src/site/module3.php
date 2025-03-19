@@ -94,16 +94,22 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "<div class='math-equation text-center'>\\[ x_{1} = \frac{-$b-\sqrt{$delta}}{2×$a} = $solution1 \\] ou \\[ x_{2} = \frac{-$b+\sqrt{$delta}}{2×$a} = $solution2 \\]</div>";
     } else if ($delta < 0) {
         $solution1 = racineComplexe1($a, $b, $c);
+        $reelle1 = $solution1[0];
+        $imaginaire1 = $solution1[1];
+
+
         $solution2 = racineComplexe2($a, $b, $c);
+        $reelle2 = $solution2[0];
+        $imaginaire2 = $solution2[1];
 
         echo "<div class='text-center2'>";
         echo "<table>";
         echo "<caption>Résultats statistiques</caption>";
         echo "<tbody>";
-        echo "<tr><th>Solution 1 partie réelle :</th><td>" . $solution1[0] . "</td></tr>";
-        echo "<tr><th>Solution 1 partie imaginaire :</th><td>" . $solution1[1] . "</td></tr>";
-        echo "<tr><th>Solution 2 partie réelle :</th><td>" . $solution2[0] . "</td></tr>";
-        echo "<tr><th>Solution 2 partie imaginaire :</th><td>" . $solution2[1] . "</td></tr>";
+        echo "<tr><th>Solution 1 partie réelle :</th><td>" . $reelle1 . "</td></tr>";
+        echo "<tr><th>Solution 1 partie imaginaire :</th><td>" . $imaginaire1 . "</td></tr>";
+        echo "<tr><th>Solution 2 partie réelle :</th><td>" . $reelle2 . "</td></tr>";
+        echo "<tr><th>Solution 2 partie imaginaire :</th><td>" . $imaginaire2 . "</td></tr>";
         echo "<tr><th>Discriminant :</th><td>" . $delta . "</td></tr>";
         echo "<tr><th>a :</th><td>" . $a . "</td></tr>";
         echo "<tr><th>b :</th><td>" . $b . "</td></tr>";
@@ -112,8 +118,8 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = $solution1[0] \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = $solution2[0] \\]</div>";
-        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = $solution1[1] \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = $solution2[1] \\]</div>";
+        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = $reelle1 \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = $reelle2 \\]</div>";
+        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = $imaginaire1 \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = $imaginaire2 \\]</div>";
 
 
 
