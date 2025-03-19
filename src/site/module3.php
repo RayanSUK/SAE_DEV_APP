@@ -5,8 +5,23 @@ if (!isset($_SESSION['login'])) {
     exit;
 }
 require('fonctionsPolynome.php');
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <title>Polynômes</title>
+</head>
+<?php
 include('partiels/navbar.php');
 ?>
+
+
 
 <main role="main">
     <!-- description section starts here -->
@@ -58,6 +73,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
+        echo "<div class='math-equation text-center'>\\[x = \frac{-$b}{2×$a} = $solution \\]</div>";
     } else if ($delta > 0) {
         $solution1 = racineReelle1($a, $b, $c);
         $solution2 = racineReelle2($a, $b, $c);
@@ -75,6 +91,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
+        echo "<div class='math-equation text-center'>\\[ x_{1} = \frac{-$b-\sqrt{$delta}}{2×$a} = $solution1 \\] ou \\[ x_{2} = \frac{-$b+\sqrt{$delta}}{2×$a} = $solution2 \\]</div>";
     } else if ($delta < 0) {
         $solution1 = racineComplexe1($a, $b, $c);
         $solution2 = racineComplexe2($a, $b, $c);
@@ -94,6 +111,11 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
+
+        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \frac{-$b-i\sqrt{-$delta}}{2×$a} = $solution1[0] \\] ou \\[ x_{2} = \frac{-$b+i\sqrt{-$delta}}{2×$a} = $solution2[0] \\]</div>";
+        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \frac{-$b-i\sqrt{-$delta}}{2×$a} = $solution1[1] \\] ou \\[ x_{2} = \frac{-$b+i\sqrt{-$delta}}{2×$a} = $solution2[1] \\]</div>";
+
+
     }
 }
 ?>
