@@ -91,6 +91,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</div>";
         echo "<div class='math-equation text-center'>\\[ x_{1} = \\frac{-$b-\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{-$b+\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
     } else if ($delta < 0) {
+        $delta *= -1;
         $solution1 = racineComplexe1($a, $b, $c);
         $reelle1 = $solution1[0];
         $imaginaire1 = $solution1[1];
@@ -115,8 +116,8 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \\frac{-$b - i\\sqrt{-$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{-$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
-        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \\frac{-$b - i\\sqrt{-$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{-$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
+        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \\frac{-$b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
+        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \\frac{-$b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
     }
 }
 ?>
