@@ -24,14 +24,42 @@ include('partiels/navbar.php');
     <!-- description section starts here -->
     <section class="description text-center">
         <div class="titre text-center">
-            <h1>Module 3</h1>
+            <h1>Module polynôme</h1>
         </div>
     </section>
 </main>
 
+<section class="presentation-site">
+<div class="container">
+    <h1>🔢 Module de Polynôme </h1>
+    <p>
+        Découvrez notre module interactif dédié à la résolution d'une équation du second degré sous la forme <strong>ax² + bx + c = 0</strong>. Ce module vous aide à calculer les solutions en fonction du discriminant.
+    </p>
+
+    <h2>🛠 Comment ça marche ?</h2>
+    <ol>
+        <li><strong>Entrez vos paramètres :</strong></li>
+        <ul>
+            <li><strong>a :</strong> Le coefficient de x².</li>
+            <li><strong>b :</strong> Le coefficient de x.</li>
+            <li><strong>c :</strong> Le terme constant.</li>
+        </ul>
+        <li><strong>Lancez l'opération :</strong></li>
+        <ul>
+            <li>Le discriminant \(\Delta = b² - 4ac\) est calculé.</li>
+            <li>Selon la valeur de \(\Delta\), vous obtiendrez soit deux solutions réelles distinctes, une seule solution réelle, ou deux solutions complexes.</li>
+        </ul>
+        <li><strong>Obtenez vos résultats :</strong></li>
+        <ul>
+            <li>Les solutions réelles ou complexes sont affichées avec la formule mathématique.</li>
+        </ul>
+    </ol>
+</div>
+</section>
+
 <main role="main">
     <div class="form-container-parent">
-        <div class="form-container">
+        <div class="form-container" id="polynomial-form">
             <h1 class="text-center">Calcul d'un polynôme de second degré</h1>
             <form method="POST">
                 <label for="a">a : </label>
@@ -56,41 +84,48 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
     $c = $_POST['c'];
     $delta = discriminant($a, $b, $c);
 
+    echo "<div class='result-container'>"; // Conteneur principal des résultats
+
+    // Cas discriminant = 0 (racine unique)
     if ($delta == 0) {
         $solution = racineUnique($a, $b);
 
-        echo "<div class='text-center2'>";
+        echo "<div class='result-box'>";
+        echo "<h2>Discriminant = 0 (racine unique)</h2>";
         echo "<table>";
-        echo "<caption>Résultats statistiques</caption>";
-        echo "<tbody>";
         echo "<tr><th>Solution :</th><td>" . htmlspecialchars($solution) . "</td></tr>";
         echo "<tr><th>Discriminant :</th><td>" . htmlspecialchars($delta) . "</td></tr>";
         echo "<tr><th>a :</th><td>" . htmlspecialchars($a) . "</td></tr>";
         echo "<tr><th>b :</th><td>" . htmlspecialchars($b) . "</td></tr>";
         echo "<tr><th>c :</th><td>" . htmlspecialchars($c) . "</td></tr>";
-        echo "</tbody>";
         echo "</table>";
         echo "</div>";
-        echo "<div class='math-equation text-center'>\\[x = \\frac{-$b}{2 \\times $a} = " . htmlspecialchars($solution) . " \\]</div>";
-    } else if ($delta > 0) {
+
+        echo "<div class='math-equation'>\\[x = \\frac{-$b}{2 \\times $a} = " . htmlspecialchars($solution) . " \\]</div>";
+    }
+
+    // Cas discriminant > 0 (deux racines réelles distinctes)
+    else if ($delta > 0) {
         $solution1 = racineReelle1($a, $b, $c);
         $solution2 = racineReelle2($a, $b, $c);
 
-        echo "<div class='text-center2'>";
+        echo "<div class='result-box'>";
+        echo "<h2>Discriminant > 0 (deux racines réelles)</h2>";
         echo "<table>";
-        echo "<caption>Résultats statistiques</caption>";
-        echo "<tbody>";
         echo "<tr><th>Solution 1 :</th><td>" . htmlspecialchars($solution1) . "</td></tr>";
         echo "<tr><th>Solution 2 :</th><td>" . htmlspecialchars($solution2) . "</td></tr>";
         echo "<tr><th>Discriminant :</th><td>" . htmlspecialchars($delta) . "</td></tr>";
         echo "<tr><th>a :</th><td>" . htmlspecialchars($a) . "</td></tr>";
         echo "<tr><th>b :</th><td>" . htmlspecialchars($b) . "</td></tr>";
         echo "<tr><th>c :</th><td>" . htmlspecialchars($c) . "</td></tr>";
-        echo "</tbody>";
         echo "</table>";
         echo "</div>";
-        echo "<div class='math-equation text-center'>\\[ x_{1} = \\frac{-$b-\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{-$b+\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
-    } else if ($delta < 0) {
+
+        echo "<div class='math-equation'>\\[ x_{1} = \\frac{-$b-\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{-$b+\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
+    }
+
+    // Cas discriminant < 0 (solutions complexes)
+    else if ($delta < 0) {
         $delta *= -1;
         $solution1 = racineComplexe1($a, $b, $c);
         $reelle1 = $solution1[0];
@@ -100,27 +135,28 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         $reelle2 = $solution2[0];
         $imaginaire2 = $solution2[1];
 
-        echo "<div class='text-center2'>";
+        echo "<div class='result-box'>";
+        echo "<h2>Discriminant < 0 (solutions complexes)</h2>";
         echo "<table>";
-        echo "<caption>Résultats statistiques</caption>";
-        echo "<tbody>";
-        echo "<tr><th>Solution 1 partie réelle :</th><td>" . htmlspecialchars($reelle1) . "</td></tr>";
-        echo "<tr><th>Solution 1 partie imaginaire :</th><td>" . htmlspecialchars($imaginaire1) . "</td></tr>";
-        echo "<tr><th>Solution 2 partie réelle :</th><td>" . htmlspecialchars($reelle2) . "</td></tr>";
-        echo "<tr><th>Solution 2 partie imaginaire :</th><td>" . htmlspecialchars($imaginaire2) . "</td></tr>";
+        echo "<tr><th>Solution 1 (partie réelle) :</th><td>" . htmlspecialchars($reelle1) . "</td></tr>";
+        echo "<tr><th>Solution 1 (partie imaginaire) :</th><td>" . htmlspecialchars($imaginaire1) . "</td></tr>";
+        echo "<tr><th>Solution 2 (partie réelle) :</th><td>" . htmlspecialchars($reelle2) . "</td></tr>";
+        echo "<tr><th>Solution 2 (partie imaginaire) :</th><td>" . htmlspecialchars($imaginaire2) . "</td></tr>";
         echo "<tr><th>Discriminant :</th><td>" . htmlspecialchars($delta) . "</td></tr>";
         echo "<tr><th>a :</th><td>" . htmlspecialchars($a) . "</td></tr>";
         echo "<tr><th>b :</th><td>" . htmlspecialchars($b) . "</td></tr>";
         echo "<tr><th>c :</th><td>" . htmlspecialchars($c) . "</td></tr>";
-        echo "</tbody>";
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \\frac{-$b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
-        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \\frac{-$b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
+        echo "<div class='math-equation'>Parties réelles : \\[ x_{1} = \\frac{-$b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
+        echo "<div class='math-equation'>Parties imaginaires : \\[ x_{1} = \\frac{-$b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
     }
+
+    echo "</div>"; // Fin du conteneur des résultats
 }
 ?>
+
 
 <?php include('partiels/footer.php'); ?>
 
