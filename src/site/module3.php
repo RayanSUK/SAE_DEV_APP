@@ -14,14 +14,11 @@ require('fonctionsPolynome.php');
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
     <title>Polynômes</title>
 </head>
 <?php
 include('partiels/navbar.php');
 ?>
-
-
 
 <main role="main">
     <!-- description section starts here -->
@@ -65,15 +62,15 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "<table>";
         echo "<caption>Résultats statistiques</caption>";
         echo "<tbody>";
-        echo "<tr><th>Solution :</th><td>" . $solution . "</td></tr>";
-        echo "<tr><th>Discriminant :</th><td>" . $delta . "</td></tr>";
-        echo "<tr><th>a :</th><td>" . $a . "</td></tr>";
-        echo "<tr><th>b :</th><td>" . $b . "</td></tr>";
-        echo "<tr><th>c :</th><td>" . $c . "</td></tr>";
+        echo "<tr><th>Solution :</th><td>" . htmlspecialchars($solution) . "</td></tr>";
+        echo "<tr><th>Discriminant :</th><td>" . htmlspecialchars($delta) . "</td></tr>";
+        echo "<tr><th>a :</th><td>" . htmlspecialchars($a) . "</td></tr>";
+        echo "<tr><th>b :</th><td>" . htmlspecialchars($b) . "</td></tr>";
+        echo "<tr><th>c :</th><td>" . htmlspecialchars($c) . "</td></tr>";
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
-        echo "<div class='math-equation text-center'>\\[x = \frac{-$b}{2×$a} = $solution \\]</div>";
+        echo "<div class='math-equation text-center'>\\[x = \frac{-$b}{2 \times $a} = " . htmlspecialchars($solution) . " \\]</div>";
     } else if ($delta > 0) {
         $solution1 = racineReelle1($a, $b, $c);
         $solution2 = racineReelle2($a, $b, $c);
@@ -82,21 +79,20 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "<table>";
         echo "<caption>Résultats statistiques</caption>";
         echo "<tbody>";
-        echo "<tr><th>Solution 1 :</th><td>" . $solution1 . "</td></tr>";
-        echo "<tr><th>Solution 2 :</th><td>" . $solution2 . "</td></tr>";
-        echo "<tr><th>Discriminant :</th><td>" . $delta . "</td></tr>";
-        echo "<tr><th>a :</th><td>" . $a . "</td></tr>";
-        echo "<tr><th>b :</th><td>" . $b . "</td></tr>";
-        echo "<tr><th>c :</th><td>" . $c . "</td></tr>";
+        echo "<tr><th>Solution 1 :</th><td>" . htmlspecialchars($solution1) . "</td></tr>";
+        echo "<tr><th>Solution 2 :</th><td>" . htmlspecialchars($solution2) . "</td></tr>";
+        echo "<tr><th>Discriminant :</th><td>" . htmlspecialchars($delta) . "</td></tr>";
+        echo "<tr><th>a :</th><td>" . htmlspecialchars($a) . "</td></tr>";
+        echo "<tr><th>b :</th><td>" . htmlspecialchars($b) . "</td></tr>";
+        echo "<tr><th>c :</th><td>" . htmlspecialchars($c) . "</td></tr>";
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
-        echo "<div class='math-equation text-center'>\\[ x_{1} = \frac{-$b-\sqrt{$delta}}{2×$a} = $solution1 \\] ou \\[ x_{2} = \frac{-$b+\sqrt{$delta}}{2×$a} = $solution2 \\]</div>";
+        echo "<div class='math-equation text-center'>\\[ x_{1} = \frac{-$b-\sqrt{$delta}}{2 \times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \frac{-$b+\sqrt{$delta}}{2 \times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
     } else if ($delta < 0) {
         $solution1 = racineComplexe1($a, $b, $c);
         $reelle1 = $solution1[0];
         $imaginaire1 = $solution1[1];
-
 
         $solution2 = racineComplexe2($a, $b, $c);
         $reelle2 = $solution2[0];
@@ -106,23 +102,20 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "<table>";
         echo "<caption>Résultats statistiques</caption>";
         echo "<tbody>";
-        echo "<tr><th>Solution 1 partie réelle :</th><td>" . $reelle1 . "</td></tr>";
-        echo "<tr><th>Solution 1 partie imaginaire :</th><td>" . $imaginaire1 . "</td></tr>";
-        echo "<tr><th>Solution 2 partie réelle :</th><td>" . $reelle2 . "</td></tr>";
-        echo "<tr><th>Solution 2 partie imaginaire :</th><td>" . $imaginaire2 . "</td></tr>";
-        echo "<tr><th>Discriminant :</th><td>" . $delta . "</td></tr>";
-        echo "<tr><th>a :</th><td>" . $a . "</td></tr>";
-        echo "<tr><th>b :</th><td>" . $b . "</td></tr>";
-        echo "<tr><th>c :</th><td>" . $c . "</td></tr>";
+        echo "<tr><th>Solution 1 partie réelle :</th><td>" . htmlspecialchars($reelle1) . "</td></tr>";
+        echo "<tr><th>Solution 1 partie imaginaire :</th><td>" . htmlspecialchars($imaginaire1) . "</td></tr>";
+        echo "<tr><th>Solution 2 partie réelle :</th><td>" . htmlspecialchars($reelle2) . "</td></tr>";
+        echo "<tr><th>Solution 2 partie imaginaire :</th><td>" . htmlspecialchars($imaginaire2) . "</td></tr>";
+        echo "<tr><th>Discriminant :</th><td>" . htmlspecialchars($delta) . "</td></tr>";
+        echo "<tr><th>a :</th><td>" . htmlspecialchars($a) . "</td></tr>";
+        echo "<tr><th>b :</th><td>" . htmlspecialchars($b) . "</td></tr>";
+        echo "<tr><th>c :</th><td>" . htmlspecialchars($c) . "</td></tr>";
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = $reelle1 \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = $reelle2 \\]</div>";
-        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = $imaginaire1 \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = $imaginaire2 \\]</div>";
-
-
-
+        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
+        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \frac{-$b - i\sqrt{-$delta}}{2 \times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \frac{-$b + i\sqrt{-$delta}}{2 \times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
     }
 }
 ?>
