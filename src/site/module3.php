@@ -35,13 +35,14 @@ include('partiels/navbar.php');
             <h1 class="text-center">Calcul d'un polynôme de second degré</h1>
             <form method="POST">
                 <label for="a">a : </label>
-                <input type="number" name="a" id="a" placeholder="a" class="form-input" required>
+                <input type="number" name="a" id="a" placeholder="a" class="form-input" step="0.01" required>
 
                 <label for="b">b : </label>
-                <input type="number" name="b" id="b" placeholder="b" class="form-input" required>
+                <input type="number" name="b" id="b" placeholder="b" class="form-input" step="0.01" required>
 
                 <label for="c">c : </label>
-                <input type="number" name="c" id="c" placeholder="c" class="form-input" required>
+                <input type="number" name="c" id="c" placeholder="c" class="form-input" step="0.01" required>
+
                 <button type="submit" class="form-buttonS">Valider</button>
             </form>
         </div>
@@ -70,7 +71,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
-        echo "<div class='math-equation text-center'>\\[x = \\frac{-$b}{2\\times$a} = " . htmlspecialchars($solution) . " \\]</div>";
+        echo "<div class='math-equation text-center'>\\[x = \\frac{-$b}{2 \\times $a} = " . htmlspecialchars($solution) . " \\]</div>";
     } else if ($delta > 0) {
         $solution1 = racineReelle1($a, $b, $c);
         $solution2 = racineReelle2($a, $b, $c);
@@ -88,7 +89,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
-        echo "<div class='math-equation text-center'>\\[ x_{1} = \\frac{-$b-\\sqrt{$delta}}{2\\times$a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{-$b+\\sqrt{$delta}}{2\\times$a} = " . htmlspecialchars($solution2) . " \\]</div>";
+        echo "<div class='math-equation text-center'>\\[ x_{1} = \\frac{-$b-\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{-$b+\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
     } else if ($delta < 0) {
         $solution1 = racineComplexe1($a, $b, $c);
         $reelle1 = $solution1[0];
@@ -114,8 +115,8 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \\frac{-$b - i\\sqrt{-$delta}}{2\\times$a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{-$delta}}{2\\times$a} = " . htmlspecialchars($reelle2) . " \\]</div>";
-        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \\frac{-$b - i\\sqrt{-$delta}}{2\\times$a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{-$delta}}{2\\times$a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
+        echo "<div class='math-equation text-center'>Parties réeles : \\[ x_{1} = \\frac{-$b - i\\sqrt{-$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{-$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
+        echo "<div class='math-equation text-center'>Parties imaginaires : \\[ x_{1} = \\frac{-$b - i\\sqrt{-$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{-$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
     }
 }
 ?>
