@@ -89,6 +89,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
     // Cas discriminant = 0 (racine unique)
     if ($delta == 0) {
         $solution = racineUnique($a, $b);
+        $b *= -1;
 
         echo "<div class='result-box'>";
         echo "<h2>\(\Delta\) = 0 (racine unique)</h2>";
@@ -101,13 +102,15 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation'>\\[x = -\\frac{$b}{2 \\times $a} = " . htmlspecialchars($solution) . " \\]</div>";
+        echo "<div class='math-equation'>\\[x = \\frac{$b}{2 \\times $a} = " . htmlspecialchars($solution) . " \\]</div>";
     }
 
     // Cas discriminant > 0 (deux racines réelles distinctes)
     else if ($delta > 0) {
         $solution1 = racineReelle1($a, $b, $c);
         $solution2 = racineReelle2($a, $b, $c);
+        $b *= -1;
+
 
         echo "<div class='result-box'>";
         echo "<h2>\(\Delta\) > 0 (deux racines réelles)</h2>";
@@ -121,7 +124,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation'>\\[ x_{1} = -\\frac{ $b-\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = -\\frac{ $b+\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
+        echo "<div class='math-equation'>\\[ x_{1} = \\frac{ $b-\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{ $b+\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
     }
 
     // Cas discriminant < 0 (solutions complexes)
@@ -134,6 +137,8 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         $solution2 = racineComplexe2($a, $b, $c);
         $reelle2 = $solution2[0];
         $imaginaire2 = $solution2[1];
+        $b *= -1;
+
 
         echo "<div class='result-box'>";
         echo "<h2>\(\Delta\) < 0 (solutions complexes)</h2>";
@@ -149,8 +154,8 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation'>Parties réelles : \\[ x_{1} = -\\frac{ $b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = -\\frac{ $b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
-        echo "<div class='math-equation'>Parties imaginaires : \\[ x_{1} = -\\frac{ $b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = -\\frac{ $b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
+        echo "<div class='math-equation'>Parties réelles : \\[ x_{1} = \\frac{ $b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{ $b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
+        echo "<div class='math-equation'>Parties imaginaires : \\[ x_{1} = \\frac{ $b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{ $b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
     }
 
     echo "</div>"; // Fin du conteneur des résultats
