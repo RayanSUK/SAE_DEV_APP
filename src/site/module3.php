@@ -101,7 +101,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation'>\\[x = \\frac{-$b}{2 \\times $a} = " . htmlspecialchars($solution) . " \\]</div>";
+        echo "<div class='math-equation'>\\[x = -\\frac{$b}{2 \\times $a} = " . htmlspecialchars($solution) . " \\]</div>";
     }
 
     // Cas discriminant > 0 (deux racines réelles distinctes)
@@ -121,7 +121,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation'>\\[ x_{1} = \\frac{-$b-\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{-$b+\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
+        echo "<div class='math-equation'>\\[ x_{1} = -\\frac{ $b-\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = -\\frac{ $b+\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
     }
 
     // Cas discriminant < 0 (solutions complexes)
@@ -149,8 +149,8 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation'>Parties réelles : \\[ x_{1} = \\frac{-$b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
-        echo "<div class='math-equation'>Parties imaginaires : \\[ x_{1} = \\frac{-$b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{-$b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
+        echo "<div class='math-equation'>Parties réelles : \\[ x_{1} = -\\frac{ $b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = -\\frac{ $b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
+        echo "<div class='math-equation'>Parties imaginaires : \\[ x_{1} = -\\frac{ $b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = -\\frac{ $b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
     }
 
     echo "</div>"; // Fin du conteneur des résultats
