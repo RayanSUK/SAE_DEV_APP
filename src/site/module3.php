@@ -91,7 +91,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         $solution = racineUnique($a, $b);
 
         echo "<div class='result-box'>";
-        echo "<h2>Discriminant = 0 (racine unique)</h2>";
+        echo "<h2>\(\Delta\) = 0 (racine unique)</h2>";
         echo "<table>";
         echo "<tr><th>Solution :</th><td>" . htmlspecialchars($solution) . "</td></tr>";
         echo "<tr><th>Discriminant :</th><td>" . htmlspecialchars($delta) . "</td></tr>";
@@ -110,7 +110,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         $solution2 = racineReelle2($a, $b, $c);
 
         echo "<div class='result-box'>";
-        echo "<h2>Discriminant > 0 (deux racines réelles)</h2>";
+        echo "<h2>\(\Delta\) > 0 (deux racines réelles)</h2>";
         echo "<table>";
         echo "<tr><th>Solution 1 :</th><td>" . htmlspecialchars($solution1) . "</td></tr>";
         echo "<tr><th>Solution 2 :</th><td>" . htmlspecialchars($solution2) . "</td></tr>";
@@ -136,7 +136,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         $imaginaire2 = $solution2[1];
 
         echo "<div class='result-box'>";
-        echo "<h2>Discriminant < 0 (solutions complexes)</h2>";
+        echo "<h2>\(\Delta\) < 0 (solutions complexes)</h2>";
         echo "<table>";
         echo "<tr><th>Solution 1 (partie réelle) :</th><td>" . htmlspecialchars($reelle1) . "</td></tr>";
         echo "<tr><th>Solution 1 (partie imaginaire) :</th><td>" . htmlspecialchars($imaginaire1) . "</td></tr>";
