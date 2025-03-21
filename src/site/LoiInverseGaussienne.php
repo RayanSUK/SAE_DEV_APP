@@ -272,6 +272,23 @@ if (isset($_POST['methode'], $_POST['n'], $_POST['forme'], $_POST['esperance'], 
     });
 </script>
 
+<script>
+    //Ce script permet de charger directement la page sur l'affichage du résultat, évite de scroller
+    document.addEventListener("DOMContentLoaded", function () {
+        // Vérifie si un résultat ou une courbe a été affiché
+        let results = document.querySelector("form");
+        let chart = document.querySelector(".text-center2");
+
+        if (results && chart) {
+            // Fait défiler vers le bas de la page
+            let target = document.querySelector(".text-center2");
+                    if (target) {
+                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+        }
+    });
+</script>
+
 </body>
 </html>
 
