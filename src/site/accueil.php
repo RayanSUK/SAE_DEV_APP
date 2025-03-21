@@ -8,6 +8,8 @@ if (!isset($_SESSION['login'])) {
 
 <?php include('partiels/navbar.php'); ?>
 
+<!-- Ajout du titre d'onglet -->
+<title>Accueil</title>
 
 <main role="main">
 <!-- la section accueil commence ici-->
