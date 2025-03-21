@@ -6,6 +6,7 @@ if (!isset($_SESSION['login'])) {
 }
 
 include('partiels/navbar.php');
+include('fonctionsPolynome.php');
 
 // Connexion à la base de données
 $cnx = mysqli_connect("localhost", "root", "root", "sigmax");
@@ -24,14 +25,32 @@ $stmt = mysqli_prepare($cnx, $query);
 mysqli_stmt_bind_param($stmt, "s", $_SESSION['login']);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
+
+$query2 = "
+SELECT a, b, c, delta, date, id
+FROM polynomial
+WHERE login = ?;
+";
+
+$stmt2 = mysqli_prepare($cnx, $query2);
+mysqli_stmt_bind_param($stmt2, "s", $_SESSION['login']);
+mysqli_stmt_execute($stmt2);
+$result2 = mysqli_stmt_get_result($stmt2);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <title>Historique des Résultats</title>
+    
+
     <style>
         /* Styles pour centrer le tableau */
         body {
@@ -39,7 +58,7 @@ $result = mysqli_stmt_get_result($stmt);
             text-align: center;
         }
         .container {
-            width: 80%;
+            width: 85%;
             margin: 0 auto; /* Centrer le container */
         }
         table {
@@ -51,6 +70,7 @@ $result = mysqli_stmt_get_result($stmt);
         th, td {
             padding: 10px;
             border: 1px solid #ddd;
+            text-align: center;
         }
         th {
             background-color: #f4f4f4;
@@ -67,9 +87,11 @@ $result = mysqli_stmt_get_result($stmt);
 </head>
 <body>
 
-<main role="main">
+<role="main">
+
+    <br><br>
     <div class="container">
-        <h1>Historique des Résultats</h1>
+        <h1>Historique (Module Probabilités)</h1>
         <?php if (mysqli_num_rows($result) > 0): ?>
             <table>
                 <thead>
@@ -109,11 +131,108 @@ $result = mysqli_stmt_get_result($stmt);
             <p>Aucun résultat trouvé.</p>
         <?php endif; ?>
     </div>
+
+    <br><br><br>
+    <div class="container">
+        <h1>Historique (Module Polynômes)</h1>
+        <?php if (mysqli_num_rows($result2) > 0): ?>
+            <table>
+                <thead>
+                <tr>
+                    <th>a</th>
+                    <th>b</th>
+                    <th>c</th>
+                    <th>Δ (Discriminant)</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result2)): ?>
+                    <tr id="row-<?php echo htmlspecialchars($row['id']); ?>">
+                        <td><?php echo htmlspecialchars($row['a']); ?></td>
+                        <td><?php echo htmlspecialchars($row['b']); ?></td>
+                        <td><?php echo htmlspecialchars($row['c']); ?></td>
+                        <td><?php echo htmlspecialchars($row['delta']); ?></td>
+                        <td><?php echo htmlspecialchars($row['date']); ?></td>
+                        <td>
+                            <form method="post" action="">
+                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                                <button type='submit' name='polynome' class='form-buttonS'>Afficher les résultats</button>
+                                <button type='submit' name='supp2' class='form-buttonS delete-button' data-id="<?php echo htmlspecialchars($row['id']); ?>">Supprimer de l'historique</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>Aucun résultat trouvé.</p>
+        <?php endif; ?>
+    </div>
+
+    
 </main>
 
 <?php
 require("fonctionsLIG.php");
 
+
+//affichage des résultats avec MathJax pour une meilleure mise en forme
+if (isset($_POST['polynome']) && isset($_POST['id'])) {
+    $id = $_POST['id'];
+    $query = "SELECT a, b, c, delta FROM polynomial WHERE id = ?";
+    $stmt = mysqli_prepare($cnx, $query);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        $a = $row['a'];
+        $b = $row['b'];
+        $c = $row['c'];
+        $delta = $row['delta'];
+
+        // Calcul des racines selon le discriminant
+        // On assure que le signe devant les termes est correctement géré pour éviter les doubles signes négatifs
+        $bAffiche = ($b < 0) ? "(" . $b . ")" : $b; // Si b est négatif, on l'encadre entre parenthèses
+        $aAffiche = ($a < 0) ? "(" . $a . ")" : $a; // Si a est négatif, on l'encadre entre parenthèses
+        if ($delta > 0) {
+            $solution1 = racineReelle1($a, $b, $c);
+            $solution2 = racineReelle2($a, $b, $c);
+            // Format LaTeX pour afficher sous forme de fraction
+            echo "<div class='math-equation'>\\[ x_{1} = \\frac{- $bAffiche-\\sqrt{$delta}}{2 \\times $aAffiche} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{- $bAffiche+\\sqrt{$delta}}{2 \\times $aAffiche} = " . htmlspecialchars($solution2) . " \\]</div>";
+        } elseif ($delta == 0) {
+            $racineUnique = racineUnique($a, $b);
+            // Format LaTeX pour la racine unique
+            echo "<div class='math-equation'>\\[x = \\frac{- $bAffiche}{2 \\times $aAffiche} = " . htmlspecialchars($racineUnique) . " \\]</div>";
+        } else {
+            $racineComplexe1 = racineComplexe1($a, $b, $c);
+            $racineComplexe2 = racineComplexe2($a, $b, $c);
+            $reelle1 = $racineComplexe1[0];
+            $imaginaire1 = $racineComplexe1[1];
+            $reelle2 = $racineComplexe2[0];
+            $imaginaire2 = $racineComplexe2[1];
+
+           
+            // Si delta est négatif, on le multiplie par -1 pour le rendre positif dans la racine carrée
+            $deltaAffiche = ($delta < 0) ? -$delta : $delta;
+            
+            
+            echo "<div class='math-equation'>Parties réelles : \\[ x_{1} = \\frac{- $bAffiche - i\\sqrt{$deltaAffiche}}{2 \\times $aAffiche} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{- $bAffiche + i\\sqrt{$deltaAffiche}}{2 \\times $aAffiche} = " . htmlspecialchars($reelle2) . " \\]</div>";
+            
+            echo "<div class='math-equation'>Parties imaginaires : \\[ x_{1} = \\frac{- $bAffiche - i\\sqrt{$deltaAffiche}}{2 \\times $aAffiche} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{- $bAffiche + i\\sqrt{$deltaAffiche}}{2 \\times $aAffiche} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
+    
+        }
+    }
+}
+?>
+<script>
+    MathJax.typeset(); // Pour rendre les expressions MathJax après leur ajout dans le DOM
+</script>
+
+
+<?php
 if(isset($_POST['supp']) && isset($_POST['id'])){
     $id = $_POST['id'];
     $query = "DELETE FROM history WHERE id = ?";
@@ -122,7 +241,20 @@ if(isset($_POST['supp']) && isset($_POST['id'])){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    echo "<p id='success-message' style='color: rgb(55, 66, 250)'>Données supprimées avec succès, veuillez rafraîchir la page</p>";
+    echo "<p id='success-message' style='color: rgb(55, 66, 250)'>Données supprimées avec succès, veuillez rafraîchir la page<br></p>";
+}
+?>
+
+<?php
+if(isset($_POST['supp2']) && isset($_POST['id'])){
+    $id = $_POST['id'];
+    $query = "DELETE FROM polynomial WHERE id = ?";
+    $stmt = mysqli_prepare($cnx, $query);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    echo "<p id='success-message' style='color: rgb(55, 66, 250)'>Données supprimées avec succès, veuillez rafraîchir la page <br></p>";
 }
 ?>
 
@@ -221,9 +353,31 @@ if (isset($_POST['courbe']) && isset($_POST['id'])) {
                 });
             });
         </script>
-    </div>
+
+
+
+  
+
+
 <?php endif; ?>
 
+
+<?php include('partiels/footer.php'); ?>
+
+
+<script>
+    //Ce script permet de charger directement la page sur l'affichage du résultat, évite de scroller
+    document.addEventListener("DOMContentLoaded", function () {
+        // Vérifie si un résultat ou une courbe a été affiché
+        let results = document.querySelector(".math-equation");
+        let chart = document.getElementById("myChart");
+
+        if (results || chart) {
+            // Fait défiler vers le bas de la page
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        }
+    });
+</script>
 
 
 </body>
