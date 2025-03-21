@@ -14,7 +14,8 @@ require('fonctionsPolynome.php');
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <title>Polynômes</title>
+    <title>Module Polynômes</title>
+    
 </head>
 <?php
 include('partiels/navbar.php');
@@ -24,14 +25,14 @@ include('partiels/navbar.php');
     <!-- description section starts here -->
     <section class="description text-center">
         <div class="titre text-center">
-            <h1>Module polynôme</h1>
+            <h1>Module polynômes</h1>
         </div>
     </section>
 </main>
 
 <section class="presentation-site">
 <div class="container">
-    <h1>🔢 Module de Polynôme </h1>
+    <h1>🔢 Module de Polynômes </h1>
     <p>
         Découvrez notre module interactif dédié à la résolution d'une équation du second degré sous la forme <strong>ax² + bx + c = 0</strong>. Ce module vous aide à calculer les solutions en fonction du discriminant.
     </p>
@@ -86,10 +87,14 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
 
     echo "<div class='result-container'>"; // Conteneur principal des résultats
 
+    // On assure que le signe devant les termes est correctement géré pour éviter les doubles signes négatifs
+    $bAffiche = ($b < 0) ? "(" . $b . ")" : $b; // Si b est négatif, on l'encadre entre parenthèses
+    $aAffiche = ($a < 0) ? "(" . $a . ")" : $a; // Si a est négatif, on l'encadre entre parenthèses
+
     // Cas discriminant = 0 (racine unique)
     if ($delta == 0) {
         $solution = racineUnique($a, $b);
-        $b *= -1;
+        
 
         echo "<div class='result-box'>";
         echo "<h2>\(\Delta\) = 0 (racine unique)</h2>";
@@ -102,15 +107,24 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation'>\\[x = \\frac{$b}{2 \\times $a} = " . htmlspecialchars($solution) . " \\]</div>";
+
+        echo "<form method='POST' action='historique_poly.php'>";
+        echo "<input type='hidden' name='a' value='" . $a . "'>";
+        echo "<input type='hidden' name='b' value='" . $b . "'>";
+        echo "<input type='hidden' name='c' value='" . $c . "'>";
+        echo "<button type='submit' name='ajouter_history' class='form-buttonS'>Ajouter à l'historique</button>";
+        echo "</form>";
+        echo "<div class='math-equation'>\\[x = \\frac{- $bAffiche}{2 \\times $aAffiche} = " . htmlspecialchars($solution) . " \\]</div>";
+       
+
+
     }
 
     // Cas discriminant > 0 (deux racines réelles distinctes)
     else if ($delta > 0) {
         $solution1 = racineReelle1($a, $b, $c);
         $solution2 = racineReelle2($a, $b, $c);
-        $b *= -1;
-
+        
 
         echo "<div class='result-box'>";
         echo "<h2>\(\Delta\) > 0 (deux racines réelles)</h2>";
@@ -124,7 +138,14 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation'>\\[ x_{1} = \\frac{ $b-\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{ $b+\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($solution2) . " \\]</div>";
+
+        echo "<form method='POST' action='historique_poly.php'>";
+        echo "<input type='hidden' name='a' value='" . $a . "'>";
+        echo "<input type='hidden' name='b' value='" . $b . "'>";
+        echo "<input type='hidden' name='c' value='" . $c . "'>";
+        echo "<button type='submit' name='ajouter_history' class='form-buttonS'>Ajouter à l'historique</button>";
+        echo "</form>";
+        echo "<div class='math-equation'>\\[ x_{1} = \\frac{- $bAffiche-\\sqrt{$delta}}{2 \\times $aAffiche} = " . htmlspecialchars($solution1) . " \\] ou \\[ x_{2} = \\frac{- $bAffiche+\\sqrt{$delta}}{2 \\times $aAffiche} = " . htmlspecialchars($solution2) . " \\]</div>";
     }
 
     // Cas discriminant < 0 (solutions complexes)
@@ -137,7 +158,7 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         $solution2 = racineComplexe2($a, $b, $c);
         $reelle2 = $solution2[0];
         $imaginaire2 = $solution2[1];
-        $b *= -1;
+        $delta *= -1;
 
 
         echo "<div class='result-box'>";
@@ -154,8 +175,22 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
         echo "</table>";
         echo "</div>";
 
-        echo "<div class='math-equation'>Parties réelles : \\[ x_{1} = \\frac{ $b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{ $b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($reelle2) . " \\]</div>";
-        echo "<div class='math-equation'>Parties imaginaires : \\[ x_{1} = \\frac{ $b - i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{ $b + i\\sqrt{$delta}}{2 \\times $a} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
+        
+
+        echo "<form method='POST' action='historique_poly.php'>";
+        echo "<input type='hidden' name='a' value='" . $a . "'>";
+        echo "<input type='hidden' name='b' value='" . $b . "'>";
+        echo "<input type='hidden' name='c' value='" . $c . "'>";
+        echo "<button type='submit' name='ajouter_history' class='form-buttonS'>Ajouter à l'historique</button>";
+        echo "</form>";
+
+        // Si delta est négatif, on le multiplie par -1 pour le rendre positif dans la racine carrée
+        $deltaAffiche = ($delta < 0) ? -$delta : $delta;
+
+        echo "<div class='math-equation'>Parties réelles : \\[ x_{1} = \\frac{- $bAffiche - i\\sqrt{$deltaAffiche}}{2 \\times $aAffiche} = " . htmlspecialchars($reelle1) . " \\] ou \\[ x_{2} = \\frac{- $bAffiche + i\\sqrt{$deltaAffiche}}{2 \\times $aAffiche} = " . htmlspecialchars($reelle2) . " \\]</div>";
+        echo "<div class='math-equation'>Parties imaginaires : \\[ x_{1} = \\frac{- $bAffiche - i\\sqrt{$deltaAffiche}}{2 \\times $aAffiche} = " . htmlspecialchars($imaginaire1) . " \\] ou \\[ x_{2} = \\frac{- $bAffiche + i\\sqrt{$deltaAffiche}}{2 \\times $aAffiche} = " . htmlspecialchars($imaginaire2) . " \\]</div>";
+
+   
     }
 
     echo "</div>"; // Fin du conteneur des résultats
@@ -164,6 +199,23 @@ if (isset($_POST['a'], $_POST['b'], $_POST['c'])) {
 
 
 <?php include('partiels/footer.php'); ?>
+
+<script>
+    //Ce script permet de charger directement la page sur l'affichage du résultat, évite de scroller
+    document.addEventListener("DOMContentLoaded", function () {
+        // Vérifie si un résultat ou une courbe a été affiché
+        let results = document.querySelector(".result-container");
+        let chart = document.querySelector(".result-box");
+
+        if (results && chart) {
+            // Fait défiler vers le bas de la page
+            let target = document.querySelector(".result-box");
+                    if (target) {
+                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+        }
+    });
+</script>
 
 </body>
 </html>
