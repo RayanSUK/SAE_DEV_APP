@@ -5,30 +5,8 @@ if (!isset($_SESSION['login'])) {
     exit;
 }
 include('partiels/navbar.php');
+include('fonctions.php');
 
-function rc4($key, $data) {
-    $key = array_values(unpack('C*', $key));
-    $data = array_values(unpack('C*', $data));
-    $S = range(0, 255);
-    $j = 0;
-    
-    // Key Scheduling Algorithm (KSA)
-    for ($i = 0; $i < 256; $i++) {
-        $j = ($j + $S[$i] + $key[$i % count($key)]) % 256;
-        [$S[$i], $S[$j]] = [$S[$j], $S[$i]];
-    }
-    
-    // Pseudo-Random Generation Algorithm (PRGA)
-    $i = $j = 0;
-    $output = '';
-    foreach ($data as $byte) {
-        $i = ($i + 1) % 256;
-        $j = ($j + $S[$i]) % 256;
-        [$S[$i], $S[$j]] = [$S[$j], $S[$i]];
-        $output .= chr($byte ^ $S[($S[$i] + $S[$j]) % 256]);
-    }
-    return $output;
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $key = $_POST['key'] ?? '';
@@ -45,6 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Module Crypto.</title>
+</head>
 
 <main role="main">
 
@@ -97,6 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>Résultat : <strong><?php echo htmlspecialchars($result); ?></strong></p>
         <?php endif; ?><br><br><br><br>
     </section>
+
+
+
+ 
 </main>
 
 <?php include('partiels/footer.php'); ?>
