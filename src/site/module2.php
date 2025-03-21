@@ -32,9 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Module Crypto.</title>
 </head>
 
-<main role="main">
 
-    <section class="presentation-site">
+<button id="openPopup" class="info-button text-center">ℹ️ Cliquez ICI pour voir l'explication du module !!</button>
+
+<main role="main">
+    <div id="popup" class="popup">
+    <div class="popup-content text-center">
+        <span class="close">&times;</span>
         <div class="container">
             <h1>🔐 Module de Cryptographie : Chiffrement RC4</h1>
             <p>
@@ -59,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </ul>
             </ol>
         </div>
-
+    </div>
+    </div>
 
 
     <section class="description text-center">
@@ -85,7 +90,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </section>
 
 
+    
+    <script>
+        //Ce script permet de mettre les instructions dans un menu déroulant. Permet d'améliorer l'expérience utilisateur
+    document.addEventListener("DOMContentLoaded", function () {
+        var openPopupBtn = document.getElementById("openPopup");
+        var popup = document.getElementById("popup");
+        var closePopupBtn = document.querySelector(".close");
 
+        if (openPopupBtn && popup && closePopupBtn) {
+            openPopupBtn.addEventListener("click", function () {
+                popup.style.display = "block";
+            });
+
+            closePopupBtn.addEventListener("click", function () {
+                popup.style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target === popup) {
+                    popup.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
  
 </main>
 
