@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * Génère un captcha sous forme d'une addition entre deux nombres aléatoires.
+ *
+ * Cette fonction génère deux nombres aléatoires entre 0 et 9, puis les additionne pour créer un captcha.
+ * Le résultat de cette addition est stocké dans la session pour validation ultérieure.
+ * Elle retourne les deux nombres pour affichage dans l'interface.
+ *
+ * @return array Contient les deux nombres générés pour l'addition (par exemple, [3, 7]).
+ */
 function Captcha() {
     // Générer deux nombres aléatoires
     $num1 = rand(0, 9);
@@ -11,6 +21,17 @@ function Captcha() {
     return [$num1, $num2];
 }
 
+/**
+ * Chiffre ou déchiffre une donnée en utilisant l'algorithme RC4.
+ *
+ * Cette fonction utilise l'algorithme RC4 pour chiffrer ou déchiffrer des données en fonction de la clé
+ * fournie. Le chiffrement ou le déchiffrement se fait en appliquant l'algorithme Key Scheduling Algorithm
+ * (KSA) et Pseudo-Random Generation Algorithm (PRGA).
+ *
+ * @param string $key  Clé de chiffrement. Cette clé est utilisée pour le chiffrement et le déchiffrement des données.
+ * @param string $data Données à chiffrer ou déchiffrer. Les données peuvent être n'importe quelle chaîne de caractères.
+ * @return string Résultat du chiffrement ou du déchiffrement. La chaîne de caractères résultante est obtenue après l'application de l'algorithme RC4.
+ */
 function rc4($key, $data) {
     $key = array_values(unpack('C*', $key));
     $data = array_values(unpack('C*', $data));
