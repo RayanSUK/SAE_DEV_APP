@@ -1,5 +1,15 @@
 <?php
+
+/**
+ * Démarre la session pour l'utilisateur et inclut la fonction RC4.
+ *
+ * Cette page contient la logique de connexion des utilisateurs. Elle vérifie les informations d'identification
+ * dans la base de données et redirige l'utilisateur en fonction de son rôle.
+ */
 session_start();
+/**
+ * Inclusion du fichier contenant la fonction RC4 pour le chiffrement/déchiffrement.
+ */
 require_once('fonctions.php'); // Inclusion de la fonction RC4
 ?>
 
@@ -37,7 +47,14 @@ $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
 if (!$cnx) {
     die("Échec de connexion à la base de données : " . mysqli_connect_error());
 }
-
+/**
+ * Traitement du formulaire de connexion.
+ *
+ * Lorsque l'utilisateur soumet le formulaire, les informations sont récupérées via `$_POST`.
+ * Le mot de passe est ensuite chiffré avec l'algorithme RC4 et comparé avec celui stocké dans la base de données.
+ * Si les informations sont correctes, une session est ouverte et l'utilisateur est redirigé en fonction de son rôle.
+ * Si les informations sont incorrectes, un message d'erreur est affiché.
+ */
 if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];

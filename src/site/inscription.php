@@ -1,11 +1,23 @@
 <?php
+/**
+ * Démarre la session PHP et configure l'affichage des erreurs.
+ */
 session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+/**
+ * Inclusion de la barre de navigation pour l'inscription.
+ */
 include('partiels/navbar_Inscription.php');
+/**
+ * Inclusion de la fonction RC4 pour le chiffrement du mot de passe.
+ */
 require_once('fonctions.php'); // Inclusion de la fonction RC4
-
+/**
+ * Génère un CAPTCHA aléatoire si ce n'est pas déjà fait.
+ * Le CAPTCHA est stocké dans la session de l'utilisateur.
+ */
 if (!isset($_SESSION['captcha'])) {
     $tab = range(0, 9);
     shuffle($tab);
@@ -14,19 +26,36 @@ if (!isset($_SESSION['captcha'])) {
 
 $nb = $_SESSION['captcha'];
 
-// Connexion à la base de données
+/**
+ * Connexion à la base de données MySQL.
+ *
+ * Si la connexion échoue, le script s'arrête et affiche un message d'erreur.
+ */
 $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
 if (!$cnx) {
     die("Échec de la connexion à la base de données: " . mysqli_connect_error());
 }
 
-// Récupération de la clé RC4 depuis la base de données
+/**
+ * Récupération de la clé de chiffrement RC4 depuis la base de données.
+ *
+ * La clé est utilisée pour le chiffrement des mots de passe lors de l'inscription.
+ */
 $key_query = "SELECT cle_rc4 FROM cle LIMIT 1";
 $key_result = mysqli_query($cnx, $key_query);
 $key_row = mysqli_fetch_assoc($key_result);
 $key = $key_row['cle_rc4'];
 
-// Traitement du formulaire d'inscription
+/**
+ * Traitement du formulaire d'inscription.
+ *
+ * Vérifie les données saisies par l'utilisateur, y compris le mot de passe et la réponse au CAPTCHA.
+ * Si les données sont valides, le mot de passe est chiffré et l'utilisateur est inscrit.
+ *
+ * @param string $nom Le pseudo de l'utilisateur.
+ * @param string $mdp Le mot de passe de l'utilisateur.
+ * @param int $reponse La réponse au CAPTCHA.
+ */
 if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];
