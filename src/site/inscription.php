@@ -13,11 +13,13 @@ include('partiels/navbar_Inscription.php');
 /**
  * Inclusion de la fonction RC4 pour le chiffrement du mot de passe.
  */
-require_once('fonctions.php'); // Inclusion de la fonction RC4
+require_once('fonctions.php');
+
 /**
  * Génère un CAPTCHA aléatoire si ce n'est pas déjà fait.
  * Le CAPTCHA est stocké dans la session de l'utilisateur.
  */
+
 if (!isset($_SESSION['captcha'])) {
     $tab = range(0, 9);
     shuffle($tab);
@@ -31,6 +33,7 @@ $nb = $_SESSION['captcha'];
  *
  * Si la connexion échoue, le script s'arrête et affiche un message d'erreur.
  */
+
 $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
 if (!$cnx) {
     die("Échec de la connexion à la base de données: " . mysqli_connect_error());
@@ -41,6 +44,7 @@ if (!$cnx) {
  *
  * La clé est utilisée pour le chiffrement des mots de passe lors de l'inscription.
  */
+
 $key_query = "SELECT cle_rc4 FROM cle LIMIT 1";
 $key_result = mysqli_query($cnx, $key_query);
 $key_row = mysqli_fetch_assoc($key_result);
@@ -56,23 +60,21 @@ $key = $key_row['cle_rc4'];
  * @param string $mdp Le mot de passe de l'utilisateur.
  * @param int $reponse La réponse au CAPTCHA.
  */
+
 if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
     $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];
     $reponse = $_POST['reponse'];
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $date = date("Y-m-d H:i:s");
+    $ip = getUserIP();
+    $jour = date('Y-m-d');
+    $heure = date('H:i:s');
+    $login_tente = $nom;
+    $reussite = "échec de l'inscription";
 
+    // Vérifie si le mot de passe est valide
     if (strlen($mdp) < 8) {
         $_SESSION['error'] = "Le mot de passe doit contenir au moins 8 caractères.";
-        header("Location: inscription.php");
-        exit;
-    }
-
-    // Chiffrement du mot de passe avec RC4
-    $mdp_chiffre = bin2hex(rc4($key, $mdp));
-
-    if ($reponse == $_SESSION['captcha']) {
+    } elseif ($reponse == $_SESSION['captcha']) {
         // Vérifie si le login est déjà utilisé
         $check_sql = "SELECT * FROM users WHERE login = ?";
         $check_stmt = mysqli_prepare($cnx, $check_sql);
@@ -82,9 +84,10 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
 
         if (mysqli_num_rows($check_result) > 0) {
             $_SESSION['error'] = "Login déjà utilisé.";
-            header("Location: inscription.php");
-            exit;
         } else {
+            // Chiffrement du mot de passe avec RC4
+            $mdp_chiffre = bin2hex(rc4($key, $mdp));
+
             // Insère dans la base de données
             $sql = "INSERT INTO users (login, password) VALUES (?, ?)";
             $stmt = mysqli_prepare($cnx, $sql);
@@ -94,25 +97,34 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['reponse'])) {
                 $_SESSION['login'] = $nom;
                 $_SESSION['id'] = mysqli_insert_id($cnx);
                 $_SESSION['etat'] = 'inscription';
-                header("Location: accueil.php");
-                exit;
+                $login_tente = $nom;
+                $reussite = "inscription réussie";
             } else {
                 $_SESSION['error'] = "Erreur lors de l'inscription.";
-                header("Location: inscription.php");
-                exit;
             }
+            mysqli_stmt_close($stmt);
         }
-
-        // Fermeture des requêtes préparées
         mysqli_stmt_close($check_stmt);
-        mysqli_stmt_close($stmt);
-        mysqli_close($cnx);
-        unset($_SESSION['captcha']); // Supprimer le CAPTCHA après utilisation
-        exit;
     } else {
-        echo "<p style='background-color: red; color: white;'>Captcha incorrect.</p>";
+        $_SESSION['error'] = "Captcha incorrect.";
     }
-    session_unset();
+
+    // Enregistrement dans adminsysteme
+    $log_query = "INSERT INTO adminsysteme (jour, heure, ip, login, statut) VALUES (?, ?, ?, ?, ?)";
+    $log_stmt = mysqli_prepare($cnx, $log_query);
+    mysqli_stmt_bind_param($log_stmt, "sssss", $jour, $heure, $ip, $login_tente, $reussite);
+    mysqli_stmt_execute($log_stmt);
+    mysqli_stmt_close($log_stmt);
+
+    mysqli_close($cnx);
+    unset($_SESSION['captcha']); // Supprimer le CAPTCHA après utilisation
+    
+    if ($reussite === "inscription réussie") {
+        header("Location: accueil.php");
+    } else {
+        header("Location: inscription.php");
+    }
+    exit;
 }
 ?>
 
