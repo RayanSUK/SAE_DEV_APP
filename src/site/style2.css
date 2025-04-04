@@ -1,0 +1,173 @@
+.log-table {
+    width: 100%; /* Prend toute la largeur de la div parente */
+    max-width: none; /* Supprime la limitation de la largeur */
+    margin: 0; /* Supprime la marge automatique qui le centre */
+    text-align: left; /* Aligne le texte à gauche */
+}
+
+.log-table th, .log-table td {
+    padding: 12px;
+    text-align: center;
+}
+
+#logTableContainer{
+    display: flex;
+    justify-content: center; /* Centre le tableau horizontalement */
+    align-items: center; /* Centre verticalement si nécessaire */
+    width: 100%;
+
+}
+
+#logTableContainer table {
+    width: auto; /* Ajuste la largeur au contenu */
+    margin: 0 auto; /* Centre le tableau */
+    border-collapse: collapse; /* Améliore le rendu des bordures */
+    gap:7px;
+}
+
+.container2 {
+    display: flex;
+   
+    align-items: flex-start;
+}
+
+.left {
+    width: 50%; /* Ajuste la largeur du tableau */
+    text-align: center;
+    
+}
+
+.right {
+    display: flex;
+    width:50%;
+    justify-content: right;
+
+   
+}
+
+
+.right form {
+    margin-bottom: 20px; /* Espacement entre les formulaires */
+}
+
+/* Styles pour le formulaire #filterForm */
+#filterForm, #actionForm {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#filterForm{
+    width: 30%;
+    height: 10%;
+}
+
+#actionForm{
+    width: 40%;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+
+#filterForm h1 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#filterForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#filterForm input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#filterForm button {
+    padding: 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #0a4482;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#filterForm button:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour le formulaire #actionForm */
+
+#actionForm h1 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#actionForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#actionForm input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#actionForm button {
+    padding: 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #0a4482;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#actionForm button:hover {
+    background-color: #0056b3;
+}
+
+input[type="file"] {
+    text-align: center;
+    width: 90%;
+}
+
+.close-btn {
+    font-size: 18px; /* Augmente la taille du texte */
+    padding: 12px 20px; /* Ajoute du padding pour un bouton plus grand */
+    background-color: #0a4482; /* Une couleur de fond rouge pour plus de visibilité */
+    color: white; /* Texte en blanc */
+    border: none; /* Retire la bordure par défaut */
+    border-radius: 8px; /* Coins arrondis */
+    cursor: pointer; /* Montre un curseur pointer */
+    font-weight: bold; /* Met le texte en gras */
+    transition: background-color 0.3s ease; /* Effet de transition lors du survol */
+}
+
+.close-btn:hover {
+    background-color: #0470e3; /* Couleur de fond plus foncée au survol */
+}
+
+
+html{
+    width:100%;
+}
