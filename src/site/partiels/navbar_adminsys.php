@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrateur système</title>
+   
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap">
 
@@ -16,8 +16,9 @@
     <div class="container">
             <img src="images/sigmaXlogo.png" alt="Le logo du site SigmaX" class="logo img-responsive">
         <ul>
-            <li><a href="inscritcsv.php">Utilisateurs inscrits</a></li>
-            <li><a href="index.php">Deconnexion</a></li>
+            <li><a href="adminsys.php">Accueil</a></li>
+            <li><a href="journal.php">Journal d'activités</a></li>
+            <li><a href="index.php">Déconnexion</a></li>
         </ul>
         <div class="clearfix"></div>
     </div>
