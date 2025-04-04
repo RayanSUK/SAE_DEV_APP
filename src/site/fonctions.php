@@ -55,4 +55,23 @@ function rc4($key, $data) {
     }
     return $output;
 }
+
+/**
+ * Permet d'obtenir l'IP de l'utilisateur.
+ *
+ * Cette fonction utilise les superglobales inclues dans PHP afin de récupérer l'adresse IP de l'utilisateur
+ * Elle d'assurer une récupération de l'IP réelle. Peut aider si l'utilisateur utilise un proxy par exemple
+ *
+ * @return string Adresse IP (IPv4 ou IPv6) de l'utilisateur.
+ */
+function getUserIP() {
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } elseif (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return filter_var(explode(',', $ip)[0], FILTER_VALIDATE_IP);
+}
 ?>
