@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Démarre la session pour l'utilisateur et inclut la fonction RC4.
  *
@@ -42,6 +41,8 @@ require_once('fonctions.php'); // Inclusion de la fonction RC4
 </html>
 
 <?php
+
+
 // Connexion à la base de données
 $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
 if (!$cnx) {
@@ -55,9 +56,13 @@ if (!$cnx) {
  * Si les informations sont correctes, une session est ouverte et l'utilisateur est redirigé en fonction de son rôle.
  * Si les informations sont incorrectes, un message d'erreur est affiché.
  */
+
 if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
     $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];
+    $ip = getUserIP();
+    $jour = date('Y-m-d');
+    $heure = date('H:i:s');
 
     // Récupération de la clé RC4 depuis la base de données
     $key_query = "SELECT cle_rc4 FROM cle LIMIT 1";
@@ -82,10 +87,20 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
             $_SESSION['id'] = $row['id'];
             $_SESSION['etat'] = 'connexion';
 
+            // Enregistrement de la connexion réussie
+            $log_query = "INSERT INTO adminsysteme (jour, heure, ip, login, statut) VALUES (?, ?, ?, ?, 'connexion réussie')";
+            $log_stmt = mysqli_prepare($cnx, $log_query);
+            mysqli_stmt_bind_param($log_stmt, "ssss", $jour, $heure, $ip, $row['login']);
+            mysqli_stmt_execute($log_stmt);
+            mysqli_stmt_close($log_stmt);
+
             // Vérification si l'utilisateur est l'adminweb
             if ($row['login'] === 'adminweb') {
                 $_SESSION['role'] = 'adminweb';
                 header("Location: adminweb.php");
+            } elseif ($row['login'] === 'adminsys') {
+                $_SESSION['role'] = 'adminsys';
+                header("Location: adminsys.php");
             } else {
                 $_SESSION['role'] = 'user';
                 header("Location: accueil.php");
@@ -93,10 +108,19 @@ if (isset($_POST['nom'], $_POST['mdp'], $_POST['acces'])) {
             exit;
         } else {
             echo "<p style='color:red; text-align: center;'>Mot de passe incorrect.</p>";
+            $login_tente = $nom;
         }
     } else {
         echo "<p style='color:red; text-align: center;'>Utilisateur non trouvé.</p>";
+        $login_tente = $nom;
     }
+
+    // Enregistrement de la tentative échouée
+    $log_query = "INSERT INTO adminsysteme (jour, heure, ip, login, statut) VALUES (?, ?, ?, ?, 'échec de la connexion')";
+    $log_stmt = mysqli_prepare($cnx, $log_query);
+    mysqli_stmt_bind_param($log_stmt, "ssss", $jour, $heure, $ip, $login_tente);
+    mysqli_stmt_execute($log_stmt);
+    mysqli_stmt_close($log_stmt);
 
     // Fermeture de la requête et de la connexion
     mysqli_stmt_close($stmt);
