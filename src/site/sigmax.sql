@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 21 mars 2025 à 05:14
+-- Généré le : ven. 04 avr. 2025 à 07:21
 -- Version du serveur : 5.7.24
 -- Version de PHP : 8.0.1
 
@@ -26,10 +26,26 @@ USE `sigmax`;
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `adminsysteme`
+--
+
+CREATE TABLE IF NOT EXISTS `adminsysteme` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `jour` date NOT NULL,
+  `heure` time NOT NULL,
+  `ip` varchar(255) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `statut` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cle`
 --
 
-CREATE TABLE `cle` (
+CREATE TABLE IF NOT EXISTS `cle` (
   `cle_rc4` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -46,13 +62,15 @@ INSERT INTO `cle` (`cle_rc4`) VALUES
 -- Structure de la table `crypto`
 --
 
-CREATE TABLE `crypto` (
+CREATE TABLE IF NOT EXISTS `crypto` (
   `id` int(11) NOT NULL,
   `login` varchar(255) NOT NULL,
   `cle` varchar(255) NOT NULL,
   `texte` varchar(255) NOT NULL,
   `id_user` int(4) NOT NULL,
-  `date` datetime DEFAULT NULL
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `crypto_ibfk_1` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -61,8 +79,8 @@ CREATE TABLE `crypto` (
 -- Structure de la table `history`
 --
 
-CREATE TABLE `history` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(255) NOT NULL,
   `methode` varchar(255) NOT NULL,
   `n` int(11) NOT NULL,
@@ -71,7 +89,9 @@ CREATE TABLE `history` (
   `t` double NOT NULL,
   `resultat` double NOT NULL,
   `id_user` int(4) NOT NULL,
-  `date` datetime DEFAULT NULL
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -80,8 +100,8 @@ CREATE TABLE `history` (
 -- Structure de la table `polynomial`
 --
 
-CREATE TABLE `polynomial` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `polynomial` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(255) NOT NULL,
   `a` int(255) NOT NULL,
   `b` int(255) NOT NULL,
@@ -93,7 +113,9 @@ CREATE TABLE `polynomial` (
   `comp1` varchar(255) NOT NULL,
   `comp2` varchar(255) NOT NULL,
   `id_user` int(4) NOT NULL,
-  `date` datetime DEFAULT NULL
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `polynomial_ibfk_1` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -102,11 +124,12 @@ CREATE TABLE `polynomial` (
 -- Structure de la table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(4) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
   `login` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
@@ -115,59 +138,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `login`, `password`) VALUES
 (1, 'adminweb', 'fbb9ef173c00a574'),
 (2, 'adminsys', 'fbb9ef173c04b965');
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `crypto`
---
-ALTER TABLE `crypto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `crypto_ibfk_1` (`id_user`);
-
---
--- Index pour la table `history`
---
-ALTER TABLE `history`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`);
-
---
--- Index pour la table `polynomial`
---
-ALTER TABLE `polynomial`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `polynomial_ibfk_1` (`id_user`);
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `history`
---
-ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT pour la table `polynomial`
---
-ALTER TABLE `polynomial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Contraintes pour les tables déchargées
