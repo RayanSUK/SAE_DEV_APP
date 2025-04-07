@@ -4,7 +4,7 @@
 require_once('fonctions.php');
 
 // Connexion à la base de données
-$cnx = mysqli_connect('localhost', 'root', '', 'sigmax');
+$cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
 if (!$cnx) {
     die("Échec de connexion à la base de données : " . mysqli_connect_error());
 }
