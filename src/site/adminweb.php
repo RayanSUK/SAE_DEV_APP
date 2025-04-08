@@ -1,18 +1,26 @@
 <?php include('partiels/navbar_adminweb.php'); ?>
 <main role="main">
-<section class="description text-center">
-    <div class="titre text-center">
-        <h1>Accueil de l'admin web</h1>
-        <p>Bienvenue dans votre espace Administrateur Web. En tant qu'administrateur web, vous avez accès à des fonctionnalités essentielles pour gérer les utilisateurs de la plateforme.</p>
-        <h2>Voici ce que vous pouvez faire :</h2>
-        <ul>
-            <li>Consulter la liste des utilisateurs inscrits.</li>
-            <li>Créer des comptes utilisateurs .</li>
-            <li>Supprimer des comptes utilisateurs ainsi que l'historique associé à ces comptes.</li>
-        </ul>
-        <p>Veuillez noter que vos identifiants d'accès sont fixes (login : <strong>adminweb</strong>, mot de passe : <strong>adminweb</strong>) et ne doivent pas être modifiés.</p>
-    </div>
-</section>
+
+    <section class="description text-center">
+        <div class="titre text-center">
+            <h1>Accueil de l'Administrateur Web</h1>
+            <p>Bienvenue dans votre espace d'administration. Cet espace est réservé à l'administrateur web, qui dispose de toutes les fonctionnalités nécessaires pour gérer les utilisateurs de la plateforme.</p>
+
+            <h2>Fonctionnalités disponibles :</h2>
+            <ul>
+                <li>Afficher la liste complète des utilisateurs inscrits.</li>
+                <li>Créer un nouvel utilisateur manuellement.</li>
+                <li class="json-class">Importer plusieurs utilisateurs automatiquement à partir d’un fichier au format <strong>JSON</strong>.</li>
+                <li>Supprimer un ou plusieurs utilisateurs ainsi que tout leur historique associé.</li>
+            </ul>
+
+            <h3>Informations de connexion de l’administrateur :</h3>
+            <p>Nom d'utilisateur : <strong>adminweb</strong> — Mot de passe : <strong>adminweb</strong></p>
+            <p class="text-danger"><em>Ces identifiants sont fixes et ne doivent pas être modifiés.</em></p>
+
+        </div>
+    </section>
+
 </main>
 
 <?php include('partiels/footer.php') ?>
@@ -21,22 +29,6 @@
 
 <!-- --------------CSS intégré directement sur le fichier car style.css surchargé----------------------- -->
 <style>
-
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
-        color: #333;
-        flex-grow: 1;
-    }
 
 
     .description {
@@ -80,6 +72,9 @@
         color: #007bff;
     }
 
+    .json-class strong{
+        color: #0a4482;
+    }
 
     footer {
         text-align: center;
