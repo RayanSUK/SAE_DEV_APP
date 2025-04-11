@@ -1,4 +1,15 @@
 <?php
+// Démarrer la session pour pouvoir utiliser les variables de session
+session_start();
+
+// Vérifier s'il y a un message dans la session
+if (isset($_SESSION['message'])) {
+    // Afficher le message (en le sécurisant)
+    echo "<p style='color:green;'>" . htmlspecialchars($_SESSION['message']) . "</p>";
+
+    // Effacer le message après l'affichage
+    unset($_SESSION['message']);
+}
 // Connexion à la base de données
 $cnx = mysqli_connect('localhost', 'root', 'root', 'sigmax');
 
