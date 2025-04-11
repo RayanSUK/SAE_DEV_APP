@@ -31,7 +31,7 @@ if (isset($_POST['delete_user'])) {
     // 1. Supprimer l'historique de l'utilisateur dans la table `history`
     $query = "DELETE FROM history WHERE login = '$login'";
     $query .= "DELETE FROM polynomial WHERE login = '$login';";
-    if (mysqli_query($cnx, $query)) {
+    if (mysqli_multi_query($cnx, $query)) {
         $message = "Historique de l'utilisateur '$login' supprimé de la base de données.";
 
         // Enregistrer l'action de suppression dans un fichier log
